@@ -1,0 +1,28 @@
+---
+interface Props {
+  error?: string | string[];
+  id: string;
+  label: string;
+  name: string;
+  required?: boolean;
+  rows?: number;
+}
+
+const { error, id, label, name, required = false, rows = 5 } = Astro.props;
+const errorMessage = Array.isArray(error) ? error[0] : error;
+const errorId = `${id}-error`;
+---
+
+<div class="flex flex-col gap-1">
+  <label for={id} class="text-sm font-semibold">{label}</label>
+  <textarea
+    id={id}
+    name={name}
+    rows={rows}
+    required={required}
+    aria-invalid={!!errorMessage}
+    aria-describedby={errorMessage ? errorId : undefined}
+    class="rounded-md border border-border bg-surface px-3 py-2.5 text-text transition-colors focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/15"
+  ></textarea>
+  {errorMessage && <span id={errorId} class="text-xs text-error" role="alert">{errorMessage}</span>}
+</div>

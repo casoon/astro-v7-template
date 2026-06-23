@@ -1,0 +1,112 @@
+---
+import { ArticleSchema, WebPageSchema } from '@casoon/astro-structured-data/components';
+import { ClientRouter } from 'astro:transitions';
+
+export interface Props {
+  title: string;
+  description?: string;
+  lang?: string;
+  siteName?: string;
+  ogImage?: string;
+  robots?: string;
+  articleAuthor?: string;
+  articleDate?: Date;
+  articleModified?: Date;
+}
+
+const {
+  title,
+  description = '',
+  lang = 'en',
+  siteName,
+  ogImage,
+  robots,
+  articleAuthor,
+  articleDate,
+  articleModified,
+} = Astro.props;
+
+const useArticleSchema = !!articleDate && !!ogImage;
+const siteUrl = Astro.site?.href ?? Astro.url.origin + '/';
+const websiteJsonLd = siteName
+  ? JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: siteName,
+      url: siteUrl,
+    })
+  : null;
+const orgJsonLd = siteName
+  ? JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Organization',
+      name: siteName,
+      url: siteUrl,
+    })
+  : null;
+---
+
+<!doctype html>
+<html lang={lang} class="no-js">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <ClientRouter />
+    <script is:inline>
+      function getStoredTheme() {
+        try {
+          const cookieTheme = document.cookie.match(/(?:^|;\s*)theme=(dark|light)(?:;|$)/)?.[1];
+          return cookieTheme || localStorage.getItem('theme');
+        } catch {
+          return null;
+        }
+      }
+
+      function applyTheme() {
+        document.documentElement.classList.remove('no-js');
+        const storedTheme = getStoredTheme();
+        if (
+          storedTheme === 'dark' ||
+          (!storedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)
+        ) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      }
+
+      applyTheme();
+      if (window.__applyThemeHandler) {
+        document.removeEventListener('astro:after-swap', window.__applyThemeHandler);
+      }
+      window.__applyThemeHandler = applyTheme;
+      document.addEventListener('astro:after-swap', window.__applyThemeHandler);
+    </script>
+    {robots && <meta name="robots" content={robots} />}
+    {useArticleSchema ? (
+      <ArticleSchema
+        title={title}
+        description={description}
+        datePublished={articleDate!.toISOString()}
+        dateModified={articleModified?.toISOString()}
+        authorName={articleAuthor ?? 'Unknown'}
+        imageUrl={ogImage!}
+      />
+    ) : (
+      <WebPageSchema title={title} description={description} image={ogImage} />
+    )}
+    <slot name="head" />
+    {websiteJsonLd && <script type="application/ld+json" set:html={websiteJsonLd} />}
+    {orgJsonLd && <script type="application/ld+json" set:html={orgJsonLd} />}
+  </head>
+  <body>
+    <a href="#main" class="skip-link">Skip to content</a>
+    <slot name="header" />
+    <main id="main">
+      <slot />
+    </main>
+    <slot name="footer" />
+  </body>
+</html>

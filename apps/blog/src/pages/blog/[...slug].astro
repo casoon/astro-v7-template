@@ -1,0 +1,103 @@
+---
+import Navbar from '@astro-v7/shared/components/Navbar.astro';
+import ReadingProgress from '@astro-v7/shared/components/ReadingProgress.svelte';
+import TableOfContents from '@astro-v7/shared/components/TableOfContents.svelte';
+import Tag from '@astro-v7/shared/components/Tag.astro';
+import ThemeToggle from '@astro-v7/shared/components/ThemeToggle.svelte';
+import BaseLayout from '@astro-v7/shared/layouts/BaseLayout.astro';
+import { localePath, switchLocalePath } from '@astro-v7/shared/utils/i18n';
+import { AutoBreadcrumbSchema } from '@casoon/astro-structured-data/components';
+import type { MarkdownHeading } from 'astro';
+import { env } from '@/env';
+import { t } from '@/i18n';
+import { type BlogPost, getBlogPostStaticPaths } from '@/utils/blog-posts';
+import { render } from 'astro:content';
+import '@/styles/app.css';
+
+export const getStaticPaths = getBlogPostStaticPaths;
+
+const { post }: { post: BlogPost } = Astro.props;
+const locale = 'en' as const;
+const tr = t(locale);
+
+const title = post.data.title;
+const description = post.data.description;
+const alternateHref = switchLocalePath(Astro.url.pathname, 'de');
+const links = [{ href: localePath('/', locale), label: tr('nav.home') }];
+const { Content, headings } = await render(post);
+const tocHeadings = headings.filter((h: MarkdownHeading) => h.depth === 2 || h.depth === 3);
+---
+
+<BaseLayout title={`${title} - Astro v7 Blog`} description={description} lang={locale} siteName={env.PUBLIC_SITE_NAME} ogImage={new URL(`/og/blog/${post.id}.png`, Astro.site).href} articleAuthor={post.data.author} articleDate={post.data.date} articleModified={post.data.lastmod}>
+  <AutoBreadcrumbSchema slot="head" homeLabel="Home" labels={{ blog: 'Blog' }} />
+
+  <Navbar slot="header" siteName="Astro v7 Blog" links={links}>
+    <a href={alternateHref} class="text-xs font-medium text-text-secondary hover:text-text no-underline">DE</a>
+    <ThemeToggle client:load />
+  </Navbar>
+
+  <ReadingProgress client:idle />
+
+  <div class="mx-auto max-w-5xl px-6 py-12">
+    <div class="lg:grid lg:grid-cols-[minmax(0,1fr)_220px] lg:gap-16 lg:items-start">
+      <article class="min-w-0">
+        <header class="mb-12">
+          <time datetime={post.data.date.toISOString()} class="mb-2 block text-sm text-text-secondary">
+            {post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+          </time>
+          <h1 class="mb-2 text-[clamp(1.75rem,4vw,2.5rem)] font-extrabold leading-snug tracking-tight">{title}</h1>
+          <p class="text-[0.9375rem] text-text-secondary">{tr('post.by')} {post.data.author}</p>
+          {post.data.readTime && (
+            <p class="mt-1 text-sm text-text-secondary">{post.data.readTime} min read</p>
+          )}
+          {post.data.tags.length > 0 && (
+            <div class="mt-4 flex flex-wrap gap-1">
+              {post.data.tags.map((tag: string) => (
+                <Tag>{tag}</Tag>
+              ))}
+            </div>
+          )}
+        </header>
+
+        <div class="post-content prose prose-neutral dark:prose-invert max-w-none">
+          <Content />
+        </div>
+
+        <footer class="mt-12 border-t border-border pt-8">
+          <a href={localePath('/', locale)} class="font-semibold">&larr; {tr('post.back')}</a>
+        </footer>
+      </article>
+
+      {tocHeadings.length > 0 && (
+        <aside class="hidden lg:block">
+          <div class="sticky top-[calc(var(--nav-height)+2rem)]">
+            <TableOfContents headings={tocHeadings} client:idle />
+          </div>
+        </aside>
+      )}
+    </div>
+  </div>
+
+  <footer slot="footer" class="border-t border-border px-6 py-8 text-center text-sm text-text-secondary">
+    <p>&copy; {new Date().getFullYear()} Astro v7 Blog.</p>
+  </footer>
+</BaseLayout>
+
+<style>
+  /* Tailwind Typography customizations using project design tokens */
+  .post-content :global(code:not(pre code)) {
+    font-family: var(--font-mono);
+    background: var(--color-bg-secondary);
+    border-radius: var(--radius-sm);
+  }
+
+  .post-content :global(code::before),
+  .post-content :global(code::after) {
+    content: none !important;
+  }
+
+  .post-content :global(pre) {
+    background: var(--color-neutral-900) !important;
+    border-radius: var(--radius-lg);
+  }
+</style>

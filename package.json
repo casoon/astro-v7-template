@@ -1,0 +1,78 @@
+{
+  "name": "astro-v7-workspace",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Astro v7 monorepo template with pnpm workspaces, Tailwind v4, Svelte 5, and Biome",
+  "author": "casoon",
+  "license": "MIT",
+  "homepage": "https://astrov7.casoon.dev",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/casoon/astro-v7-template"
+  },
+  "packageManager": "pnpm@11.0.9",
+  "engines": {
+    "node": ">=22.12.0",
+    "pnpm": ">=11.0.0"
+  },
+  "volta": {
+    "node": "24.14.1",
+    "pnpm": "11.0.9"
+  },
+  "scripts": {
+    "dev": "pnpm --filter @astro-v7/starter dev",
+    "dev:starter": "pnpm --filter @astro-v7/starter dev",
+    "dev:blog": "pnpm --filter @astro-v7/blog dev",
+    "build": "pnpm build:starter && pnpm build:blog",
+    "build:starter": "pnpm --filter @astro-v7/starter build",
+    "build:blog": "pnpm --filter @astro-v7/blog build",
+    "preview": "pnpm --filter @astro-v7/starter preview",
+    "preview:starter": "pnpm --filter @astro-v7/starter preview",
+    "preview:blog": "pnpm --filter @astro-v7/blog preview",
+    "check": "biome check .",
+    "check:fix": "biome check --write .",
+    "format": "biome format --write .",
+    "type-check": "pnpm -r run type-check",
+    "test:e2e": "playwright test",
+    "test:e2e:starter": "playwright test --project=starter",
+    "test:e2e:blog": "playwright test --project=blog",
+    "deploy": "pnpm deploy:starter && pnpm deploy:blog",
+    "deploy:starter": "pnpm --filter @astro-v7/starter run deploy",
+    "deploy:blog": "pnpm --filter @astro-v7/blog run deploy",
+    "fallow:audit": "fallow audit",
+    "fallow:health": "fallow health --score --hotspots --targets",
+    "fallow:dead": "fallow dead-code",
+    "secrets:scan": "pnpm exec nosecrets scan .",
+    "secrets:scan:staged": "pnpm exec nosecrets scan --staged",
+    "clean": "pnpm -r clean && rm -rf node_modules",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{js,mjs,cjs,ts,tsx,json,astro,svelte,css}": [
+      "biome check --write --no-errors-on-unmatched"
+    ]
+  },
+  "keywords": [
+    "astro",
+    "astro-v7",
+    "template",
+    "starter",
+    "monorepo",
+    "workspace",
+    "pnpm",
+    "catalog",
+    "tailwind-v4",
+    "svelte-5",
+    "biome"
+  ],
+  "devDependencies": {
+    "@axe-core/playwright": "catalog:",
+    "@biomejs/biome": "catalog:",
+    "@casoon/nosecrets": "^0.3.7",
+    "@playwright/test": "^1.60.0",
+    "fallow": "catalog:",
+    "husky": "catalog:",
+    "lint-staged": "catalog:",
+    "sharp": "catalog:"
+  }
+}

@@ -1,0 +1,41 @@
+name: Update Badges
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-badges:
+    name: Refresh README Badges
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js with Volta
+        uses: volta-cli/action@v5
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v5
+        with:
+          run_install: false
+
+      - name: Update version badges
+        run: bash scripts/update-badges.sh
+
+      - name: Commit badge updates
+        run: |
+          if git diff --quiet README.md; then
+            echo "Badges are up to date"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git commit --no-verify -m "Update version badges"
+          git push

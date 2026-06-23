@@ -1,0 +1,2 @@
+pnpm exec nosecrets scan --staged
+pnpm lint-staged

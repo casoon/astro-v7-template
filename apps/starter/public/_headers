@@ -1,0 +1,82 @@
+# =============================================================================
+# CACHE-RICHTLINIEN FÜR CLOUDFLARE WORKERS
+# =============================================================================
+# Regeln werden von oben nach unten verarbeitet.
+# Die ERSTE passende Regel gewinnt – spezifische Regeln vor allgemeine stellen!
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# 1. Hashed Assets (/_astro/* von Vite/Astro) – ewig cachen, immutable
+# -----------------------------------------------------------------------------
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+  Accept-Ranges: bytes
+  Vary: Accept-Encoding
+
+# -----------------------------------------------------------------------------
+# 2. Bilder
+# -----------------------------------------------------------------------------
+/og/*
+  Cache-Control: public, max-age=31536000, immutable
+  Accept-Ranges: bytes
+  Vary: Accept-Encoding
+
+/*.webp
+  Cache-Control: public, max-age=31536000, immutable
+  Accept-Ranges: bytes
+
+/*.jpg
+  Cache-Control: public, max-age=31536000, immutable
+  Accept-Ranges: bytes
+
+/*.png
+  Cache-Control: public, max-age=31536000, immutable
+  Accept-Ranges: bytes
+
+/*.svg
+  Cache-Control: public, max-age=31536000, immutable
+  Accept-Ranges: bytes
+
+# -----------------------------------------------------------------------------
+# 3. Schriftarten
+# -----------------------------------------------------------------------------
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+  Accept-Ranges: bytes
+
+# -----------------------------------------------------------------------------
+# 4. Sitemap & Feeds
+# -----------------------------------------------------------------------------
+/sitemap*.xml
+  Cache-Control: public, max-age=3600, s-maxage=7200
+  Content-Type: application/xml; charset=utf-8
+
+/rss.xml
+  Cache-Control: public, max-age=3600, s-maxage=7200
+  Content-Type: application/rss+xml; charset=utf-8
+
+# -----------------------------------------------------------------------------
+# 5. Robots & Meta
+# -----------------------------------------------------------------------------
+/robots.txt
+  Cache-Control: public, max-age=86400
+
+/.well-known/*
+  Cache-Control: public, max-age=3600
+
+# -----------------------------------------------------------------------------
+# 6. HTML-Seiten – kein Browser-Cache, immer revalidieren
+#
+# Hintergrund: Astro baut CSS/JS mit Content-Hashes (/_astro/*.abc123.css).
+# Wenn der Browser alte HTML mit alten Hashes cached und nach einem Deploy
+# die alten Dateien nicht mehr existieren, sieht die Seite zerschossen aus.
+# no-cache = Browser cached, muss aber vor Nutzung revalidieren (304 = schnell).
+# s-maxage=3600 = Cloudflare Edge kann HTML 1h cachen (Worker-Deploy invalidiert).
+# -----------------------------------------------------------------------------
+/*
+  Cache-Control: no-cache, s-maxage=3600
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  Vary: Accept-Encoding

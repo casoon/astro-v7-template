@@ -1,0 +1,67 @@
+---
+import Card from '@astro-v7/shared/components/Card.astro';
+import Navbar from '@astro-v7/shared/components/Navbar.astro';
+import Tag from '@astro-v7/shared/components/Tag.astro';
+import ThemeToggle from '@astro-v7/shared/components/ThemeToggle.svelte';
+import BaseLayout from '@astro-v7/shared/layouts/BaseLayout.astro';
+import { localePath } from '@astro-v7/shared/utils/i18n';
+import { env } from '@/env';
+import { t } from '@/i18n';
+import { type CollectionEntry, getCollection } from 'astro:content';
+import '@/styles/app.css';
+
+type BlogPost = CollectionEntry<'blog'>;
+
+const locale = 'en' as const;
+const tr = t(locale);
+
+const posts = (await getCollection('blog'))
+  .filter((post: BlogPost) => !post.data.draft)
+  .sort((a: BlogPost, b: BlogPost) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const links = [{ href: localePath('/', locale), label: tr('nav.home') }];
+---
+
+<BaseLayout title={tr('home.title')} description={tr('home.description')} lang={locale} siteName={env.PUBLIC_SITE_NAME} ogImage={new URL('/og/home.png', Astro.site).href}>
+
+  <Navbar slot="header" siteName="Astro v7 Blog" links={links}>
+    <a href="/de" class="text-xs font-medium text-text-secondary hover:text-text no-underline">DE</a>
+    <ThemeToggle client:load />
+  </Navbar>
+
+  <section class="mx-auto max-w-3xl px-6 pt-12 pb-8 text-center">
+    <h1 class="mb-2 text-[clamp(2rem,5vw,3rem)] font-extrabold tracking-tight">{tr('home.title')}</h1>
+    <p class="text-lg text-text-secondary">{tr('home.description')}</p>
+  </section>
+
+  <section class="mx-auto max-w-3xl px-6 pb-12">
+    <h2 class="mb-6 text-2xl font-bold">{tr('home.latest')}</h2>
+    <ul class="flex list-none flex-col gap-4 p-0" role="list">
+      {posts.map((post: BlogPost) => (
+        <li>
+          <Card href={`/blog/${post.id}`}>
+            <time datetime={post.data.date.toISOString()} class="mb-1 block text-xs text-text-secondary">
+              {post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+            </time>
+            <h3 class="mb-1 text-xl font-bold">{post.data.title}</h3>
+            <p class="leading-relaxed text-text-secondary">{post.data.description}</p>
+            {post.data.tags.length > 0 && (
+              <div class="mt-3 flex flex-wrap gap-1">
+                {post.data.tags.map((tag: string) => (
+                  <Tag>{tag}</Tag>
+                ))}
+              </div>
+            )}
+          </Card>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <footer slot="footer" class="border-t border-border px-6 py-8 text-center text-sm text-text-secondary">
+    <p>
+      &copy; {new Date().getFullYear()} Astro v7 Blog.
+      <a href="/rss.xml">{tr('footer.rss')}</a>
+    </p>
+  </footer>
+</BaseLayout>

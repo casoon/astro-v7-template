@@ -1,0 +1,23 @@
+---
+import { cn } from '../utils/cn';
+
+interface Props {
+  class?: string;
+  role?: 'alert' | 'status';
+  variant?: 'success' | 'error';
+}
+
+const { class: className, role = 'status', variant = 'success' } = Astro.props;
+---
+
+<div
+  class={cn(
+    'mb-6 rounded-xl p-4',
+    variant === 'success' && 'bg-success/20 text-success',
+    variant === 'error' && 'bg-error/20 text-error',
+    className,
+  )}
+  role={role}
+>
+  <slot />
+</div>

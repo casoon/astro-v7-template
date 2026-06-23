@@ -1,0 +1,73 @@
+---
+import Button from '@astro-v7/shared/components/Button.astro';
+import Card from '@astro-v7/shared/components/Card.astro';
+import Navbar from '@astro-v7/shared/components/Navbar.astro';
+import ThemeToggle from '@astro-v7/shared/components/ThemeToggle.svelte';
+import BaseLayout from '@astro-v7/shared/layouts/BaseLayout.astro';
+import { localePath } from '@astro-v7/shared/utils/i18n';
+import { env } from '@/env';
+import { t } from '@/i18n';
+import '@/styles/app.css';
+
+const locale = 'en' as const;
+const tr = t(locale);
+
+const links = [
+  { href: localePath('/', locale), label: tr('nav.home') },
+  { href: localePath('/contact', locale), label: tr('nav.contact') },
+];
+---
+
+<BaseLayout title={tr('home.title')} description={tr('home.description')} lang={locale} siteName={env.PUBLIC_SITE_NAME} ogImage={new URL('/og/home.png', Astro.site).href}>
+
+  <Navbar slot="header" siteName="Astro v7" links={links}>
+    <a href="/de" class="text-xs font-medium text-text-secondary hover:text-text no-underline">DE</a>
+    <ThemeToggle client:load />
+  </Navbar>
+
+  <section class="mx-auto max-w-3xl px-6 py-16 text-center">
+    <h1 class="mb-4 text-[clamp(2rem,5vw,3.5rem)] font-extrabold leading-tight tracking-tight">{tr('home.title')}</h1>
+    <p class="mb-8 text-xl text-text-secondary">{tr('home.description')}</p>
+    <div class="flex flex-wrap justify-center gap-4">
+      <Button href="https://docs.astro.build" target="_blank" rel="noopener noreferrer">
+        {tr('home.cta.docs')}
+      </Button>
+      <Button href={localePath('/contact', locale)} variant="secondary">
+        {tr('home.cta.contact')}
+      </Button>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-6 pb-12">
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <Card>
+        <h2 class="mb-2 text-xl font-bold">{tr('feature.astro.title')}</h2>
+        <p class="leading-relaxed text-text-secondary">{tr('feature.astro.desc')}</p>
+      </Card>
+      <Card>
+        <h2 class="mb-2 text-xl font-bold">{tr('feature.tailwind.title')}</h2>
+        <p class="leading-relaxed text-text-secondary">{tr('feature.tailwind.desc')}</p>
+      </Card>
+      <Card>
+        <h2 class="mb-2 text-xl font-bold">{tr('feature.svelte.title')}</h2>
+        <p class="leading-relaxed text-text-secondary">{tr('feature.svelte.desc')}</p>
+      </Card>
+      <Card>
+        <h2 class="mb-2 text-xl font-bold">{tr('feature.biome.title')}</h2>
+        <p class="leading-relaxed text-text-secondary">{tr('feature.biome.desc')}</p>
+      </Card>
+      <Card>
+        <h2 class="mb-2 text-xl font-bold">{tr('feature.zod.title')}</h2>
+        <p class="leading-relaxed text-text-secondary">{tr('feature.zod.desc')}</p>
+      </Card>
+      <Card>
+        <h2 class="mb-2 text-xl font-bold">{tr('feature.darkmode.title')}</h2>
+        <p class="leading-relaxed text-text-secondary">{tr('feature.darkmode.desc')}</p>
+      </Card>
+    </div>
+  </section>
+
+  <footer slot="footer" class="border-t border-border px-6 py-8 text-center text-sm text-text-secondary">
+    <p>&copy; {new Date().getFullYear()} Astro v7 Starter. {tr('footer.built')} <a href="https://astro.build" target="_blank" rel="noopener noreferrer">Astro</a>.</p>
+  </footer>
+</BaseLayout>

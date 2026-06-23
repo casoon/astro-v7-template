@@ -1,0 +1,44 @@
+{
+  "name": "@astro-v7/blog",
+  "version": "0.1.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev --port 4322",
+    "generate:og": "tsx scripts/generate-og.ts",
+    "build": "pnpm generate:og && astro build",
+    "preview": "astro preview",
+    "type-check": "astro check",
+    "clean": "rm -rf dist .astro",
+    "deploy": "pnpm build && wrangler deploy"
+  },
+  "dependencies": {
+    "@astro-v7/shared": "workspace:*",
+    "@astrojs/cloudflare": "catalog:",
+    "@astrojs/mdx": "catalog:",
+    "@astrojs/svelte": "catalog:",
+    "@astrojs/rss": "catalog:",
+    "@casoon/astro-site-files": "catalog:",
+    "@casoon/astro-structured-data": "catalog:",
+    "@casoon/astro-speed-measure": "catalog:",
+    "gray-matter": "catalog:",
+    "unist-util-visit": "catalog:",
+    "@fontsource/fira-code": "catalog:",
+    "@fontsource/inter": "catalog:",
+    "@fontsource/lora": "catalog:",
+    "@tailwindcss/typography": "catalog:",
+    "@tailwindcss/vite": "catalog:",
+    "tailwindcss-animate": "catalog:",
+    "astro": "catalog:",
+    "svelte": "catalog:",
+    "tailwindcss": "catalog:",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@astrojs/check": "catalog:",
+    "@casoon/astro-post-audit": "catalog:",
+    "tsx": "catalog:",
+    "typescript": "catalog:",
+    "wrangler": "catalog:"
+  }
+}

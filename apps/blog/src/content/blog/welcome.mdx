@@ -1,0 +1,42 @@
+---
+title: 'Welcome to the Astro v6 Blog'
+description: 'The first post in our new Astro v6 template featuring MDX support and Content Collections.'
+titleDe: 'Willkommen im Astro v6 Blog'
+descriptionDe: 'Der erste Beitrag in unserem neuen Astro v6 Template mit MDX-Unterstützung und Content Collections.'
+date: 2026-02-24
+author: 'Astro v6 Team'
+tags: ['astro', 'v6', 'template']
+---
+
+This is the first post in the **Astro v6 Blog Template**. Here we cover the most important changes.
+
+## What's New in Astro v6?
+
+- **New dev server** powered by the Vite Environment API
+- **Live Content Collections** for real-time data
+- **Content Security Policy** out of the box
+- **Node 22+** as minimum requirement
+- **Zod v4** for schema validation
+- **Vite 7** under the hood
+
+## Content Collections with Loader API
+
+In Astro v6, Content Collections use the new Loader API. Instead of `type: 'content'`, we now define a `loader`:
+
+```typescript
+import { defineCollection } from 'astro:content';
+import { glob } from 'astro/loaders';
+import { z } from 'astro/zod';
+
+const blog = defineCollection({
+  loader: glob({ pattern: '**/*.mdx', base: './src/content/blog' }),
+  schema: z.object({
+    title: z.string(),
+    date: z.coerce.date(),
+  }),
+});
+```
+
+## Conclusion
+
+Astro v6 brings significant improvements under the hood that bring the development workflow closer to production.

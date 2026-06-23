@@ -1,0 +1,33 @@
+{
+  "name": "@astro-v7/shared",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./styles/*": "./src/styles/*",
+    "./layouts/*": "./src/layouts/*",
+    "./components/*": "./src/components/*",
+    "./seo/*": "./src/seo/*",
+    ".": "./src/utils/index.ts",
+    "./utils": "./src/utils/index.ts",
+    "./utils/*": "./src/utils/*.ts"
+  },
+  "dependencies": {
+    "@casoon/astro-structured-data": "catalog:",
+    "@resvg/resvg-js": "catalog:",
+    "clsx": "catalog:",
+    "@lucide/svelte": "catalog:",
+    "satori": "catalog:",
+    "tailwind-merge": "catalog:",
+    "zod": "catalog:"
+  },
+  "peerDependencies": {
+    "@astrojs/svelte": "catalog:",
+    "astro": "catalog:",
+    "svelte": "catalog:"
+  },
+  "devDependencies": {
+    "@astrojs/svelte": "catalog:",
+    "svelte": "catalog:"
+  }
+}

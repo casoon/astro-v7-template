@@ -1,0 +1,32 @@
+---
+import BaseLayout from '@astro-v7/shared/layouts/BaseLayout.astro';
+import { t } from '@/i18n';
+import '@/styles/app.css';
+
+const locale = 'en';
+const tr = t(locale);
+---
+
+<BaseLayout title={tr('404.title')} description={tr('404.text')} lang={locale} robots="noindex, nofollow">
+
+  <a
+    href="#main-content"
+    class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-white focus:rounded-lg focus:font-medium"
+  >
+    Skip to content
+  </a>
+
+  <main id="main-content" class="flex min-h-[60vh] items-center justify-center px-6 py-20">
+    <div class="max-w-xl text-center">
+      <p class="mb-4 text-[8rem] leading-none font-light text-text-secondary/20 select-none" aria-hidden="true">404</p>
+      <h1 class="mb-4 text-2xl font-bold md:text-3xl">{tr('404.title')}</h1>
+      <p class="mb-8 text-lg text-text-secondary">{tr('404.text')}</p>
+      <a
+        href="/"
+        class="inline-block rounded-lg bg-accent px-6 py-3 text-sm font-medium text-white no-underline transition-colors hover:bg-accent/90"
+      >
+        &larr; {tr('404.back')}
+      </a>
+    </div>
+  </main>
+</BaseLayout>

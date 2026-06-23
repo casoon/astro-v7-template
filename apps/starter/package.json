@@ -1,0 +1,36 @@
+{
+  "name": "@astro-v7/starter",
+  "version": "0.1.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "generate:og": "tsx scripts/generate-og.ts",
+    "build": "pnpm generate:og && astro build",
+    "preview": "astro preview",
+    "type-check": "astro check",
+    "clean": "rm -rf dist .astro",
+    "deploy": "pnpm build && wrangler deploy --config dist/server/wrangler.json"
+  },
+  "dependencies": {
+    "@astro-v7/shared": "workspace:*",
+    "@astrojs/cloudflare": "catalog:",
+    "@astrojs/svelte": "catalog:",
+    "@casoon/astro-site-files": "catalog:",
+    "@casoon/astro-structured-data": "catalog:",
+    "@casoon/astro-speed-measure": "catalog:",
+    "@fontsource/inter": "catalog:",
+    "@tailwindcss/vite": "catalog:",
+    "tailwindcss-animate": "catalog:",
+    "astro": "catalog:",
+    "svelte": "catalog:",
+    "tailwindcss": "catalog:"
+  },
+  "devDependencies": {
+    "@astrojs/check": "catalog:",
+    "@casoon/astro-post-audit": "catalog:",
+    "tsx": "catalog:",
+    "typescript": "catalog:",
+    "wrangler": "catalog:"
+  }
+}

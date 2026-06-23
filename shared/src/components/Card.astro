@@ -1,0 +1,26 @@
+---
+import { cn } from '../utils/cn';
+
+interface Props {
+  class?: string;
+  href?: string;
+}
+
+const { class: className, href } = Astro.props;
+
+const classes = cn(
+  'rounded-xl border border-border bg-surface p-8 transition-all',
+  href ? 'block text-inherit no-underline hover:border-accent hover:shadow-md' : 'hover:shadow-md',
+  className
+);
+---
+
+{href ? (
+  <a href={href} class={classes}>
+    <slot />
+  </a>
+) : (
+  <article class={classes}>
+    <slot />
+  </article>
+)}

@@ -1,0 +1,57 @@
+---
+import Alert from '@astro-v7/shared/components/Alert.astro';
+import Button from '@astro-v7/shared/components/Button.astro';
+import Navbar from '@astro-v7/shared/components/Navbar.astro';
+import Textarea from '@astro-v7/shared/components/Textarea.astro';
+import TextField from '@astro-v7/shared/components/TextField.astro';
+import ThemeToggle from '@astro-v7/shared/components/ThemeToggle.svelte';
+import BaseLayout from '@astro-v7/shared/layouts/BaseLayout.astro';
+import { localePath } from '@astro-v7/shared/utils/i18n';
+import { env } from '@/env';
+import { t } from '@/i18n';
+import { actions, isInputError } from 'astro:actions';
+import '@/styles/app.css';
+
+const locale = 'en' as const;
+const tr = t(locale);
+
+const links = [
+  { href: localePath('/', locale), label: tr('nav.home') },
+  { href: localePath('/contact', locale), label: tr('nav.contact') },
+];
+
+const result = Astro.getActionResult(actions.submitContactForm);
+const success = result && !result.error;
+const inputError = result?.error && isInputError(result.error) ? result.error.fields : undefined;
+---
+
+<BaseLayout title={tr('contact.title')} description={tr('contact.description')} lang={locale} siteName={env.PUBLIC_SITE_NAME} ogImage={new URL('/og/contact.png', Astro.site).href}>
+
+  <Navbar slot="header" siteName="Astro v7" links={links}>
+    <a href="/de/contact" class="text-xs font-medium text-text-secondary hover:text-text no-underline">DE</a>
+    <ThemeToggle client:load />
+  </Navbar>
+
+  <section class="mx-auto max-w-xl px-6 py-12">
+    <h1 class="mb-2 text-3xl font-extrabold">{tr('contact.title')}</h1>
+    <p class="mb-8 text-text-secondary">{tr('contact.description')}</p>
+
+    {success && (
+      <Alert>
+        <p>{result.data?.message}</p>
+      </Alert>
+    )}
+
+    <form class="flex flex-col gap-4" method="POST" action={actions.submitContactForm}>
+      <TextField id="name" name="name" label={tr('contact.name')} required autocomplete="name" error={inputError?.name} />
+      <TextField id="email" name="email" type="email" label={tr('contact.email')} required autocomplete="email" error={inputError?.email} />
+      <TextField id="subject" name="subject" label={tr('contact.subject')} required error={inputError?.subject} />
+      <Textarea id="message" name="message" label={tr('contact.message')} rows={5} required error={inputError?.message} />
+      <Button type="submit">{tr('contact.send')}</Button>
+    </form>
+  </section>
+
+  <footer slot="footer" class="border-t border-border px-6 py-8 text-center text-sm text-text-secondary">
+    <p>&copy; {new Date().getFullYear()} Astro v7 Starter.</p>
+  </footer>
+</BaseLayout>
