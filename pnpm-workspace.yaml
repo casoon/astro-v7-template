@@ -17,10 +17,10 @@ catalog:
   "@astrojs/rss": ^4.0.18
   "@astrojs/svelte": ^9.0.0
   "@axe-core/playwright": ^4.11.3
-  "@casoon/astro-post-audit": ^0.4.5
-  "@casoon/astro-structured-data": ^1.4.1
-  "@casoon/astro-site-files": ^0.4.1
-  "@casoon/astro-speed-measure": ^0.2.0
+  "@casoon/astro-post-audit": ^0.4.6
+  "@casoon/astro-structured-data": ^1.5.0
+  "@casoon/astro-site-files": ^0.4.2
+  "@casoon/astro-speed-measure": ^0.4.0
 
   # Tailwind v4
   tailwindcss: ^4.3.1
