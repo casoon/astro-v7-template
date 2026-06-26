@@ -1,0 +1,133 @@
+# Beispiel-Projektdefinition: Lokales Unternehmen
+
+projekt:
+  name: "Sanitär Hoffmann Hamburg"
+  template: starter
+  sprachen: [de]
+
+auftraggeber:
+  name: "Sanitär Hoffmann GmbH"
+  branche: "Sanitär & Heizung / Handwerk"
+  beschreibung: >
+    Traditionshandwerksbetrieb in Hamburg-Altona. Gegründet 1987.
+    Spezialisiert auf Badsanierung, Heizungsmodernisierung und Notfallservice.
+    12 Mitarbeiter, hauptsächlich Empfehlungsgeschäft, kaum Online-Präsenz bisher.
+
+ziel:
+  primaer: "Lokale Anfragen generieren (Kontaktformular + Telefon)"
+  cta: "Kostenlosen Kostenvoranschlag anfordern"
+  metriken:
+    - "5-10 qualifizierte Anfragen pro Monat"
+    - "Erscheinen in Google Maps / Local Pack"
+    - "Branded Suchanfragen steigen"
+
+zielgruppe:
+  persona: >
+    Petra, 52, Eigenheimbesitzerin in Hamburg-Altona.
+    Ihr Bad ist 25 Jahre alt, die Heizung macht Probleme.
+    Sie sucht einen zuverlässigen lokalen Handwerker — keine große Kette.
+    Hat schlechte Erfahrungen mit unzuverlässigen Firmen gemacht.
+    Entscheidung oft abends am Smartphone nach einer Recherchephase von 1-2 Wochen.
+  groesstes_problem: "Zuverlässigen, lokalen Handwerker finden, dem man vertrauen kann"
+  einwaende:
+    - "Kommt der auch wirklich zuverlässig zum Termin?"
+    - "Ist der Preis fair oder werde ich abgezockt?"
+    - "Sind die wirklich aus Hamburg oder kommen die von weit her?"
+    - "Was wenn Probleme auftauchen — wer haftet?"
+  entscheidungsfaktor: "Lokale Empfehlungen, echte Bewertungen, transparente Kommunikation"
+
+marke:
+  differenzierung: >
+    Kein anonymes Handwerksunternehmen — ein Familienbetrieb aus dem Viertel.
+    Seit 1987 in Hamburg-Altona. Wir kennen die alten Wasserleitungen in
+    dieser Stadt. Festpreise, keine Überraschungen.
+  adjektive: [zuverlässig, lokal, ehrlich, kompetent, persönlich]
+  tabu: [anonym, billig, Kette, unpersönlich, kompliziert]
+  referenzen:
+    - "Alte Handwerksbetriebe mit modernem Web-Auftritt"
+    - "Warmes Erscheinungsbild, das zu echten Menschen passt"
+
+inhalt:
+  seiten:
+    - route: "/"
+      headline: "Ihr zuverlässiger Sanitärbetrieb in Hamburg-Altona seit 1987"
+      cta: "Kostenlosen Kostenvoranschlag anfordern"
+    - route: "/leistungen/"
+      headline: "Unsere Leistungen"
+      unterseiten:
+        - "/leistungen/badsanierung"
+        - "/leistungen/heizung"
+        - "/leistungen/notfallservice"
+    - route: "/ueber-uns/"
+      headline: "Familie Hoffmann — Ihr Handwerker im Viertel"
+    - route: "/kundenstimmen/"
+      headline: "Was unsere Kunden sagen"
+    - route: "/contact/"
+      headline: "Kostenloser Kostenvoranschlag"
+  sprachen: [de]
+  vorhanden:
+    - "Logo (veraltet, Überarbeitung nötig)"
+    - "12 Google-Bewertungen (4.8 Sterne)"
+  fehlend:
+    - "Team-Fotos (dringend)"
+    - "Vorher/Nachher Fotos von Projekten"
+    - "Hero-Bild"
+
+creative_direction:
+  positioning_statement: >
+    Für Hamburger Eigenheimbesitzer, die einen zuverlässigen Handwerker suchen,
+    ist Sanitär Hoffmann der lokale Familienbetrieb,
+    der pünktlich kommt und ehrliche Preise macht,
+    weil wir seit 1987 im Viertel verwurzelt sind.
+    Im Gegensatz zu anonymen Großbetrieben, die Unterauftragnehmer schicken.
+
+  farben:
+    primary: "oklch(0.38 0.12 240)"    # Dunkles Blau — Vertrauen, Solidität
+    secondary: "oklch(0.92 0.04 85)"   # Warmes Beige — Menschlichkeit
+    accent: "oklch(0.65 0.14 40)"      # Warmes Orange — Energie, Handwerk
+    neutral_900: "oklch(0.20 0.01 240)"
+    neutral_50: "oklch(0.97 0.005 85)"
+
+  typografie:
+    display: "Lora"
+    body: "Source Sans 3"
+    begruendung: >
+      Lora als Serif-Display-Font transportiert Tradition und Verlässlichkeit.
+      Source Sans 3 für saubere Lesbarkeit in Bodytexten.
+      Kombination: solide, menschlich, nicht steif.
+
+  tonalitaet: >
+    Direkt und bodenständig. Kein Marketing-Speak.
+    So wie Familie Hoffmann auch persönlich reden würde.
+    "Wir kommen. Wir machen es richtig. Fertig."
+
+seo:
+  local:
+    city: "Hamburg"
+    district: "Altona"
+    service_area: ["Altona", "Ottensen", "Bahrenfeld", "Eimsbüttel", "Blankenese"]
+    google_business: true
+    json_ld_type: "Plumber"
+
+wettbewerber:
+  - name: "Klempner-Portal.de"
+    beschreibung: "Aggregator-Plattform"
+    schwaechen:
+      - "Anonym, kein lokales Vertrauen"
+      - "Hohe Konkurrenz, Preiskampf"
+
+  - name: "Grosse Handwerksketten (HAPEKO etc.)"
+    schwaechen:
+      - "Unpersönlich"
+      - "Lange Wartezeiten"
+      - "Unterauftragnehmer"
+
+annahmen:
+  - frage: "Team-Fotos"
+    annahme: "Müssen noch fotografiert werden. Fotoshooting einplanen."
+    konfidenz: hoch
+    validierung: "Mit Kunde besprechen"
+  - frage: "Pricing-Strategie"
+    annahme: "Kostenvoranschlag kostenlos, Preise nicht öffentlich"
+    konfidenz: mittel
+    validierung: "Klären ob Stundenpreise kommuniziert werden sollen"

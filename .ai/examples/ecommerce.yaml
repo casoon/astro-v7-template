@@ -1,0 +1,139 @@
+# Beispiel-Projektdefinition: E-Commerce / Shop
+
+projekt:
+  name: "Kaffeerei Hamburg"
+  template: starter
+  sprachen: [de]
+  hinweis: >
+    Dieses Projekt nutzt das Starter-Template als Basis für eine
+    Landing-Page / Showcase-Website. Der eigentliche Shop läuft auf
+    Shopify. Diese Website: Marke, Story, Sortiment → Weiterleitung zum Shop.
+
+auftraggeber:
+  name: "Kaffeerei GmbH"
+  branche: "Specialty Coffee / D2C"
+  beschreibung: >
+    Kleine Hamburger Kaffeerösterei, gegründet 2021.
+    Rösten wöchentlich frisch, verkaufen hauptsächlich über eigenen Webshop.
+    Problem: Shopify-Template sieht generisch aus, Marke kommt nicht raus.
+    Ziel: Eigene Markenseite (Astro) die auf den Shopify-Shop verlinkt.
+
+ziel:
+  primaer: "Shop-Traffic erhöhen, Markenidentität stärken"
+  sekundaer: "Newsletter-Aufbau, Gastronomieanfragen"
+  cta: "Jetzt Kaffee entdecken"
+  cta_ziel: "Shopify"
+  metriken:
+    - "20% mehr Shop-Besucher über organische Suche"
+    - "500 Newsletter-Abonnenten"
+    - "5 B2B-Anfragen (Gastronomie) pro Monat"
+
+zielgruppe:
+  persona: >
+    Jonas, 33, arbeitet remote als Designer in Hamburg.
+    Trinkt täglich 2-3 Tassen Kaffee, aber kein Kaffee-Snob.
+    Kauft gerne bei lokalen Unternehmen, wenn Qualität stimmt.
+    Entscheidet oft impulsiv — sieht etwas, findet es schön, kauft.
+    Bestellt 1-2x pro Monat Kaffee online.
+  groesstes_problem: "Guter Kaffee von lokalen Röstereien ist schwer zu finden"
+  einwaende:
+    - "Ist Specialty Coffee wirklich besser oder nur teurer?"
+    - "Was wenn mir der Geschmack nicht gefällt?"
+    - "Lohnt sich die monatliche Bestellung?"
+  entscheidungsfaktor: "Geschichte hinter dem Produkt, visuelles Erlebnis, Geschmacksprofil klar erklärt"
+
+marke:
+  differenzierung: >
+    Kein anonymous Commodity — Kaffee mit Gesicht und Geschichte.
+    Wir kennen die Bauern beim Namen. Jede Röstung hat eine Story.
+    Transparenz von der Farm bis zur Tasse.
+  adjektive: [authentisch, handwerklich, lokal, transparent, sinnlich]
+  tabu: [massenmarkt, austauschbar, überteuert wirkend, hipster-arrogant]
+  referenzen:
+    - "Five Elephant Berlin — Klarheit im Branding"
+    - "Tor Coffee Hamburg — lokale Wurzeln"
+    - "Kopffüßler — schöne Produktseiten"
+
+inhalt:
+  seiten:
+    - route: "/"
+      headline: "Hamburger Kaffee. Frisch geröstet. Mit Geschichte."
+      cta: "Jetzt entdecken"
+    - route: "/roesterei/"
+      headline: "Wie wir rösten"
+    - route: "/herkunft/"
+      headline: "Von der Farm bis zur Tasse"
+    - route: "/sortiment/"
+      headline: "Unsere aktuellen Röstungen"
+      hinweis: "Produkt-Showcase, CTA → Shopify"
+    - route: "/gastronomie/"
+      headline: "Kaffee für dein Restaurant"
+    - route: "/contact/"
+      headline: "Schreib uns"
+  sprachen: [de]
+
+creative_direction:
+  positioning_statement: >
+    Für Hamburger Kaffeetrinker, die mehr wollen als anonyme Bohnen,
+    ist Kaffeerei der lokale Röster,
+    der Transparenz und handwerkliche Qualität vereint,
+    weil wir jeden Schritt von der Farm bis zur Tasse kennen.
+    Im Gegensatz zu Supermarkt-Marken, die Herkunft verbergen.
+
+  farben:
+    primary: "oklch(0.35 0.08 50)"     # Tiefes Braun — Kaffee, Erde, Wärme
+    secondary: "oklch(0.92 0.04 80)"   # Warmes Creme — Milch, Gemütlichkeit
+    accent: "oklch(0.68 0.14 45)"      # Wärmeres Orange — Röstung, Energie
+    neutral_900: "oklch(0.18 0.04 50)"
+    neutral_50: "oklch(0.97 0.01 80)"
+
+  typografie:
+    display: "Playfair Display"
+    body: "Lato"
+    begruendung: >
+      Playfair Display: klassische Eleganz, Handwerk, Premium-Gefühl.
+      Lato: modern und lesbar für Produktbeschreibungen und Texte.
+      Kontrast erzeugt Spannung zwischen Tradition und Zeitgeist.
+
+  tonalitaet: >
+    Leidenschaftlich, aber nicht überheblich.
+    Erzählerisch — jede Röstung hat eine Geschichte.
+    Einladend, nicht exklusiv. Kaffee für alle, die es ernst nehmen.
+
+  bildsprache: >
+    Viel Textur: Kaffeebohnen, Holz, Keramik, Hände beim Rösten.
+    Warme Lichtstimmung, Golden Hour.
+    Menschen die Kaffee genießen — authentisch, nicht gestellt.
+    Kein weißer Studio-Look. Keine Stockfotos.
+
+wettbewerber:
+  - name: "Five Elephant"
+    url: "https://www.five-elephant.de"
+    staerken:
+      - "Sehr klares Branding"
+      - "Transparenz über Herkunft"
+    schwaechen:
+      - "Etwas kalt/distanziert"
+  - name: "Lokale Hamburger Röstereien"
+    schwaechen:
+      - "Oft schlechte Online-Präsenz"
+      - "Keine starke Marke"
+
+seo:
+  local:
+    city: "Hamburg"
+    keywords:
+      - "Kaffeerösterei Hamburg"
+      - "Specialty Coffee Hamburg"
+      - "Kaffee online kaufen Hamburg"
+      - "Kaffeebohnen frisch geröstet Hamburg"
+
+annahmen:
+  - frage: "Shopify-Integration"
+    annahme: "Astro-Seite verlinkt auf Shopify, kein Produktsync nötig"
+    konfidenz: hoch
+    validierung: "Mit Kunde bestätigt"
+  - frage: "Produktbilder"
+    annahme: "Vorhanden, aber müssen optimiert werden"
+    konfidenz: mittel
+    validierung: "Bilder liefern lassen"

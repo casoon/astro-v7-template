@@ -1,0 +1,131 @@
+# Beispiel-Projektdefinition: Blog / Content
+
+projekt:
+  name: "The Astro Developer"
+  template: blog
+  sprachen: [de, en]
+
+auftraggeber:
+  name: "Jörn Seidel"
+  typ: "Personal Brand / Developer Blog"
+  beschreibung: >
+    Technischer Blog über Astro, Webperformance und moderne Webentwicklung.
+    Zielgruppe: JavaScript-Entwickler, die von React/Next.js zu Astro wechseln
+    oder Astro tiefer verstehen wollen.
+
+ziel:
+  primaer: "Newsletter-Abonnenten gewinnen"
+  sekundaer: "Freelance-Anfragen über Blog-Reputation"
+  cta: "Wöchentlichen Newsletter abonnieren"
+  metriken:
+    - "1000 Newsletter-Abonnenten in 6 Monaten"
+    - "5000 monatliche Seitenaufrufe nach 3 Monaten"
+    - "2-3 Freelance-Anfragen pro Monat"
+
+zielgruppe:
+  persona: >
+    Lisa, 29, Frontend-Entwicklerin bei einer Agentur in München.
+    Frustriert von der Komplexität von Next.js für einfache Websites.
+    Hat von Astro gehört, aber noch nie tiefgehend damit gearbeitet.
+    Liest Blogs in Mittagspausen oder abends.
+    Abonniert Newsletter wenn der erste Artikel wirklich hilfreich war.
+  groesstes_problem: >
+    Next.js ist zu komplex und zu langsam für ihre Kundenprojekte.
+    Sie sucht einen besseren Weg, aber hat Angst, etwas Wichtiges zu verpassen.
+  einwaende:
+    - "Ist Astro stabil genug für Produktionsprojekte?"
+    - "Lohnt sich der Lernaufwand?"
+    - "Was wenn Kunden Vue oder React wollen?"
+  entscheidungsfaktor: "Konkrete Beispiele, echte Projekte, keine theoretischen Tutorials"
+
+marke:
+  differenzierung: >
+    Kein Tutorial-Blog — ein ehrliches Tagebuch aus der Praxis.
+    Echte Projekte, echte Fehler, echte Lösungen.
+    Kein Affiliate-Spam, keine gesponserten Beiträge.
+  adjektive: [direkt, technisch, ehrlich, praktisch, fokussiert]
+  tabu: [oberflächlich, sponsored, clickbait, aufgebläht, theoretisch]
+
+inhalt:
+  content_typen:
+    - typ: "Deep-Dive Tutorial"
+      frequenz: "2x pro Monat"
+      laenge: "2000-4000 Wörter"
+      beispiel: "Astro v7 Content Collections: Der vollständige Guide"
+
+    - typ: "Quick Tip"
+      frequenz: "1x pro Woche"
+      laenge: "500-800 Wörter"
+      beispiel: "Astro v7: Warum render(entry) statt entry.render()"
+
+    - typ: "Case Study"
+      frequenz: "1x pro Monat"
+      laenge: "1500-2500 Wörter"
+      beispiel: "Wie ich eine Next.js-Site zu Astro migriert habe — Ergebnisse nach 3 Monaten"
+
+  seiten:
+    - route: "/"
+      headline: "Astro, Performance & modernes Web — aus der Praxis"
+      cta: "Newsletter abonnieren"
+    - route: "/blog/"
+      headline: "Alle Artikel"
+    - route: "/blog/[id]/"
+      typ: "Article"
+    - route: "/ueber-mich/"
+      headline: "Wer schreibt hier?"
+    - route: "/newsletter/"
+      headline: "Wöchentliche Einblicke aus der Astro-Praxis"
+
+  sprachen: [de, en]
+  rss: true
+  sitemap: true
+
+creative_direction:
+  positioning_statement: >
+    Für Frontend-Entwickler, die Astro ernsthaft einsetzen wollen,
+    ist The Astro Developer der technische Blog,
+    der echte Projektpraxis zeigt statt Toy-Examples,
+    weil jeder Artikel auf realen Kundenprojekten basiert.
+    Im Gegensatz zu Tutorial-Sites, die nur die Happy Path zeigen.
+
+  farben:
+    primary: "oklch(0.58 0.19 285)"    # Lila — Kreativität, Astro-Brand-nah
+    secondary: "oklch(0.15 0.02 285)"  # Fast-Schwarz — Code-Ästhetik
+    accent: "oklch(0.78 0.16 55)"      # Gelb-Orange — Energie, Code-Highlighting
+    neutral_900: "oklch(0.12 0.01 285)"
+    neutral_50: "oklch(0.97 0.005 285)"
+
+  typografie:
+    display: "Cal Sans"
+    body: "Inter Variable"
+    mono: "JetBrains Mono Variable"
+    begruendung: >
+      Cal Sans für Headlines: markant und persönlich.
+      Inter für Lesbarkeit in langen Texten.
+      JetBrains Mono für Code: das beste Developer-Font.
+
+  tonalitaet: >
+    Wie ein erfahrener Kollege beim Code Review.
+    Direkt, kein Bullshit, aber auch nicht arrogant.
+    Fehler eingestehen. Meinungen vertreten.
+
+seo:
+  hauptkeywords:
+    - "Astro Tutorial Deutsch"
+    - "Astro v7 Guide"
+    - "Astro Performance"
+    - "Astro vs Next.js"
+  long_tail:
+    - "Astro Content Collections Deutsch"
+    - "Astro v7 Migration Guide"
+
+wettbewerber:
+  - name: "docs.astro.build"
+    beschreibung: "Offizielle Doku"
+    luecke: "Kein Praxiskontext, keine Meinungen"
+  - name: "CSS-Tricks / Smashing Magazine"
+    beschreibung: "Große Tech-Blogs"
+    luecke: "Nicht Astro-fokussiert, zu breit"
+  - name: "joshwcomeau.com"
+    beschreibung: "Developer Personal Blog"
+    inspiration: "Tiefe, Qualität, persönliche Note"

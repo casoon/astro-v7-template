@@ -1,0 +1,131 @@
+# Beispiel-Projektdefinition: SaaS Produkt
+
+projekt:
+  name: "TaskFlow"
+  template: starter
+  sprachen: [de, en]
+
+auftraggeber:
+  name: "TaskFlow GmbH"
+  branche: "B2B SaaS / Projektmanagement"
+  beschreibung: >
+    SaaS-Tool für agile Teams, das Aufgabenmanagement, Zeiterfassung
+    und Teamkommunikation in einer Oberfläche vereint.
+    Zielgruppe: Tech-Startups und Agenturen mit 5-50 Mitarbeitern.
+
+ziel:
+  primaer: "Trial-Registrierungen generieren (14 Tage kostenlos)"
+  cta: "14 Tage kostenlos testen"
+  metriken:
+    - "Trial-Registrierungen pro Monat: Ziel 200"
+    - "Trial-to-Paid Conversion: Ziel 15%"
+    - "CAC: unter 80 EUR"
+
+zielgruppe:
+  persona: >
+    Max, 34, CTO in einem Berliner Startup mit 20 Mitarbeitern.
+    Frustriert von zu vielen Tools (Slack, Jira, Toggl, Notion — alle gleichzeitig).
+    Hat keine Zeit für lange Onboardings. Entscheidet selbst, testet kurz, kauft wenn es funktioniert.
+  groesstes_problem: "Tool-Chaos: 5 verschiedene Apps, kein gemeinsames Bild"
+  einwaende:
+    - "Wieder ein Tool, das wir lernen müssen"
+    - "Wechselkosten zu hoch — wir haben alles in Jira"
+    - "Funktioniert das auch für unser Remote-Team?"
+    - "Was wenn wir schnell wachsen — skaliert das?"
+  entscheidungsfaktor: "Kostenloser Trial ohne Kreditkarte, Datenmigration aus Jira"
+
+marke:
+  differenzierung: >
+    Das einzige Tool, das Aufgaben, Zeit und Kommunikation in einer Oberfläche
+    vereint — ohne die Komplexität von Jira oder die Chaotik von Notion.
+    Setup in 15 Minuten, nicht in 15 Tagen.
+  adjektive: [fokussiert, schnell, klar, menschlich, zuverlässig]
+  tabu: [kompliziert, bürokratisch, enterprise-schwer, aufdringlich]
+  referenzen:
+    - "Linear.app — klares UI, kein Overhead"
+    - "Notion — Flexibilität, aber zu viel Freiheit"
+    - "Basecamp — Menschlichkeit im B2B-Kontext"
+
+inhalt:
+  seiten:
+    - route: "/"
+      headline: "Schluss mit Tool-Chaos. Alle Aufgaben. Eine Oberfläche."
+      cta: "14 Tage kostenlos testen"
+    - route: "/features/"
+      headline: "Was TaskFlow kann"
+      cta: "Jetzt testen"
+    - route: "/preise/"
+      headline: "Ehrliche Preise. Keine Überraschungen."
+      cta: "Kostenlos starten"
+    - route: "/contact/"
+      headline: "Fragen? Wir antworten innerhalb von 24 Stunden."
+  sprachen: [de, en]
+  vorhanden:
+    - "Logo (SVG)"
+    - "Produktscreenshots"
+    - "3 Testimonials"
+  fehlend:
+    - "Hero-Bild"
+    - "Team-Fotos"
+    - "Feature-Illustrationen"
+
+creative_direction:
+  positioning_statement: >
+    Für Tech-Teams, die im Tool-Chaos versinken,
+    ist TaskFlow das Projektmanagement-Tool,
+    das alles vereint was du täglich brauchst,
+    weil wir gezielt das Überflüssige weggelassen haben.
+    Im Gegensatz zu Jira, das für Konzerne gebaut wurde.
+
+  farben:
+    primary: "oklch(0.52 0.19 255)"    # Sattblau — Vertrauen, Fokus
+    secondary: "oklch(0.96 0.02 255)"  # Fast-Weiß — Klarheit
+    accent: "oklch(0.72 0.18 150)"     # Grün — Fortschritt, Erfolg
+    neutral_900: "oklch(0.18 0.02 255)"
+    neutral_50: "oklch(0.98 0.005 255)"
+
+  typografie:
+    display: "Inter Variable"
+    body: "Inter Variable"
+    mono: "JetBrains Mono Variable"
+    begruendung: >
+      Inter für maximale Lesbarkeit in UI-Kontexten.
+      JetBrains Mono für Code-Snippets in der Feature-Sektion.
+
+  tonalitaet: "Präzise, direkt, ohne Marketing-Sprache. Wie ein kluger Kollege."
+
+wettbewerber:
+  - name: "Jira"
+    url: "https://www.atlassian.com/de/software/jira"
+    staerken:
+      - "Marktführer, bekannt"
+      - "Sehr umfangreich, erweiterbar"
+      - "Enterprise-Tauglich"
+    schwaechen:
+      - "Überwältigend komplex für kleine Teams"
+      - "Langsam, UI veraltet"
+      - "Teuer bei Wachstum"
+
+  - name: "Linear"
+    url: "https://linear.app"
+    staerken:
+      - "Sehr schnell und schönes UI"
+      - "Entwickler-freundlich"
+    schwaechen:
+      - "Keine Zeiterfassung"
+      - "Keine Kommunikation eingebaut"
+
+  - name: "Notion"
+    url: "https://notion.so"
+    staerken:
+      - "Extrem flexibel"
+      - "Bekannt und beliebt"
+    schwaechen:
+      - "Kein echtes Projektmanagement"
+      - "Zu viel Freiheit führt zu Chaos"
+
+annahmen:
+  - frage: "Produktscreenshots Qualität"
+    annahme: "Hochauflösend und aktuell"
+    konfidenz: mittel
+    validierung: "Bitte Screenshots liefern"
