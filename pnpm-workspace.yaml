@@ -10,29 +10,29 @@ allowBuilds:
 
 catalog:
   # Astro v7 (stable)
-  astro: ^7.0.0
+  astro: ^7.0.4
   "@astrojs/check": ^0.9.9
-  "@astrojs/cloudflare": ^14.0.0
+  "@astrojs/cloudflare": ^14.0.2
   "@astrojs/mdx": ^7.0.0
-  "@astrojs/rss": ^4.0.18
+  "@astrojs/rss": ^4.0.19
   "@astrojs/svelte": ^9.0.0
-  "@axe-core/playwright": ^4.11.3
+  "@axe-core/playwright": ^4.12.1
   "@casoon/astro-post-audit": ^0.4.6
-  "@casoon/astro-structured-data": ^1.5.0
+  "@casoon/astro-structured-data": ^1.5.1
   "@casoon/astro-site-files": ^0.4.2
   "@casoon/astro-speed-measure": ^0.4.0
 
   # Tailwind v4
-  tailwindcss: ^4.3.1
+  tailwindcss: ^4.3.2
   "@tailwindcss/typography": ^0.5.20
-  "@tailwindcss/vite": ^4.3.1
+  "@tailwindcss/vite": ^4.3.2
   tailwindcss-animate: ^1.0.7
 
   # Svelte 5
-  svelte: ^5.56.3
+  svelte: ^5.56.4
   # fallow-ignore-next-line unused-catalog-entry
   "@sveltejs/vite-plugin-svelte": ^6.2.4
-  "@lucide/svelte": ^1.18.0
+  "@lucide/svelte": ^1.22.0
 
   # Core
   gray-matter: ^4.0.3
@@ -48,13 +48,13 @@ catalog:
   sharp: ^0.35.1
 
   # Code analysis
-  fallow: ^2.96.0
+  fallow: ^2.103.0
 
   # Deployment
-  wrangler: ^4.100.0
+  wrangler: ^4.106.0
 
   # Formatting & Linting (Biome only - no more ESLint/Prettier hybrid)
-  "@biomejs/biome": ^2.5.0
+  "@biomejs/biome": ^2.5.1
   husky: ^9.1.7
   lint-staged: ^17.0.7
 
