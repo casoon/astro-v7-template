@@ -22,7 +22,6 @@
     "@casoon/astro-structured-data": "catalog:",
     "@casoon/astro-speed-measure": "catalog:",
     "gray-matter": "catalog:",
-    "unist-util-visit": "catalog:",
     "@fontsource/fira-code": "catalog:",
     "@fontsource/inter": "catalog:",
     "@fontsource/lora": "catalog:",
@@ -31,8 +30,7 @@
     "tailwindcss-animate": "catalog:",
     "astro": "catalog:",
     "svelte": "catalog:",
-    "tailwindcss": "catalog:",
-    "zod": "catalog:"
+    "tailwindcss": "catalog:"
   },
   "devDependencies": {
     "@astrojs/check": "catalog:",

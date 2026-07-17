@@ -1,6 +1,6 @@
 {
   "name": "astro-v7-workspace",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "description": "Astro v7 monorepo template with pnpm workspaces, Tailwind v4, Svelte 5, and Biome",
   "author": "casoon",
@@ -69,7 +69,7 @@
     "@axe-core/playwright": "catalog:",
     "@biomejs/biome": "catalog:",
     "@casoon/nosecrets": "^0.3.7",
-    "@playwright/test": "^1.60.0",
+    "@playwright/test": "^1.61.1",
     "fallow": "catalog:",
     "husky": "catalog:",
     "lint-staged": "catalog:",
