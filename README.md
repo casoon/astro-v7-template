@@ -2,8 +2,8 @@
 
 <!-- BADGES:START -->
 [![CI](https://github.com/casoon/astro-v7-template/actions/workflows/ci.yml/badge.svg)](https://github.com/casoon/astro-v7-template/actions/workflows/ci.yml)
-[![Astro](https://img.shields.io/badge/Astro-7.0.9-FF5D01?logo=astro&logoColor=white)](https://astro.build)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-4.3.2-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
+[![Astro](https://img.shields.io/badge/Astro-7.1.0-FF5D01?logo=astro&logoColor=white)](https://astro.build)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-4.3.3-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 [![Svelte](https://img.shields.io/badge/Svelte-5.56.5-FF3E00?logo=svelte&logoColor=white)](https://svelte.dev)
 [![TypeScript](https://img.shields.io/badge/TypeScript-6.0.3-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Biome](https://img.shields.io/badge/Biome-2.5.4-60A5FA?logo=biome&logoColor=white)](https://biomejs.dev)
