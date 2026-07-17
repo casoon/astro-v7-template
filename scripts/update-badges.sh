@@ -39,7 +39,7 @@ PNPM_ESC=$(escape_shields "$PNPM")
 # Build badges file
 BADGES_FILE=$(mktemp)
 cat > "$BADGES_FILE" <<EOF
-[![CI](https://github.com/casoon/astro-v6-template/actions/workflows/ci.yml/badge.svg)](https://github.com/casoon/astro-v6-template/actions/workflows/ci.yml)
+[![CI](https://github.com/casoon/astro-v7-template/actions/workflows/ci.yml/badge.svg)](https://github.com/casoon/astro-v7-template/actions/workflows/ci.yml)
 [![Astro](https://img.shields.io/badge/Astro-${ASTRO_ESC}-FF5D01?logo=astro&logoColor=white)](https://astro.build)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-${TAILWIND_ESC}-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 [![Svelte](https://img.shields.io/badge/Svelte-${SVELTE_ESC}-FF3E00?logo=svelte&logoColor=white)](https://svelte.dev)
