@@ -4,6 +4,11 @@
   Dark mode overrides happen via .dark class in variables.css (unlayered),
   which wins over @layer theme due to CSS cascade layer priority.
 */
+
+/* Class-based dark mode: dark: utilities follow the .dark class (theme toggle),
+   not prefers-color-scheme — matches the cookie/localStorage toggle in BaseLayout. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   /* Colors - Light mode defaults (resolved OKLCH values) */
   --color-bg: oklch(98% 0 0);

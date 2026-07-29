@@ -28,6 +28,7 @@
   },
   "devDependencies": {
     "@astrojs/svelte": "catalog:",
-    "svelte": "catalog:"
+    "svelte": "catalog:",
+    "typescript": "catalog:"
   }
 }
