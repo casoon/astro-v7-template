@@ -30,15 +30,12 @@ catalog:
 
   # Svelte 5
   svelte: ^5.56.8
-  # fallow-ignore-next-line unused-catalog-entry
-  "@sveltejs/vite-plugin-svelte": ^6.2.4
   "@lucide/svelte": ^1.28.0
 
   # Core
   gray-matter: ^4.0.3
   prop-for-that: ^0.7.12
   # rehype-slug and remark-gfm removed — Sätteri (Astro v7 default markdown) provides both natively
-  unist-util-visit: ^5.1.0
   tsx: ^4.23.7
   typescript: ^6.0.3
   zod: ^4.4.3

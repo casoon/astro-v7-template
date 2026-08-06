@@ -91,6 +91,7 @@ All projects share the same design tokens, UI components and utilities — ensur
 - **Build Metrics** — `@casoon/astro-speed-measure` for build performance tracking
 - **Post-Build Audit** — `@casoon/astro-post-audit` for SEO, link and WCAG checks after every build
 - **Code Analysis** — fallow for dead code, complexity hotspots and duplication detection
+- **prop-for-that** — reactive CSS custom properties (pointer, scroll, viewport, form state, ...) via a toggleable integration, demoed on the starter homepage
 - **Secret Scanning** — `@casoon/nosecrets` in pre-commit plus manual workspace scans
 - **Playwright** — E2E tests for both apps with axe-core a11y scanning
 - **Biome** — Single tool for linting + formatting (replaces ESLint + Prettier)
@@ -111,6 +112,7 @@ astro-v7-template/
 │   ├── starter/          # Landing page + contact form + i18n
 │   └── blog/             # Blog with MDX + RSS + i18n
 ├── shared/                # Design tokens, components, layouts, SEO, utilities
+├── integrations/         # Custom Astro integrations (e.g. prop-for-that)
 ├── e2e/
 │   ├── starter/          # Playwright E2E tests for starter
 │   └── blog/             # Playwright E2E tests for blog
@@ -171,6 +173,7 @@ Landing page featuring:
 - OG image generation per page and locale
 - Dark mode toggle
 - SEO component with JSON-LD
+- prop-for-that demo section (pointer tilt, scroll reveal, range/clock/viewport/size/truncation/color-input sources)
 
 ### Blog
 
@@ -184,6 +187,14 @@ Blog template featuring:
 - i18n (English + German) with language switcher
 - OG image generation per page and blog post
 - Tag display
+
+## prop-for-that Integration
+
+[`prop-for-that`](https://www.npmjs.com/package/prop-for-that) exposes runtime state (pointer, scroll, viewport, form state, ...) as CSS custom properties, so effects can be driven with plain CSS instead of JavaScript. It's wired up as a template-wide integration (`integrations/props-for-that.mjs`) rather than a shared component, so any project cloned from this template gets it for free.
+
+- Registered per app in `astro.config.mjs` via `propsForThat({ enabled: true })` — set `enabled: false` to strip the injected script from a clone that doesn't need it.
+- The auto-bootstrap is a no-op until an element carries a `data-props-for` attribute, so pages that don't use it pay no runtime cost.
+- See the starter homepage for a live demo, and `shared/src/styles/global.css` for the corresponding `.props-*` utility classes.
 
 ## Adding Another App
 
