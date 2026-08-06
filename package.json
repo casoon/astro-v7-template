@@ -69,7 +69,7 @@
     "@axe-core/playwright": "catalog:",
     "@biomejs/biome": "catalog:",
     "@casoon/nosecrets": "^0.3.7",
-    "@playwright/test": "^1.61.1",
+    "@playwright/test": "^1.62.1",
     "fallow": "catalog:",
     "husky": "catalog:",
     "lint-staged": "catalog:",

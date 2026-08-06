@@ -10,14 +10,14 @@ allowBuilds:
 
 catalog:
   # Astro v7 (stable)
-  astro: ^7.1.5
+  astro: ^7.1.6
   "@astrojs/check": ^0.9.10
-  "@astrojs/cloudflare": ^14.1.6
+  "@astrojs/cloudflare": ^14.1.7
   "@astrojs/mdx": ^7.0.5
   "@astrojs/rss": ^4.0.19
   "@astrojs/svelte": ^9.0.1
   "@axe-core/playwright": ^4.12.1
-  "@casoon/astro-post-audit": ^0.4.6
+  "@casoon/astro-post-audit": ^0.5.3
   "@casoon/astro-structured-data": ^1.5.1
   "@casoon/astro-site-files": ^0.4.2
   "@casoon/astro-speed-measure": ^0.4.0
@@ -32,13 +32,14 @@ catalog:
   svelte: ^5.56.8
   # fallow-ignore-next-line unused-catalog-entry
   "@sveltejs/vite-plugin-svelte": ^6.2.4
-  "@lucide/svelte": ^1.27.0
+  "@lucide/svelte": ^1.28.0
 
   # Core
   gray-matter: ^4.0.3
+  prop-for-that: ^0.7.12
   # rehype-slug and remark-gfm removed — Sätteri (Astro v7 default markdown) provides both natively
   unist-util-visit: ^5.1.0
-  tsx: ^4.23.1
+  tsx: ^4.23.7
   typescript: ^6.0.3
   zod: ^4.4.3
   clsx: ^2.1.1
@@ -48,15 +49,15 @@ catalog:
   sharp: ^0.35.3
 
   # Code analysis
-  fallow: ^3.10.0
+  fallow: ^3.14.0
 
   # Deployment
-  wrangler: ^4.115.0
+  wrangler: ^4.118.0
 
   # Formatting & Linting (Biome only - no more ESLint/Prettier hybrid)
-  "@biomejs/biome": ^2.5.6
+  "@biomejs/biome": ^2.5.7
   husky: ^9.1.7
-  lint-staged: ^17.2.0
+  lint-staged: ^17.3.0
 
   # Fonts (reduced set)
   "@fontsource/inter": ^5.3.0

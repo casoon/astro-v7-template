@@ -7,6 +7,7 @@ import speedMeasure from '@casoon/astro-speed-measure';
 import structuredData from '@casoon/astro-structured-data';
 import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from 'astro/config';
+import propsForThat from '../../integrations/props-for-that.mjs';
 import { env } from './src/env.ts';
 import { getBlogSitemapEntries } from './src/utils/blog-rss.js';
 
@@ -40,6 +41,7 @@ export default defineConfig({
 
   integrations: [
     svelte(),
+    propsForThat({ enabled: true }),
     mdx({
       shikiConfig: {
         wrap: true,

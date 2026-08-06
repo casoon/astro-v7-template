@@ -6,6 +6,7 @@ import speedMeasure from '@casoon/astro-speed-measure';
 import structuredData from '@casoon/astro-structured-data';
 import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from 'astro/config';
+import propsForThat from '../../integrations/props-for-that.mjs';
 import { env } from './src/env.ts';
 
 export default defineConfig({
@@ -25,6 +26,7 @@ export default defineConfig({
 
   integrations: [
     svelte(),
+    propsForThat({ enabled: true }),
     siteFiles({
       sitemap: {
         i18n: {

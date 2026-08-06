@@ -67,6 +67,78 @@ const links = [
     </div>
   </section>
 
+  <section class="mx-auto max-w-6xl px-6 pb-20">
+    <h2 class="mb-2 text-2xl font-bold">{tr('demo.title')}</h2>
+    <p class="mb-8 text-text-secondary">{tr('demo.description')}</p>
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div class="props-tilt rounded-xl border border-border bg-surface p-8" data-props-for="pointer-local">
+        <h3 class="mb-2 text-lg font-bold">{tr('demo.pointer.title')}</h3>
+        <p class="text-text-secondary">{tr('demo.pointer.desc')}</p>
+      </div>
+      <div class="rounded-xl border border-border bg-surface p-8" data-props-for="visibility">
+        <h3 class="mb-2 text-lg font-bold">{tr('demo.scroll.title')}</h3>
+        <p class="text-text-secondary">{tr('demo.scroll.desc')}</p>
+      </div>
+      <div class="rounded-xl border border-border bg-surface p-8">
+        <h3 class="mb-2 text-lg font-bold">{tr('demo.range.title')}</h3>
+        <p class="text-text-secondary">{tr('demo.range.desc')}</p>
+        <div data-props-for="range">
+          <input type="range" min="0" max="100" value="40" class="w-full" aria-label={tr('demo.range.title')} />
+          <div class="props-range-track"><div class="props-range-fill"></div></div>
+        </div>
+      </div>
+      <div class="rounded-xl border border-border bg-surface p-8" data-props-for="scroll-velocity">
+        <h3 class="mb-2 text-lg font-bold">{tr('demo.scrollvelocity.title')}</h3>
+        <p class="text-text-secondary">{tr('demo.scrollvelocity.desc')}</p>
+        <div class="props-scroll-meter"><div class="props-scroll-meter-fill"></div></div>
+      </div>
+      <div class="flex items-center gap-6 rounded-xl border border-border bg-surface p-8" data-props-for="clock">
+        <div class="props-clock-face" aria-hidden="true"><div class="props-clock-hand"></div></div>
+        <div>
+          <h3 class="mb-2 text-lg font-bold">{tr('demo.clock.title')}</h3>
+          <p class="text-text-secondary">{tr('demo.clock.desc')}</p>
+        </div>
+      </div>
+      <div class="rounded-xl border border-border bg-surface p-8">
+        <h3 class="mb-2 text-lg font-bold">{tr('demo.random.title')}</h3>
+        <p class="text-text-secondary">{tr('demo.random.desc')}</p>
+        <div class="props-random-grid" aria-hidden="true">
+          {Array.from({ length: 12 }).map(() => (
+            <span class="props-random-dot" data-props-for="random" />
+          ))}
+        </div>
+      </div>
+      <div class="rounded-xl border border-border bg-surface p-8" data-props-for="viewport">
+        <h3 class="mb-2 text-lg font-bold">{tr('demo.viewport.title')}</h3>
+        <p class="text-text-secondary">{tr('demo.viewport.desc')}</p>
+        <p class="props-viewport-readout" aria-hidden="true"></p>
+      </div>
+      <div class="rounded-xl border border-border bg-surface p-8">
+        <h3 class="mb-2 text-lg font-bold">{tr('demo.size.title')}</h3>
+        <p class="text-text-secondary">{tr('demo.size.desc')}</p>
+        <div class="props-resize-box" data-props-for="size">
+          <span class="props-resize-readout" aria-hidden="true"></span>
+        </div>
+      </div>
+      <div class="rounded-xl border border-border bg-surface p-8">
+        <h3 class="mb-2 text-lg font-bold">{tr('demo.truncated.title')}</h3>
+        <p class="text-text-secondary">{tr('demo.truncated.desc')}</p>
+        <div class="props-truncate-demo">
+          <p class="props-truncate-text" data-props-for="truncated" data-props-to=".props-truncate-demo">{tr('demo.truncated.sample')}</p>
+          <span class="props-truncate-badge">{tr('demo.truncated.badge')}</span>
+        </div>
+      </div>
+      <div class="rounded-xl border border-border bg-surface p-8">
+        <h3 class="mb-2 text-lg font-bold">{tr('demo.color.title')}</h3>
+        <p class="text-text-secondary">{tr('demo.color.desc')}</p>
+        <div class="props-color-demo" data-props-for="color-input">
+          <input type="color" value="#2f7ed8" aria-label={tr('demo.color.title')} />
+          <div class="props-color-swatch" aria-hidden="true"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <footer slot="footer" class="border-t border-border px-6 py-8 text-center text-sm text-text-secondary">
     <p>&copy; {new Date().getFullYear()} Astro v7 Starter. {tr('footer.built')} <a href="https://astro.build" target="_blank" rel="noopener noreferrer">Astro</a>.</p>
   </footer>

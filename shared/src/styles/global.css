@@ -113,4 +113,209 @@
   .skip-link:focus {
     top: 0;
   }
+
+  /* prop-for-that: scroll-reveal via [data-props-for~="visibility"] */
+  [data-props-for~="visibility"] {
+    opacity: var(--live-visible, 0);
+    transition: opacity 0.4s ease;
+  }
+
+  /* prop-for-that: pointer tilt via [data-props-for~="pointer-local"] */
+  .props-tilt {
+    transition: transform 0.15s ease-out;
+    transform: perspective(800px)
+      rotateX(calc((0.5 - var(--live-local-pointer-y-ratio, 0.5)) * 12deg))
+      rotateY(calc((var(--live-local-pointer-x-ratio, 0.5) - 0.5) * 12deg));
+  }
+
+  /* prop-for-that: range fill via [data-props-for~="range"] */
+  .props-range-track {
+    height: 8px;
+    margin-top: var(--space-sm);
+    overflow: hidden;
+    border-radius: 999px;
+    background: var(--color-border);
+  }
+
+  .props-range-fill {
+    height: 100%;
+    background: var(--color-accent);
+    width: calc(var(--live-value-pct, 0) * 100%);
+  }
+
+  /* prop-for-that: scroll speed/direction via [data-props-for~="scroll-velocity"] */
+  .props-scroll-meter {
+    height: 8px;
+    margin-top: var(--space-sm);
+    overflow: hidden;
+    border-radius: 999px;
+    background: var(--color-border);
+  }
+
+  .props-scroll-meter-fill {
+    height: 100%;
+    background: var(--color-accent);
+    transform-origin: center;
+    transition: background-color 0.2s ease;
+    transform: scaleX(
+      clamp(
+        0,
+        calc(max(var(--live-scroll-velocity, 0), var(--live-scroll-velocity, 0) * -1) / 30),
+        1
+      )
+    );
+  }
+
+  @container style(--live-scroll-direction: -1) {
+    .props-scroll-meter-fill {
+      background: var(--color-info);
+    }
+  }
+
+  /* prop-for-that: analog second hand via [data-props-for~="clock"] */
+  .props-clock-face {
+    position: relative;
+    width: 56px;
+    height: 56px;
+    flex-shrink: 0;
+    border: 2px solid var(--color-border);
+    border-radius: 50%;
+  }
+
+  .props-clock-hand {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 2px;
+    height: 22px;
+    background: var(--color-accent);
+    transform-origin: top center;
+    transform: translateX(-50%) rotate(calc(var(--live-seconds, 0) * 6deg));
+  }
+
+  /* prop-for-that: per-element rolls via [data-props-for~="random"] */
+  .props-random-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: var(--space-xs);
+    margin-top: var(--space-sm);
+  }
+
+  .props-random-dot {
+    aspect-ratio: 1;
+    border-radius: 999px;
+    background: color-mix(
+      in oklch,
+      var(--color-accent) calc(var(--const-random, 0.5) * 100%),
+      var(--color-bg-secondary)
+    );
+    transform: rotate(calc(var(--const-random-2, 0.5) * 360deg))
+      scale(calc(0.6 + var(--const-random-3, 0.5) * 0.4));
+  }
+
+  /* prop-for-that: viewport size via [data-props-for~="viewport"], rendered with CSS counters */
+  .props-viewport-readout {
+    margin-top: var(--space-sm);
+    font-weight: 600;
+    color: var(--color-accent);
+    font-variant-numeric: tabular-nums;
+    counter-reset: props-vw var(--live-vw, 0) props-vh var(--live-vh, 0);
+  }
+
+  .props-viewport-readout::before {
+    content: counter(props-vw) " × " counter(props-vh) " px";
+  }
+
+  /* prop-for-that: element resize via [data-props-for~="size"] */
+  .props-resize-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 160px;
+    height: 100px;
+    min-width: 80px;
+    min-height: 60px;
+    max-width: 100%;
+    margin-top: var(--space-sm);
+    padding: var(--space-sm);
+    resize: both;
+    overflow: auto;
+    border: 1px dashed var(--color-border-secondary);
+    border-radius: var(--radius-lg);
+    background: var(--color-bg-secondary);
+  }
+
+  .props-resize-readout {
+    font-weight: 600;
+    color: var(--color-accent);
+    font-variant-numeric: tabular-nums;
+    counter-reset: props-w var(--live-w, 0) props-h var(--live-h, 0);
+  }
+
+  .props-resize-readout::before {
+    content: counter(props-w) " × " counter(props-h) " px";
+  }
+
+  /* prop-for-that: overflow detection via [data-props-for~="truncated"] */
+  .props-truncate-demo {
+    margin-top: var(--space-sm);
+  }
+
+  .props-truncate-text {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  .props-truncate-badge {
+    display: none;
+    margin-top: var(--space-xs);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-accent);
+  }
+
+  @container style(--live-truncated-y: 1) {
+    .props-truncate-badge {
+      display: inline-block;
+    }
+  }
+
+  /* prop-for-that: live value via [data-props-for~="color-input"] */
+  .props-color-demo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-top: var(--space-sm);
+  }
+
+  .props-color-demo input[type="color"] {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: none;
+    border-radius: var(--input-radius);
+    cursor: pointer;
+  }
+
+  .props-color-swatch {
+    height: 40px;
+    flex: 1;
+    border: 1px solid var(--color-border);
+    border-radius: var(--input-radius);
+    background: var(--live-color, var(--color-accent));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-props-for~="visibility"] {
+    opacity: 1;
+    transition: none;
+  }
+
+  .props-tilt {
+    transition: none;
+    transform: none;
+  }
 }

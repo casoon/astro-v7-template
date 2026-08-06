@@ -26,6 +26,39 @@ export default {
   'feature.darkmode.desc':
     'Basierend auf Systemeinstellung mit manuellem Toggle über Svelte-Komponente.',
 
+  // prop-for-that Demo
+  'demo.title': 'prop-for-that Demo',
+  'demo.description':
+    'CSS reagiert auf Laufzeitzustand über Custom Properties – ganz ohne JS im Animationspfad.',
+  'demo.pointer.title': 'Pointer-Tilt',
+  'demo.pointer.desc':
+    'Bewege den Mauszeiger über diese Karte – sie neigt sich je nach Zeigerposition, gesteuert vom pointer-local-Plugin.',
+  'demo.scroll.title': 'Scroll-Reveal',
+  'demo.scroll.desc':
+    'Diese Karte blendet sich ein, sobald sie in den Viewport scrollt, gesteuert von der visibility-Quelle.',
+  'demo.range.title': 'Range-Füllstand',
+  'demo.range.desc': 'Ziehe am Regler – die Füllleiste folgt dem Wert rein über CSS.',
+  'demo.scrollvelocity.title': 'Scroll-Geschwindigkeit',
+  'demo.scrollvelocity.desc': 'Scrolle die Seite – dieser Balken reagiert auf Tempo und Richtung.',
+  'demo.clock.title': 'Live-Uhr',
+  'demo.clock.desc': 'Ein reiner CSS-Sekundenzeiger – ganz ohne JS im Render-Loop.',
+  'demo.random.title': 'Zufall pro Element',
+  'demo.random.desc':
+    'Jedes Feld würfelt einmalig beim Laden Farbton und Rotation – ohne JS-Loop, ohne :nth-child-Leiter.',
+  'demo.viewport.title': 'Viewport-Größe',
+  'demo.viewport.desc':
+    'Verändere die Fenstergröße – die Zahl kommt live aus CSS-Countern, ganz ohne JS-Textrendering.',
+  'demo.size.title': 'Elementgröße',
+  'demo.size.desc':
+    'Ziehe an der Ecke der Box – ihre eigene Größe wird verfolgt, ganz ohne ResizeObserver im Code.',
+  'demo.truncated.title': 'Trunkierungs-Erkennung',
+  'demo.truncated.desc': 'CSS erkennt, wenn Text überläuft, und zeigt automatisch ein Badge an.',
+  'demo.truncated.sample':
+    'Dieser Absatz ist absichtlich lang, damit er sein zweizeiliges Clamp überläuft und die truncated-Quelle auslöst.',
+  'demo.truncated.badge': 'Abgeschnitten',
+  'demo.color.title': 'Farbeingabe',
+  'demo.color.desc': 'Wähle eine Farbe – der Farbfleck ist direkt an den Eingabewert gebunden.',
+
   // Contact
   'contact.title': 'Kontakt',
   'contact.description':
