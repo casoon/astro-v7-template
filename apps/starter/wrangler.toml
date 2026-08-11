@@ -8,3 +8,11 @@ not_found_handling = "404-page"
 
 [observability]
 enabled = true
+
+[[kv_namespaces]]
+binding = "SESSION"
+id = "995fa8c5d08a49c9ae5147ec0e8f2836"
+
+[[routes]]
+pattern = "astro-v7-template.casoon.dev"
+custom_domain = true

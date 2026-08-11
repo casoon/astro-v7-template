@@ -1,0 +1,32 @@
+{
+  "languages": {
+    "JavaScript": {
+      "formatter": { "language_server": { "name": "biome" } },
+      "format_on_save": "on"
+    },
+    "TypeScript": {
+      "formatter": { "language_server": { "name": "biome" } },
+      "format_on_save": "on"
+    },
+    "TSX": {
+      "formatter": { "language_server": { "name": "biome" } },
+      "format_on_save": "on"
+    },
+    "JSON": {
+      "formatter": { "language_server": { "name": "biome" } },
+      "format_on_save": "on"
+    },
+    "Astro": {
+      "formatter": { "language_server": { "name": "biome" } },
+      "format_on_save": "on"
+    },
+    "Svelte": {
+      "formatter": { "language_server": { "name": "biome" } },
+      "format_on_save": "on"
+    },
+    "CSS": {
+      "formatter": { "language_server": { "name": "biome" } },
+      "format_on_save": "on"
+    }
+  }
+}

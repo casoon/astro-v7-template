@@ -15,7 +15,7 @@
 
 A lean, production-ready **Astro v7** monorepo template with Tailwind v4, Svelte 5 and Biome.
 
-**Live Demos:** [Starter](https://astrov7.casoon.dev) · [Blog](https://astrov7blog.casoon.dev)
+**Live Demos:** [Starter](https://astrov7.casoon.dev) · [Blog](https://astrov7blog.casoon.dev) · [Starter (Worker)](https://astro-v7-template.casoon.dev)
 
 > **Status:** Astro v7 is stable. This template tracks the latest Astro v7 releases.
 
@@ -161,6 +161,10 @@ pnpm dev:blog
 | `pnpm fallow:health` | Complexity score, hotspots and refactor targets |
 | `pnpm fallow:audit` | Combined dead-code + complexity + duplication audit |
 | `pnpm clean` | Remove build artifacts + node_modules |
+
+## Known Issues
+
+- **TypeScript pinned to `^6.0.3`.** `@astrojs/check` (via `@astrojs/language-server`) restricts its `typescript` peer to `^5.0.0 || ^6.0.0` — TypeScript 7's native compiler doesn't yet expose the programmatic API `astro check` relies on. Revisit once Astro's language server supports it ([withastro/roadmap#1321](https://github.com/withastro/roadmap/discussions/1321)).
 
 ## Apps
 
