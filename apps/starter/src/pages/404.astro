@@ -1,13 +1,13 @@
 ---
-import BaseLayout from '@astro-v7/shared/layouts/BaseLayout.astro';
 import { t } from '@/i18n';
+import StarterLayout from '@/layouts/StarterLayout.astro';
 import '@/styles/app.css';
 
 const locale = 'en';
 const tr = t(locale);
 ---
 
-<BaseLayout title={tr('404.title')} description={tr('404.text')} lang={locale} robots="noindex, nofollow">
+<StarterLayout title={tr('404.title')} description={tr('404.text')} lang={locale} robots="noindex, nofollow">
 
   <a
     href="#main-content"
@@ -29,4 +29,4 @@ const tr = t(locale);
       </a>
     </div>
   </main>
-</BaseLayout>
+</StarterLayout>

@@ -4,6 +4,7 @@ import postAudit from '@casoon/astro-post-audit';
 import siteFiles from '@casoon/astro-site-files';
 import speedMeasure from '@casoon/astro-speed-measure';
 import structuredData from '@casoon/astro-structured-data';
+import { webVitalsDashboard } from '@casoon/astro-webvitals/integration';
 import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from 'astro/config';
 import propsForThat from '../../integrations/props-for-that.mjs';
@@ -25,10 +26,12 @@ export default defineConfig({
   },
 
   integrations: [
+    webVitalsDashboard({ route: '/web-vitals' }),
     svelte(),
     propsForThat({ enabled: true }),
     siteFiles({
       sitemap: {
+        exclude: ['/web-vitals/'],
         i18n: {
           defaultLocale: 'en',
           locales: { en: 'en', de: 'de-DE' },
@@ -68,7 +71,7 @@ export default defineConfig({
       progress: 'verbose',
       hints: { sourceFiles: true },
       rules: {
-        filters: { exclude: ['404.html'] },
+        filters: { exclude: ['404.html', 'web-vitals/index.html'] },
         canonical: { self_reference: true },
         opengraph: { require_og_image: true },
         a11y: { require_skip_link: true },

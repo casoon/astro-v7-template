@@ -39,6 +39,9 @@ catalogs:
     '@casoon/astro-structured-data':
       specifier: ^1.5.1
       version: 1.5.1
+    '@casoon/astro-webvitals':
+      specifier: ^0.4.8
+      version: 0.4.8
     '@fontsource/fira-code':
       specifier: ^5.3.0
       version: 5.3.0
@@ -237,6 +240,9 @@ importers:
       '@casoon/astro-structured-data':
         specifier: 'catalog:'
         version: 1.5.1(astro@7.2.0(@astrojs/markdown-remark@7.2.2)(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(jiti@2.7.0)(tsx@4.23.12)(yaml@2.9.0))(typescript@6.0.3)
+      '@casoon/astro-webvitals':
+        specifier: 'catalog:'
+        version: 0.4.8(astro@7.2.0(@astrojs/markdown-remark@7.2.2)(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(jiti@2.7.0)(tsx@4.23.12)(yaml@2.9.0))
       '@fontsource/inter':
         specifier: 'catalog:'
         version: 5.3.0
@@ -610,6 +616,12 @@ packages:
     engines: {node: '>=18'}
     peerDependencies:
       astro: ^5.0.0 || ^6.0.0 || ^7.0.0
+
+  '@casoon/astro-webvitals@0.4.8':
+    resolution: {integrity: sha512-LC9SEaV/t1uSi/jyYKmgr4k94Ik6eogEYIONbmRomzYgNKJNbN2cc89pqzkUQdiX4s5cZwJPhUNbRj1ajgWNjQ==}
+    engines: {node: '>=18.17.0'}
+    peerDependencies:
+      astro: ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0
 
   '@casoon/nosecrets@0.3.7':
     resolution: {integrity: sha512-umnf9/1yt0htkUYVVRtWa0/8OJQJzXgixp67bBurKZEnNdoolJ2/+T/NV03QPMC/Ra2+fsxXr0ZrJC2UBlQZZA==}
@@ -3480,6 +3492,9 @@ packages:
   web-namespaces@2.0.1:
     resolution: {integrity: sha512-bKr1DkiNa2krS7qxNtdrtHAmzuYGFQLiQ13TsorsdT6ULTkPLKuu5+GsFpDlg6JFjUTwX2DyhMPG2be8uPrqsQ==}
 
+  web-vitals@6.1.0:
+    resolution: {integrity: sha512-ZNoJ/MbU6aaR2WjKrFVUvy5WQx+G96YvXQFSsmKTz3A/0VlAFywjUcxl00hc/S6wef2stfgQ4yWYIJCWCNudkA==}
+
   workerd@1.20260722.1:
     resolution: {integrity: sha512-NycKuc1x2onvsRfGGpM093vRlLFU2zHDAM0+APpccfg4+gZxDGCH27RmdDvkeBuoZyYqgLo3oAfF6re4mvC3vQ==}
     engines: {node: '>=16'}
@@ -3907,6 +3922,11 @@ snapshots:
       zod: 4.4.3
     transitivePeerDependencies:
       - typescript
+
+  '@casoon/astro-webvitals@0.4.8(astro@7.2.0(@astrojs/markdown-remark@7.2.2)(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(jiti@2.7.0)(tsx@4.23.12)(yaml@2.9.0))':
+    dependencies:
+      astro: 7.2.0(@astrojs/markdown-remark@7.2.2)(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(jiti@2.7.0)(tsx@4.23.12)(yaml@2.9.0)
+      web-vitals: 6.1.0
 
   '@casoon/nosecrets@0.3.7': {}
 
@@ -6934,6 +6954,8 @@ snapshots:
   vscode-uri@3.1.0: {}
 
   web-namespaces@2.0.1: {}
+
+  web-vitals@6.1.0: {}
 
   workerd@1.20260722.1:
     optionalDependencies:

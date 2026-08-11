@@ -1,6 +1,5 @@
 ---
 import { ArticleSchema, WebPageSchema } from '@casoon/astro-structured-data/components';
-import { ClientRouter } from 'astro:transitions';
 
 export interface Props {
   title: string;
@@ -27,7 +26,7 @@ const {
 } = Astro.props;
 
 const useArticleSchema = !!articleDate && !!ogImage;
-const siteUrl = Astro.site?.href ?? Astro.url.origin + '/';
+const siteUrl = Astro.site?.href ?? `${Astro.url.origin}/`;
 const websiteJsonLd = siteName
   ? JSON.stringify({
       '@context': 'https://schema.org',
@@ -53,7 +52,6 @@ const orgJsonLd = siteName
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
-    <ClientRouter />
     <script is:inline>
       function getStoredTheme() {
         try {

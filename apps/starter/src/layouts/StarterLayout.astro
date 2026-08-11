@@ -1,0 +1,20 @@
+---
+import type { Props as BaseLayoutProps } from '@astro-v7/shared/layouts/BaseLayout.astro';
+import BaseLayout from '@astro-v7/shared/layouts/BaseLayout.astro';
+import { WebVitals } from '@casoon/astro-webvitals';
+
+export interface Props extends BaseLayoutProps {}
+---
+
+<BaseLayout {...Astro.props}>
+  <slot name="head" slot="head" />
+  <slot name="header" slot="header" />
+  <slot />
+  <slot name="footer" slot="footer" />
+  <WebVitals
+    debug={import.meta.env.DEV}
+    endpoint="/api/analytics/vitals/"
+    sampleRate={import.meta.env.DEV ? 1 : 0.1}
+    dashboard
+  />
+</BaseLayout>

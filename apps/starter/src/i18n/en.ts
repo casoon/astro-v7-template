@@ -24,6 +24,9 @@ export default {
   'feature.zod.desc': 'Runtime validation for environment variables, forms and API endpoints.',
   'feature.darkmode.title': 'Dark Mode',
   'feature.darkmode.desc': 'System preference based with manual toggle via Svelte component.',
+  'feature.webvitals.title': 'Web Vitals',
+  'feature.webvitals.desc':
+    'Real User Monitoring via @casoon/astro-webvitals, with optional sampled reporting to your own endpoint.',
 
   // prop-for-that demo
   'demo.title': 'prop-for-that demo',

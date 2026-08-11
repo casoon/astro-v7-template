@@ -1,5 +1,21 @@
 # Changelog
 
+## Unreleased
+
+### Added
+
+- Web Vitals RUM showcase with a typed, batch-reporting endpoint and Playwright coverage for payload validation and browser transport.
+- Sitemap RUM test mode that opens every sitemap URL and verifies that it reports browser metrics.
+- Local Web Vitals dashboard route backed by browser storage.
+- Documentation explaining the complementary static Post-Audit and field Web Vitals checks.
+
+### Changed
+
+- The Web Vitals endpoint is platform-independent; Cloudflare Analytics Engine is no longer required.
+- Starter pages share a dedicated layout that applies Web Vitals consistently.
+- The starter now uses `@casoon/astro-webvitals` 0.4.8 with browser-local page checks alongside the sitemap QA pass.
+- `pnpm audit:pages` and `pnpm audit:pages:dev` print the sitemap page-check results in the terminal.
+
 ## 1.0.0 (2026-06-23)
 
 Initial release based on [astro-v6-template](https://github.com/casoon/astro-v6-template) v1.4.4.

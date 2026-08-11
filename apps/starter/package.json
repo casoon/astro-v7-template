@@ -19,6 +19,7 @@
     "@casoon/astro-site-files": "catalog:",
     "@casoon/astro-structured-data": "catalog:",
     "@casoon/astro-speed-measure": "catalog:",
+    "@casoon/astro-webvitals": "catalog:",
     "prop-for-that": "catalog:",
     "@fontsource/inter": "catalog:",
     "@tailwindcss/vite": "catalog:",

@@ -25,6 +25,9 @@ export default {
   'feature.darkmode.title': 'Dark Mode',
   'feature.darkmode.desc':
     'Basierend auf Systemeinstellung mit manuellem Toggle über Svelte-Komponente.',
+  'feature.webvitals.title': 'Web Vitals',
+  'feature.webvitals.desc':
+    'Real User Monitoring über @casoon/astro-webvitals, mit optionalem Sampling an einen eigenen Endpoint.',
 
   // prop-for-that Demo
   'demo.title': 'prop-for-that Demo',

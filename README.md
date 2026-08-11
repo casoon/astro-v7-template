@@ -92,6 +92,7 @@ All projects share the same design tokens, UI components and utilities — ensur
 - **Post-Build Audit** — `@casoon/astro-post-audit` for SEO, link and WCAG checks after every build
 - **Code Analysis** — fallow for dead code, complexity hotspots and duplication detection
 - **prop-for-that** — reactive CSS custom properties (pointer, scroll, viewport, form state, ...) via a toggleable integration, demoed on the starter homepage
+- **Web Vitals** — `@casoon/astro-webvitals` RUM in production, reporting sampled Core Web Vitals through a platform-independent, typed API route
 - **Secret Scanning** — `@casoon/nosecrets` in pre-commit plus manual workspace scans
 - **Playwright** — E2E tests for both apps with axe-core a11y scanning
 - **Biome** — Single tool for linting + formatting (replaces ESLint + Prettier)
@@ -155,6 +156,9 @@ pnpm dev:blog
 | `pnpm format` | Format all files |
 | `pnpm test:e2e` | Run all Playwright E2E tests |
 | `pnpm test:e2e:starter` | E2E tests for starter only |
+| `pnpm test:e2e:starter:sitemap-rum` | Verify RUM transport for every starter sitemap URL |
+| `pnpm audit:pages` | Build and check page metadata and basic accessibility signals for every sitemap URL |
+| `pnpm audit:pages:dev` | Run the same page checks against `astro dev` |
 | `pnpm test:e2e:blog` | E2E tests for blog only |
 | `pnpm type-check` | TypeScript check |
 | `pnpm fallow:dead` | Detect unused files, exports and dependencies |
@@ -178,6 +182,7 @@ Landing page featuring:
 - Dark mode toggle
 - SEO component with JSON-LD
 - prop-for-that demo section (pointer tilt, scroll reveal, range/clock/viewport/size/truncation/color-input sources)
+- Web Vitals RUM (`@casoon/astro-webvitals`) with a platform-independent analytics endpoint
 
 ### Blog
 
@@ -199,6 +204,28 @@ Blog template featuring:
 - Registered per app in `astro.config.mjs` via `propsForThat({ enabled: true })` — set `enabled: false` to strip the injected script from a clone that doesn't need it.
 - The auto-bootstrap is a no-op until an element carries a `data-props-for` attribute, so pages that don't use it pay no runtime cost.
 - See the starter homepage for a live demo, and `shared/src/styles/global.css` for the corresponding `.props-*` utility classes.
+
+## Web Vitals Monitoring
+
+[`@casoon/astro-webvitals`](https://www.npmjs.com/package/@casoon/astro-webvitals) v0.4.8 measures Core Web Vitals (LCP, CLS, INP) plus FCP/TTFB in the browser and reports them through a sampled, batched endpoint:
+
+- `apps/starter/src/layouts/StarterLayout.astro` applies `<WebVitals debug={import.meta.env.DEV} endpoint="/api/analytics/vitals/" sampleRate={import.meta.env.DEV ? 1 : 0.1} dashboard />` to every starter page. The overlay appears only in development; every local session and 10% of production sessions report metrics.
+- `apps/starter/src/pages/api/analytics/vitals.ts` validates the batch payload with Zod and returns `204`. It has no Cloudflare runtime import, so it works unchanged with Node, Vercel, Netlify and Cloudflare adapters.
+- The default endpoint intentionally does not persist analytics data. Add your database, queue or analytics-provider call after validation; this keeps the template portable and makes the data destination an explicit choice.
+- Each report contains `id`, `delta`, `rating` and `navigationType` when available. Aggregate `delta` by `id`; supporting metrics such as Long Tasks and navigation timings legitimately omit a rating.
+- Optional package features are `attribution`, `trackLongTasks`, `trackSoftNavigations`, `retryFailedMetrics`, `consent` and `respectDnt`. Enable them only after defining the corresponding data and privacy policy.
+- `apps/starter/astro.config.mjs` uses `webVitalsDashboard({ route: '/web-vitals' })` from `@casoon/astro-webvitals/integration` to inject the noindex route `/web-vitals/`. It is excluded from the sitemap and Post-Audit because it is an internal tool. It reads at most 200 local metrics from this browser's storage, has clear and sitemap-pass controls, and requires neither Cloudflare nor a database.
+- Open `/web-vitals/` after visiting a starter page to inspect the latest local metrics per URL. **Run sitemap pass** visits each page in `/sitemap.xml` in this tab, waits for local measurements and returns to the dashboard. `astro dev` supplies a matching fallback for static `src/pages` routes; preview and production use the generated sitemap. It is browser-local QA data, not shared or representative production analytics.
+
+### Static and field checks
+
+`@casoon/astro-post-audit` is the static counterpart to Web Vitals: it checks rendered SEO, links and lightweight accessibility rules at build time, while Web Vitals captures what users experience in the browser. The starter's build runs both layers.
+
+`e2e/starter/web-vitals.spec.ts` verifies the analytics contract for an official vital and a supporting metric, then confirms browser transport, the local dashboard route and the sitemap pass returning after every sitemap page. The endpoint contract is tested without requiring a Cloudflare Analytics Engine binding.
+
+Run `pnpm test:e2e:starter:sitemap-rum` for the opt-in sitemap RUM mode. It gets every URL from `/sitemap.xml`, opens it in a browser and requires a valid batched TTFB report. The normal E2E commands exclude this broader browser pass.
+
+Run `pnpm audit:pages` for a terminal report of the browser-visible page checks collected by the Web Vitals dashboard. It builds the starter first and uses the generated sitemap, so it is suitable for CI. `pnpm audit:pages:dev` starts (or reuses) the starter dev server and checks the static-page sitemap fallback for a fast local loop. Restart an already running dev server after upgrading `@casoon/astro-webvitals`, so Vite loads the new browser bundle. Both commands exit with an error when a page has an issue.
 
 ## Adding Another App
 

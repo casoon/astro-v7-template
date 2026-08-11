@@ -5,10 +5,10 @@ import Navbar from '@astro-v7/shared/components/Navbar.astro';
 import Textarea from '@astro-v7/shared/components/Textarea.astro';
 import TextField from '@astro-v7/shared/components/TextField.astro';
 import ThemeToggle from '@astro-v7/shared/components/ThemeToggle.svelte';
-import BaseLayout from '@astro-v7/shared/layouts/BaseLayout.astro';
 import { localePath } from '@astro-v7/shared/utils/i18n';
 import { env } from '@/env';
 import { t } from '@/i18n';
+import StarterLayout from '@/layouts/StarterLayout.astro';
 import { actions, isInputError } from 'astro:actions';
 import '@/styles/app.css';
 
@@ -25,7 +25,7 @@ const success = result && !result.error;
 const inputError = result?.error && isInputError(result.error) ? result.error.fields : undefined;
 ---
 
-<BaseLayout title={tr('contact.title')} description={tr('contact.description')} lang={locale} siteName={env.PUBLIC_SITE_NAME} ogImage={new URL('/og/de/contact.png', Astro.site).href}>
+<StarterLayout title={tr('contact.title')} description={tr('contact.description')} lang={locale} siteName={env.PUBLIC_SITE_NAME} ogImage={new URL('/og/de/contact.png', Astro.site).href}>
 
   <Navbar slot="header" siteName="Astro v7" links={links}>
     <a href="/contact" class="text-xs font-medium text-text-secondary hover:text-text no-underline">EN</a>
@@ -54,4 +54,4 @@ const inputError = result?.error && isInputError(result.error) ? result.error.fi
   <footer slot="footer" class="border-t border-border px-6 py-8 text-center text-sm text-text-secondary">
     <p>&copy; {new Date().getFullYear()} Astro v7 Starter.</p>
   </footer>
-</BaseLayout>
+</StarterLayout>
