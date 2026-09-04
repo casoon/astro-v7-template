@@ -151,6 +151,9 @@ pnpm dev:blog
 | `pnpm build` | Build all apps |
 | `pnpm build:starter` | Build starter only |
 | `pnpm build:blog` | Build blog only |
+| `pnpm preview` | Preview the built starter app |
+| `pnpm preview:starter` | Preview the built starter app |
+| `pnpm preview:blog` | Preview the built blog app |
 | `pnpm check` | Run Biome lint + format check |
 | `pnpm check:fix` | Biome auto-fix |
 | `pnpm format` | Format all files |
@@ -164,6 +167,11 @@ pnpm dev:blog
 | `pnpm fallow:dead` | Detect unused files, exports and dependencies |
 | `pnpm fallow:health` | Complexity score, hotspots and refactor targets |
 | `pnpm fallow:audit` | Combined dead-code + complexity + duplication audit |
+| `pnpm secrets:scan` | Scan the workspace for leaked secrets |
+| `pnpm secrets:scan:staged` | Scan only staged files for leaked secrets |
+| `pnpm deploy` | Build and deploy both apps to Cloudflare Workers |
+| `pnpm deploy:starter` | Build and deploy the starter app |
+| `pnpm deploy:blog` | Build and deploy the blog app |
 | `pnpm clean` | Remove build artifacts + node_modules |
 
 ## Known Issues
@@ -221,6 +229,8 @@ Blog template featuring:
 
 `@casoon/astro-post-audit` is the static counterpart to Web Vitals: it checks rendered SEO, links and lightweight accessibility rules at build time, while Web Vitals captures what users experience in the browser. The starter's build runs both layers.
 
+Both apps configure `@casoon/astro-post-audit` (v0.5.5) identically in `astro.config.mjs`: `preset: 'standard'` with `failOn: 'errors'` (only real errors fail the build; advisory/info findings do not), `progress: 'verbose'`, `hints: { sourceFiles: true }` to map findings back to source files, and `contentStyle: true` for heuristic tone/language checks. The `rules` block enables `canonical.self_reference`, `opengraph.require_og_image`, `a11y.require_skip_link`, `structured_data.check_json_ld`, `html_validation.enabled`, duplicate title/description detection under `content_quality`, and `links.check_fragments`, with `severity` overriding `html/assertion.roles.unnecessary-list` to `off` (a false positive for this template's semantic list markup). `rules.filters.exclude` skips `404.html` on both apps, plus `web-vitals/index.html` (starter — noindexed dashboard route) and `blog/index.html` (blog — an empty `Astro.redirect('/')` stub, which post-audit would otherwise flag as a 0-byte file).
+
 `e2e/starter/web-vitals.spec.ts` verifies the analytics contract for an official vital and a supporting metric, then confirms browser transport, the local dashboard route and the sitemap pass returning after every sitemap page. The endpoint contract is tested without requiring a Cloudflare Analytics Engine binding.
 
 Run `pnpm test:e2e:starter:sitemap-rum` for the opt-in sitemap RUM mode. It gets every URL from `/sitemap.xml`, opens it in a browser and requires a valid batched TTFB report. The normal E2E commands exclude this broader browser pass.
@@ -242,14 +252,14 @@ Use `apps/starter` or `apps/blog` as the starting point, depending on whether th
 
 ## Deployment
 
-The template ships pre-configured for **Cloudflare Workers**. Deploy after building:
+The template ships pre-configured for **Cloudflare Workers**. `pnpm deploy:starter` and `pnpm deploy:blog` each build the app and run `wrangler deploy`:
 
 ```bash
-pnpm build:starter
-wrangler deploy --config apps/starter/dist/server/wrangler.json
+pnpm deploy:starter
+pnpm deploy:blog
 
-pnpm build:blog
-cd apps/blog && wrangler deploy
+# or both apps at once
+pnpm deploy
 ```
 
 ### Other platforms (Node.js, Vercel, Netlify)

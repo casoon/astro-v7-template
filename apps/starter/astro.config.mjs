@@ -70,12 +70,15 @@ export default defineConfig({
       failOn: 'errors',
       progress: 'verbose',
       hints: { sourceFiles: true },
+      contentStyle: true,
       rules: {
         filters: { exclude: ['404.html', 'web-vitals/index.html'] },
         canonical: { self_reference: true },
         opengraph: { require_og_image: true },
         a11y: { require_skip_link: true },
         structured_data: { check_json_ld: true },
+        html_validation: { enabled: true },
+        severity: { 'html/assertion.roles.unnecessary-list': 'off' },
         content_quality: {
           detect_duplicate_titles: true,
           detect_duplicate_descriptions: true,
