@@ -1,5 +1,10 @@
 ---
-import { ArticleSchema, WebPageSchema } from '@casoon/astro-structured-data/components';
+import {
+  ArticleSchema,
+  OrganizationSchema,
+  WebPageSchema,
+  WebSiteSchema,
+} from '@casoon/astro-structured-data/components';
 
 export interface Props {
   title: string;
@@ -26,23 +31,6 @@ const {
 } = Astro.props;
 
 const useArticleSchema = !!articleDate && !!ogImage;
-const siteUrl = Astro.site?.href ?? `${Astro.url.origin}/`;
-const websiteJsonLd = siteName
-  ? JSON.stringify({
-      '@context': 'https://schema.org',
-      '@type': 'WebSite',
-      name: siteName,
-      url: siteUrl,
-    })
-  : null;
-const orgJsonLd = siteName
-  ? JSON.stringify({
-      '@context': 'https://schema.org',
-      '@type': 'Organization',
-      name: siteName,
-      url: siteUrl,
-    })
-  : null;
 ---
 
 <!doctype html>
@@ -95,9 +83,9 @@ const orgJsonLd = siteName
     ) : (
       <WebPageSchema title={title} description={description} image={ogImage} />
     )}
+    {siteName && <WebSiteSchema name={siteName} />}
+    {siteName && <OrganizationSchema name={siteName} />}
     <slot name="head" />
-    {websiteJsonLd && <script type="application/ld+json" set:html={websiteJsonLd} />}
-    {orgJsonLd && <script type="application/ld+json" set:html={orgJsonLd} />}
   </head>
   <body>
     <a href="#main" class="skip-link">Skip to content</a>

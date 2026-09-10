@@ -78,6 +78,7 @@ export default defineConfig({
         a11y: { require_skip_link: true },
         structured_data: { check_json_ld: true },
         html_validation: { enabled: true },
+        css_architecture: { enabled: true },
         severity: { 'html/assertion.roles.unnecessary-list': 'off' },
         content_quality: {
           detect_duplicate_titles: true,

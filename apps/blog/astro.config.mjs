@@ -55,6 +55,9 @@ export default defineConfig({
           locales: { en: 'en', de: 'de-DE' },
         },
         exclude: [/\/blog\/?$/, /\/de\/blog\/?$/],
+        // Matches priority/changefreq rules against the locale-stripped path, so
+        // /de/blog/x/ gets the same 0.7 as /blog/x/ instead of falling back to depth-based default.
+        localeAgnosticRules: true,
         priority: [
           { pattern: '/$', priority: 1.0 },
           { pattern: '/blog/', priority: 0.7 },
@@ -115,6 +118,7 @@ export default defineConfig({
         a11y: { require_skip_link: true },
         structured_data: { check_json_ld: true },
         html_validation: { enabled: true },
+        css_architecture: { enabled: true },
         severity: { 'html/assertion.roles.unnecessary-list': 'off' },
         content_quality: {
           detect_duplicate_titles: true,

@@ -31,8 +31,7 @@ const description =
 const alternateHref = switchLocalePath(Astro.url.pathname, otherLocale);
 const links = [{ href: localePath('/', locale), label: tr('nav.home') }];
 const breadcrumbHomeLabel = locale === 'de' ? 'Start' : 'Home';
-const breadcrumbLabels: Record<string, string> =
-  locale === 'de' ? { de: '', blog: 'Blog' } : { blog: 'Blog' };
+const breadcrumbLabels: Record<string, string> = { blog: 'Blog' };
 const { Content, headings } = await render(post);
 const tocHeadings = headings.filter((h: MarkdownHeading) => h.depth === 2 || h.depth === 3);
 ---
