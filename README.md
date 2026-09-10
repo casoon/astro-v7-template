@@ -2,11 +2,11 @@
 
 <!-- BADGES:START -->
 [![CI](https://github.com/casoon/astro-v7-template/actions/workflows/ci.yml/badge.svg)](https://github.com/casoon/astro-v7-template/actions/workflows/ci.yml)
-[![Astro](https://img.shields.io/badge/Astro-7.2.10-FF5D01?logo=astro&logoColor=white)](https://astro.build)
+[![Astro](https://img.shields.io/badge/Astro-7.3.2-FF5D01?logo=astro&logoColor=white)](https://astro.build)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-4.3.3-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 [![Svelte](https://img.shields.io/badge/Svelte-5.57.0-FF3E00?logo=svelte&logoColor=white)](https://svelte.dev)
 [![TypeScript](https://img.shields.io/badge/TypeScript-6.0.3-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![Biome](https://img.shields.io/badge/Biome-2.5.11-60A5FA?logo=biome&logoColor=white)](https://biomejs.dev)
+[![Biome](https://img.shields.io/badge/Biome-2.5.12-60A5FA?logo=biome&logoColor=white)](https://biomejs.dev)
 [![Zod](https://img.shields.io/badge/Zod-4.5.4-3068B7?logo=zod&logoColor=white)](https://zod.dev)
 [![pnpm](https://img.shields.io/badge/pnpm-11.0.9-F69220?logo=pnpm&logoColor=white)](https://pnpm.io/)
 [![nosecrets](https://img.shields.io/badge/nosecrets-0.3.7-4B32C3?logo=gnuprivacyguard&logoColor=white)](https://www.npmjs.com/package/@casoon/nosecrets)
@@ -229,7 +229,7 @@ Blog template featuring:
 
 `@casoon/astro-post-audit` is the static counterpart to Web Vitals: it checks rendered SEO, links and lightweight accessibility rules at build time, while Web Vitals captures what users experience in the browser. The starter's build runs both layers.
 
-Both apps configure `@casoon/astro-post-audit` (v0.5.5) identically in `astro.config.mjs`: `preset: 'standard'` with `failOn: 'errors'` (only real errors fail the build; advisory/info findings do not), `progress: 'verbose'`, `hints: { sourceFiles: true }` to map findings back to source files, and `contentStyle: true` for heuristic tone/language checks. The `rules` block enables `canonical.self_reference`, `opengraph.require_og_image`, `a11y.require_skip_link`, `structured_data.check_json_ld`, `html_validation.enabled`, duplicate title/description detection under `content_quality`, and `links.check_fragments`, with `severity` overriding `html/assertion.roles.unnecessary-list` to `off` (a false positive for this template's semantic list markup). `rules.filters.exclude` skips `404.html` on both apps, plus `web-vitals/index.html` (starter — noindexed dashboard route) and `blog/index.html` (blog — an empty `Astro.redirect('/')` stub, which post-audit would otherwise flag as a 0-byte file).
+Both apps configure `@casoon/astro-post-audit` (v0.6.0) identically in `astro.config.mjs`: `preset: 'standard'` with `failOn: 'errors'` (only real errors fail the build; advisory/info findings do not), `progress: 'verbose'`, `hints: { sourceFiles: true }` to map findings back to source files, and `contentStyle: true` for heuristic tone/language checks. The `rules` block enables `canonical.self_reference`, `opengraph.require_og_image`, `a11y.require_skip_link`, `structured_data.check_json_ld`, `html_validation.enabled`, `css_architecture.enabled` (per-route CSS payload and outlier detection), duplicate title/description detection under `content_quality`, and `links.check_fragments`, with `severity` overriding `html/assertion.roles.unnecessary-list` to `off` (a false positive for this template's semantic list markup). `rules.filters.exclude` skips `404.html` on both apps, plus `web-vitals/index.html` (starter — noindexed dashboard route) and `blog/index.html` (blog — an empty `Astro.redirect('/')` stub, which post-audit would otherwise flag as a 0-byte file).
 
 `e2e/starter/web-vitals.spec.ts` verifies the analytics contract for an official vital and a supporting metric, then confirms browser transport, the local dashboard route and the sitemap pass returning after every sitemap page. The endpoint contract is tested without requiring a Cloudflare Analytics Engine binding.
 
