@@ -1,6 +1,6 @@
 {
   "name": "astro-v7-workspace",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "private": true,
   "description": "Astro v7 monorepo template with pnpm workspaces, Tailwind v4, Svelte 5, and Biome",
   "author": "casoon",
@@ -20,6 +20,7 @@
     "pnpm": "11.0.9"
   },
   "scripts": {
+    "info": "npm-scripts-info",
     "dev": "pnpm --filter @astro-v7/starter dev",
     "dev:starter": "pnpm --filter @astro-v7/starter dev",
     "dev:blog": "pnpm --filter @astro-v7/blog dev",
@@ -50,6 +51,38 @@
     "clean": "pnpm -r clean && rm -rf node_modules",
     "prepare": "husky"
   },
+  "scripts-info": {
+    "info": "Zeigt diese Übersicht der verfügbaren Scripts",
+    "dev": "Startet die Starter-App (@astro-v7/starter) im Dev-Modus",
+    "dev:starter": "Startet die Starter-App im Dev-Modus",
+    "dev:blog": "Startet die Blog-App im Dev-Modus",
+    "build": "Baut Starter- und Blog-App",
+    "build:starter": "Baut die Starter-App",
+    "build:blog": "Baut die Blog-App",
+    "preview": "Startet eine lokale Vorschau des Starter-Builds",
+    "preview:starter": "Startet eine lokale Vorschau des Starter-Builds",
+    "preview:blog": "Startet eine lokale Vorschau des Blog-Builds",
+    "check": "Prüft das gesamte Repo mit Biome auf Lint-/Formatfehler",
+    "check:fix": "Behebt Biome-Lint-/Formatfehler im gesamten Repo automatisch",
+    "format": "Formatiert das gesamte Repo mit Biome",
+    "type-check": "Führt den TypeScript-Type-Check in allen Workspace-Paketen aus",
+    "test:e2e": "Führt die Playwright-E2E-Tests aus (ohne @sitemap-rum/@page-audit)",
+    "test:e2e:starter": "Führt die Playwright-E2E-Tests der Starter-App aus (ohne @sitemap-rum/@page-audit)",
+    "test:e2e:starter:sitemap-rum": "Führt die @sitemap-rum-Tests der Starter-App aus",
+    "audit:pages": "Baut die Starter-App und führt die @page-audit-Tests dagegen aus",
+    "audit:pages:dev": "Führt die Page-Audit-Tests gegen den Dev-Server der Starter-App aus",
+    "test:e2e:blog": "Führt die Playwright-E2E-Tests der Blog-App aus",
+    "deploy": "Deployt Starter- und Blog-App",
+    "deploy:starter": "Deployt die Starter-App",
+    "deploy:blog": "Deployt die Blog-App",
+    "fallow:audit": "Führt eine Fallow-Codebase-Analyse aus",
+    "fallow:health": "Zeigt den Fallow-Health-Score mit Hotspots und Targets",
+    "fallow:dead": "Findet toten Code mit Fallow",
+    "secrets:scan": "Scannt das Repo mit nosecrets auf Secrets",
+    "secrets:scan:staged": "Scannt nur gestagte Dateien mit nosecrets auf Secrets",
+    "clean": "Räumt alle Workspace-Pakete auf und löscht node_modules",
+    "prepare": "Richtet die Husky-Git-Hooks ein"
+  },
   "lint-staged": {
     "*.{js,mjs,cjs,ts,tsx,json,astro,svelte,css}": [
       "biome check --write --no-errors-on-unmatched"
@@ -71,11 +104,12 @@
   "devDependencies": {
     "@axe-core/playwright": "catalog:",
     "@biomejs/biome": "catalog:",
-    "@casoon/nosecrets": "^0.3.7",
+    "@casoon/nosecrets": "^0.3.8",
     "@playwright/test": "^1.63.0",
     "fallow": "catalog:",
     "husky": "catalog:",
     "lint-staged": "catalog:",
+    "npm-scripts-info": "^0.3.9",
     "sharp": "catalog:"
   }
 }

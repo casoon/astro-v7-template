@@ -9,7 +9,7 @@
 [![Biome](https://img.shields.io/badge/Biome-2.5.12-60A5FA?logo=biome&logoColor=white)](https://biomejs.dev)
 [![Zod](https://img.shields.io/badge/Zod-4.5.4-3068B7?logo=zod&logoColor=white)](https://zod.dev)
 [![pnpm](https://img.shields.io/badge/pnpm-11.0.9-F69220?logo=pnpm&logoColor=white)](https://pnpm.io/)
-[![nosecrets](https://img.shields.io/badge/nosecrets-0.3.7-4B32C3?logo=gnuprivacyguard&logoColor=white)](https://www.npmjs.com/package/@casoon/nosecrets)
+[![nosecrets](https://img.shields.io/badge/nosecrets-0.3.8-4B32C3?logo=gnuprivacyguard&logoColor=white)](https://www.npmjs.com/package/@casoon/nosecrets)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 <!-- BADGES:END -->
 

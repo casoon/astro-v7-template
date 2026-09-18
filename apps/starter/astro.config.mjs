@@ -17,6 +17,15 @@ export default defineConfig({
 
   devToolbar: { enabled: false },
 
+  // Fixed, unique port so projects scaffolded from this template don't all default to 4321 —
+  // sharing a port across projects means the browser serves stale cached assets/cookies from
+  // whichever project last ran on it. Change this to a free port when starting a new project
+  // (check other repos under ~/GitHub for ports already in use).
+  server: {
+    host: true,
+    port: 5014,
+  },
+
   i18n: {
     defaultLocale: 'en',
     locales: ['en', 'de'],
@@ -115,6 +124,26 @@ export default defineConfig({
     ssr: {
       external: ['sharp'],
       noExternal: ['@fontsource/*'],
+      // Cloudflare/workerd dev: cold node_modules/.vite/deps_ssr means Vite discovers
+      // SSR deps during the first render and fires a "program reload" that kills the
+      // workerd runner mid-chunk (exits 1). @astrojs/svelte registers its SSR entry in
+      // optimizeDeps.include itself, so noDiscovery alone doesn't stop it from being
+      // optimized lazily on first render — it must be listed here to pull it into the
+      // initial (pre-request) optimization pass instead. The rest of the list isn't
+      // fatal if missing, just extra reload churn on a cold cache. (Astro doesn't read
+      // environments.ssr.optimizeDeps — this must be vite.ssr.optimizeDeps.)
+      optimizeDeps: {
+        noDiscovery: true,
+        include: [
+          '@astrojs/svelte/server.js',
+          '@casoon/astro-structured-data/components',
+          '@casoon/astro-webvitals',
+          '@lucide/svelte',
+          'astro/logger/console',
+          'tailwind-merge',
+          'zod',
+        ],
+      },
     },
   },
 
