@@ -131,6 +131,27 @@ See `accessibility-audit` skill. Automated testing via `@axe-core/playwright` in
 - Zod validation for all inputs (env, forms)
 - No `set:html` without sanitization
 
+## Cloudflare Dev Server (vite.ssr.optimizeDeps)
+
+Both apps pin their SSR deps in `vite.ssr.optimizeDeps` (`noDiscovery: true` + `include`).
+Without it, a cold `node_modules/.vite/deps_ssr` makes Vite discover deps during the first
+render and fire a program reload that kills the workerd runner. `environments.ssr.optimizeDeps`
+is NOT read by Astro — it must be `vite.ssr.optimizeDeps`. See `astro-architecture` skill.
+
+**Every `include` entry must resolve from the app itself.** Deps of `@astro-v7/shared`
+(`@lucide/svelte`, `clsx`, `tailwind-merge`, `zod`) only exist in `shared/node_modules` under
+pnpm, so a bare name resolves to nothing from `apps/*` and Vite drops the entry silently.
+
+| Entry belongs to | Write it as |
+|------------------|-------------|
+| the app's own `package.json` | `'astro/logger/console'` |
+| `@astro-v7/shared` | `'@astro-v7/shared > zod'` |
+
+Getting this wrong returns 500 on the first request of every page with a Svelte island
+(`Cannot read properties of null (reading 'function')`) — the reload bumps Vite's `?v=` hash
+mid-graph and leaves two instances of `svelte/internal/server`. To verify: after a cold start,
+`deps_ssr/_metadata.json` must hold as many entries as the include list.
+
 ## Webspire MCP
 
 MCP server configured in `.claude/mcp.json` (`@webspire/mcp`). See `webspire` skill for patterns, snippets, and token integration.
