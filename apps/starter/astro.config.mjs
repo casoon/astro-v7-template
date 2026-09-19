@@ -129,19 +129,30 @@ export default defineConfig({
       // workerd runner mid-chunk (exits 1). @astrojs/svelte registers its SSR entry in
       // optimizeDeps.include itself, so noDiscovery alone doesn't stop it from being
       // optimized lazily on first render — it must be listed here to pull it into the
-      // initial (pre-request) optimization pass instead. The rest of the list isn't
-      // fatal if missing, just extra reload churn on a cold cache. (Astro doesn't read
+      // initial (pre-request) optimization pass instead. (Astro doesn't read
       // environments.ssr.optimizeDeps — this must be vite.ssr.optimizeDeps.)
+      //
+      // Every entry must be resolvable *from this app*. tailwind-merge, zod,
+      // @lucide/svelte and clsx are dependencies of the shared workspace package, so
+      // under pnpm they only exist in shared/node_modules — a bare name resolves to
+      // nothing and the entry is silently dropped. They are then discovered during the
+      // first render, which triggers "optimized dependencies changed. reloading". That
+      // reload bumps Vite's `?v=` hash, and the half-loaded module graph ends up with
+      // two instances of svelte/internal/server: the Renderer writes `ssr_context` into
+      // one, `push_element` reads it from the other and finds null — "Cannot read
+      // properties of null (reading 'function')" on the first render of any page with a
+      // Svelte island. Vite's `parent > child` syntax resolves them via the linked package.
       optimizeDeps: {
         noDiscovery: true,
         include: [
           '@astrojs/svelte/server.js',
+          '@astro-v7/shared > @lucide/svelte',
+          '@astro-v7/shared > clsx',
+          '@astro-v7/shared > tailwind-merge',
+          '@astro-v7/shared > zod',
           '@casoon/astro-structured-data/components',
           '@casoon/astro-webvitals',
-          '@lucide/svelte',
           'astro/logger/console',
-          'tailwind-merge',
-          'zod',
         ],
       },
     },
