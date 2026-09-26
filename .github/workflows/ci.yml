@@ -6,10 +6,17 @@ on:
   pull_request:
     branches: [main, master]
 
+# A new push to a PR cancels its outdated run; runs on main/master always finish.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   ci:
     name: Quality & Build
     runs-on: ubuntu-latest
+    # A full run takes ~3 minutes; the default limit would be 360.
+    timeout-minutes: 15
 
     steps:
       - name: Checkout code

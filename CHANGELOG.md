@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+### Changed
+
+- CI: `timeout-minutes: 15` on the job and a `concurrency` group — a new push to a PR cancels its outdated run, runs on `main`/`master` always finish.
+
 ## 1.3.4 (2026-09-26)
 
 ### Changed
