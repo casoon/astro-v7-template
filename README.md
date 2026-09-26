@@ -157,6 +157,7 @@ pnpm dev:blog
 | `pnpm check` | Run Biome lint + format check |
 | `pnpm check:fix` | Biome auto-fix |
 | `pnpm format` | Format all files |
+| `pnpm test:unit` | Unit tests for shared utilities (`node --test`, no extra dependencies) |
 | `pnpm test:e2e` | Run all Playwright E2E tests (build first; starter runs in `wrangler dev`, blog on a static server) |
 | `pnpm test:e2e:starter` | E2E tests for starter only |
 | `pnpm test:e2e:starter:sitemap-rum` | Verify RUM transport for every starter sitemap URL |

@@ -122,6 +122,11 @@ See `accessibility-audit` skill. Automated testing via `@axe-core/playwright` in
 - Use `@casoon/astro-site-files` for sitemap, robots and other site meta-files
 - This replaces the older split packages `@casoon/astro-sitemap` and `@casoon/astro-crawler-policy`
 
+## Unit Tests
+
+- `pnpm test:unit` — Node's built-in runner (`node --import tsx --test`), files `shared/src/**/*.test.ts`
+- Covers i18n path helpers, env validation, `configEnv`, `securityTxt`, shared config builders
+
 ## E2E Tests
 
 - Playwright at workspace root, tests in `e2e/starter/` and `e2e/blog/`
