@@ -5,7 +5,7 @@
   "description": "Astro v7 monorepo template with pnpm workspaces, Tailwind v4, Svelte 5, and Biome",
   "author": "casoon",
   "license": "MIT",
-  "homepage": "https://astrov7.casoon.dev",
+  "homepage": "https://astro-v7-template.casoon.dev",
   "repository": {
     "type": "git",
     "url": "https://github.com/casoon/astro-v7-template"
