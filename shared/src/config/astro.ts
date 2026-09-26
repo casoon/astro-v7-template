@@ -39,6 +39,10 @@ export const baseAstroConfig = {
     checkOrigin: true,
   },
 
+  // No app uses Astro.session. Without this, @astrojs/cloudflare enables sessions and binds
+  // a KV namespace (SESSION) on every deploy. Remove the line to opt in.
+  session: false,
+
   csp: {
     algorithm: 'SHA-256',
   },

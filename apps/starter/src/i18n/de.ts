@@ -1,3 +1,5 @@
+import type en from './en.js';
+
 export default {
   // Nav
   'nav.home': 'Startseite',
@@ -82,4 +84,4 @@ export default {
 
   // Footer
   'footer.built': 'Erstellt mit',
-} as const;
+} satisfies Record<keyof typeof en, string>;

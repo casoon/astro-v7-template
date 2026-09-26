@@ -1,3 +1,5 @@
+import type en from './en.js';
+
 export default {
   // Nav
   'nav.home': 'Startseite',
@@ -23,4 +25,4 @@ export default {
 
   // Footer
   'footer.rss': 'RSS-Feed',
-} as const;
+} satisfies Record<keyof typeof en, string>;

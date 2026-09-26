@@ -95,7 +95,11 @@ See `accessibility-audit` skill. Automated testing via `@axe-core/playwright` in
 ## Blog Content
 
 - One folder per locale: `src/content/blog/en/<slug>.mdx`, `src/content/blog/de/<slug>.mdx` — `entry.id` is `<locale>/<slug>`
-- Use `getBlogPosts(locale)` / `getPostSlug(post)` from `src/utils/blog-posts.ts`; every post needs both locales (sitemap hreflang pairs them by slug)
+- Use `getBlogPosts(locale)` / `getPostSlug(post)` from `src/utils/blog-posts.ts`; every post needs both locales (sitemap hreflang pairs them by slug) — the build fails otherwise
+
+## Translations
+
+- `src/i18n/en.ts` defines the keys; `de.ts` uses `satisfies Record<keyof typeof en, string>`, and `t(locale)` only accepts those keys — missing or misspelled keys fail `astro check`
 
 ## OG Image Generation
 
@@ -133,7 +137,7 @@ See `accessibility-audit` skill. Automated testing via `@axe-core/playwright` in
 
 ## Security
 - Content Security Policy (CSP) with SHA-256 algorithm
-- Server-side sessions via Cloudflare KV (`sessionKVBindingName: 'SESSION'`)
+- Sessions are off (`session: false` in `shared/src/config/astro.ts`); removing it makes the Cloudflare adapter bind a `SESSION` KV namespace
 - `checkOrigin: true` for CSRF protection
 - Zod validation for all inputs (env, forms)
 - No `set:html` without sanitization
