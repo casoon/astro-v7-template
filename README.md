@@ -144,6 +144,8 @@ pnpm dev:blog
 
 ## Available Scripts
 
+> **Tip:** [opi](https://github.com/casoon/opi) lists and runs these scripts from an interactive terminal menu, with the descriptions from `scripts-info` in `package.json`. It also bundles the checks: `opi --check commit` runs lint, types and the secret scan before a commit.
+
 | Script | Description |
 |---|---|
 | `pnpm dev` | Start the starter app (port 5014) |
