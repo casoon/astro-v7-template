@@ -7,6 +7,10 @@
 - Volta pins Node.js 24.21.0 (latest Node 24 LTS, was 24.14.1); minimum stays `>=22.12.0` like Astro's own engines.
 - CI uses `actions/checkout@v6` and `actions/upload-artifact@v6` — the Node 24 runtimes — instead of the deprecated Node 20 `@v4` versions.
 
+### Fixed
+
+- OG image generation could fail with "Unsupported OpenType signature": the scripts passed `fontData.buffer`, the whole backing ArrayBuffer of a Node Buffer, ignoring its offset. `generateOgImage()` now takes the Buffer itself.
+
 ## 1.3.3 (2026-09-26)
 
 ### Added
