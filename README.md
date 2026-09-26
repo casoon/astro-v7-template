@@ -15,7 +15,7 @@
 
 A lean, production-ready **Astro v7** monorepo template with Tailwind v4, Svelte 5 and Biome.
 
-**Live Demo:** [Starter](https://astro-v7-template.casoon.dev)
+**Live Demos:** [Starter](https://astro-v7-template.casoon.dev) · [Blog](https://astro-v7-blog.casoon.dev)
 
 > **Status:** Astro v7 is stable. This template tracks the latest Astro v7 releases.
 
