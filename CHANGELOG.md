@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 1.3.2 (2026-09-26)
 
 ### Added
 
@@ -24,6 +24,7 @@
 - Blog posts moved to one folder per locale; `titleDe`/`descriptionDe` frontmatter removed.
 - Starter `wrangler.toml` no longer pins a KV namespace id or custom domain.
 - Starter E2E tests run against `wrangler dev` instead of a static file server.
+- Dependencies: astro 7.3.5, @astrojs/cloudflare 14.3.3, @casoon/astro-post-audit 0.7.0, zod 4.6.5, wrangler 4.140, Biome 2.5.14.
 
 - The Web Vitals endpoint is platform-independent; Cloudflare Analytics Engine is no longer required.
 - Starter pages share a dedicated layout that applies Web Vitals consistently.
