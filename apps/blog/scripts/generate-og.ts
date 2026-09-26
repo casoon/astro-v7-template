@@ -55,14 +55,17 @@ function getPages(): Page[] {
     },
   ];
 
-  const files = readdirSync(contentDir).filter((f) => f.endsWith('.md') || f.endsWith('.mdx'));
+  const files = readdirSync(contentDir, { recursive: true, encoding: 'utf-8' }).filter(
+    (f) => f.endsWith('.md') || f.endsWith('.mdx')
+  );
   for (const file of files) {
     const content = readFileSync(join(contentDir, file), 'utf-8');
     const fm = parseFrontmatter(content);
-    const slug = file.replace(/\.(md|mdx)$/, '');
+    // en/<slug>.mdx → blog/<slug>.png, de/<slug>.mdx → de/blog/<slug>.png
+    const [locale, slug] = file.replace(/\.(md|mdx)$/, '').split('/');
     if (fm.title) {
       pages.push({
-        file: `blog/${slug}.png`,
+        file: `${locale === 'en' ? '' : `${locale}/`}blog/${slug}.png`,
         title: fm.title,
         description: fm.description || '',
       });
@@ -81,7 +84,7 @@ async function main() {
 
     const png = await generateOgImage(
       { title: page.title, description: page.description, siteName: 'Astro v7 Blog' },
-      fontData.buffer as ArrayBuffer
+      fontData
     );
 
     writeFileSync(outPath, png);

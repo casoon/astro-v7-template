@@ -1,3 +1,5 @@
+import type en from './en.js';
+
 export default {
   // Nav
   'nav.home': 'Startseite',
@@ -10,6 +12,11 @@ export default {
   // Blog post
   'post.by': 'von',
   'post.back': 'Zurück zur Übersicht',
+  'post.readTime': 'Min. Lesezeit',
+
+  // Breadcrumbs
+  'breadcrumb.home': 'Start',
+  'breadcrumb.blog': 'Blog',
 
   // 404
   '404.title': '404 - Seite nicht gefunden',
@@ -18,4 +25,4 @@ export default {
 
   // Footer
   'footer.rss': 'RSS-Feed',
-} as const;
+} satisfies Record<keyof typeof en, string>;

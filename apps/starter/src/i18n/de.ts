@@ -1,3 +1,5 @@
+import type en from './en.js';
+
 export default {
   // Nav
   'nav.home': 'Startseite',
@@ -13,7 +15,7 @@ export default {
   // Feature cards
   'feature.astro.title': 'Astro v7',
   'feature.astro.desc':
-    'Neuer Dev-Server mit Vite Environment API, Live Content Collections, CSP-Unterstützung.',
+    'Vite 8 mit Rolldown, Rust-Compiler und Sätteri-Markdown – GFM und Heading-IDs eingebaut.',
   'feature.tailwind.title': 'Tailwind v4',
   'feature.tailwind.desc': 'CSS-first-Konfiguration, OKLCH-Farben, native Container Queries.',
   'feature.svelte.title': 'Svelte 5',
@@ -71,6 +73,9 @@ export default {
   'contact.subject': 'Betreff',
   'contact.message': 'Nachricht',
   'contact.send': 'Senden',
+  'contact.success': 'Danke! Deine Nachricht wurde gesendet.',
+  'contact.demoNotice':
+    'Demo: Deine Eingaben sind gültig, es wurde aber keine Nachricht verschickt. Mail-Provider in src/actions/contact.ts anbinden.',
 
   // 404
   '404.title': '404 - Seite nicht gefunden',
@@ -79,4 +84,4 @@ export default {
 
   // Footer
   'footer.built': 'Erstellt mit',
-} as const;
+} satisfies Record<keyof typeof en, string>;

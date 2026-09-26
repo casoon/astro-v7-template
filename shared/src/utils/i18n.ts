@@ -54,8 +54,8 @@ export function createI18nUtils<const TLocales extends readonly string[]>(config
 
 const defaultI18nUtils = createI18nUtils({ defaultLocale, locales });
 
-/** Type-safe translation dictionary */
-export type Translations = Record<string, string>;
+/** Translation dictionary keyed by the default locale's keys */
+export type Translations<TKey extends string = string> = Record<TKey, string>;
 
 /**
  * Get locale from URL pathname.
@@ -79,8 +79,6 @@ export const switchLocalePath = defaultI18nUtils.switchLocalePath;
  * Create a typed translation helper.
  * Usage: const t = useTranslations(translations.de);
  */
-export function useTranslations(dict: Translations) {
-  return (key: string): string => {
-    return dict[key] ?? key;
-  };
+export function useTranslations<TKey extends string>(dict: Translations<TKey>) {
+  return (key: TKey): string => dict[key];
 }

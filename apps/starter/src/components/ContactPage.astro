@@ -46,7 +46,7 @@ const inputError = result?.error && isInputError(result.error) ? result.error.fi
 
     {success && (
       <Alert>
-        <p>{result.data?.message}</p>
+        <p>{result.data.delivered ? tr('contact.success') : tr('contact.demoNotice')}</p>
       </Alert>
     )}
 
@@ -55,6 +55,10 @@ const inputError = result?.error && isInputError(result.error) ? result.error.fi
       <TextField id="email" name="email" type="email" label={tr('contact.email')} required autocomplete="email" error={inputError?.email} />
       <TextField id="subject" name="subject" label={tr('contact.subject')} required error={inputError?.subject} />
       <Textarea id="message" name="message" label={tr('contact.message')} rows={5} required error={inputError?.message} />
+      <div class="sr-only" aria-hidden="true">
+        <label for="website">Website</label>
+        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
+      </div>
       <Button type="submit">{tr('contact.send')}</Button>
     </form>
   </section>

@@ -1,3 +1,12 @@
+import {
+  baseAstroConfig,
+  configEnv,
+  postAuditOptions,
+  securityTxt,
+  sitemapI18n,
+  viteSsrConfig,
+} from '@astro-v7/shared/config/astro';
+import { validateEnv } from '@astro-v7/shared/utils/env';
 import cloudflare from '@astrojs/cloudflare';
 import mdx from '@astrojs/mdx';
 import svelte from '@astrojs/svelte';
@@ -8,7 +17,7 @@ import structuredData from '@casoon/astro-structured-data';
 import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from 'astro/config';
 import propsForThat from '../../integrations/props-for-that.mjs';
-import { env } from './src/env.ts';
+import { envSchema } from './src/env.ts';
 import { getBlogSitemapEntries } from './src/utils/blog-rss.js';
 
 // Astro v7: remark-gfm and rehype-slug removed — Sätteri provides both natively.
@@ -24,19 +33,20 @@ const codeBlockTitleTransformer = {
   },
 };
 
+const env = validateEnv(envSchema, configEnv(new URL('.env', import.meta.url)));
+
 export default defineConfig({
-  trailingSlash: 'always',
+  ...baseAstroConfig,
   site: env.PUBLIC_SITE_URL,
   adapter: cloudflare(),
 
-  devToolbar: { enabled: false },
-
-  i18n: {
-    defaultLocale: 'en',
-    locales: ['en', 'de'],
-    routing: {
-      prefixDefaultLocale: false,
-    },
+  // Fixed, unique port so projects scaffolded from this template don't all default to 4321 —
+  // sharing a port across projects means the browser serves stale cached assets/cookies from
+  // whichever project last ran on it. Change this to a free port when starting a new project
+  // (check other repos under ~/GitHub for ports already in use).
+  server: {
+    host: true,
+    port: 4322,
   },
 
   integrations: [
@@ -50,10 +60,7 @@ export default defineConfig({
     }),
     siteFiles({
       sitemap: {
-        i18n: {
-          defaultLocale: 'en',
-          locales: { en: 'en', de: 'de-DE' },
-        },
+        i18n: sitemapI18n,
         exclude: [/\/blog\/?$/, /\/de\/blog\/?$/],
         // Matches priority/changefreq rules against the locale-stripped path, so
         // /de/blog/x/ gets the same 0.7 as /blog/x/ instead of falling back to depth-based default.
@@ -74,7 +81,7 @@ export default defineConfig({
         },
       },
       robots: { preset: 'seoOnly' },
-      security: { contact: 'mailto:security@example.com' },
+      security: securityTxt(env.PUBLIC_SECURITY_CONTACT, env.PUBLIC_SITE_URL),
       audit: {
         disable: ['sitemap/duplicate-urls'],
       },
@@ -103,63 +110,16 @@ export default defineConfig({
       siteName: env.PUBLIC_SITE_NAME,
       locale: 'en_US',
       defaultArticlePublisher: { name: env.PUBLIC_SITE_NAME },
+      // Recommended-field warnings ask for business data (address, phone, sameAs, …) that a
+      // template can't provide. JSON-LD validity is still checked by post-audit (check_json_ld).
+      warnOnMissingRecommended: false,
     }),
     speedMeasure(),
-    postAudit({
-      preset: 'standard',
-      failOn: 'errors',
-      progress: 'verbose',
-      hints: { sourceFiles: true },
-      contentStyle: true,
-      rules: {
-        filters: { exclude: ['blog/index.html', '404.html'] },
-        canonical: { self_reference: true },
-        opengraph: { require_og_image: true },
-        a11y: { require_skip_link: true },
-        structured_data: { check_json_ld: true },
-        html_validation: { enabled: true },
-        css_architecture: { enabled: true },
-        severity: { 'html/assertion.roles.unnecessary-list': 'off' },
-        content_quality: {
-          detect_duplicate_titles: true,
-          detect_duplicate_descriptions: true,
-        },
-        links: { check_fragments: true },
-      },
-    }),
+    postAudit(postAuditOptions(['blog/index.html', '404.html'])),
   ],
-
-  prefetch: {
-    prefetchAll: true,
-    defaultStrategy: 'viewport',
-  },
-
-  security: {
-    checkOrigin: true,
-  },
-
-  csp: {
-    algorithm: 'SHA-256',
-  },
-
-  // Cloudflare Workers does not support Sharp — use noop image service.
-  image: {
-    service: { entrypoint: 'astro/assets/services/noop' },
-  },
-
-  // Astro v7: compressHTML default changed to 'jsx' (strips whitespace with JSX rules).
-  // Set explicitly to avoid surprise whitespace changes around inline elements.
-  compressHTML: 'jsx',
 
   vite: {
     plugins: [tailwindcss()],
-    ssr: {
-      external: ['sharp'],
-      noExternal: ['@fontsource/*'],
-    },
-  },
-
-  build: {
-    inlineStylesheets: 'auto',
+    ssr: viteSsrConfig(),
   },
 });

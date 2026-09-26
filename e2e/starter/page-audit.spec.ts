@@ -52,13 +52,13 @@ test.describe('Starter – local page audit @page-audit', () => {
         },
         { storageKey: pageAuditStorageKey, url }
       );
-      expect(audit).toBeDefined();
+      if (!audit) throw new Error(`No page-audit entry captured for ${url}`);
 
-      const issues = audit!.checks.filter((check) => check.state === 'issue');
+      const issues = audit.checks.filter((check) => check.state === 'issue');
       results.push({
         url,
         issues,
-        passed: audit!.checks.filter((check) => check.state === 'pass').length,
+        passed: audit.checks.filter((check) => check.state === 'pass').length,
       });
     }
 

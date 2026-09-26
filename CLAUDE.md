@@ -92,6 +92,15 @@ See `accessibility-audit` skill. Automated testing via `@axe-core/playwright` in
 - Shared locale utilities in `shared/src/utils/i18n.ts` (`localePath`, `switchLocalePath`, `useTranslations`)
 - Language switcher as simple EN/DE link in Navbar
 
+## Blog Content
+
+- One folder per locale: `src/content/blog/en/<slug>.mdx`, `src/content/blog/de/<slug>.mdx` — `entry.id` is `<locale>/<slug>`
+- Use `getBlogPosts(locale)` / `getPostSlug(post)` from `src/utils/blog-posts.ts`; every post needs both locales (sitemap hreflang pairs them by slug) — the build fails otherwise
+
+## Translations
+
+- `src/i18n/en.ts` defines the keys; `de.ts` uses `satisfies Record<keyof typeof en, string>`, and `t(locale)` only accepts those keys — missing or misspelled keys fail `astro check`
+
 ## OG Image Generation
 
 - Build-time generation via `scripts/generate-og.ts` (runs before `astro build`)
@@ -103,13 +112,20 @@ See `accessibility-audit` skill. Automated testing via `@axe-core/playwright` in
 ## Astro Actions
 
 - Located in `src/actions/` with `index.ts` as re-export hub
-- Contact form handling lives in `contact.ts`
+- Contact form handling lives in `contact.ts`; delivery is a stub (`deliverContactMessage()` returns `false` → page shows a demo notice)
+- Contact pages are `prerender = false` (the form POST needs the action result). Starter `wrangler.toml` must NOT set `not_found_handling = "404-page"` — Cloudflare would answer browser navigations to on-demand routes with the 404 page without invoking the Worker
+- Starter E2E runs against `wrangler dev` (not a static server) for that reason
 - Convention: `export const server = { submitContactForm }`
 
 ## Site Files
 
 - Use `@casoon/astro-site-files` for sitemap, robots and other site meta-files
 - This replaces the older split packages `@casoon/astro-sitemap` and `@casoon/astro-crawler-policy`
+
+## Unit Tests
+
+- `pnpm test:unit` — Node's built-in runner (`node --import tsx --test`), files `shared/src/**/*.test.ts`
+- Covers i18n path helpers, env validation, `configEnv`, `securityTxt`, shared config builders
 
 ## E2E Tests
 
@@ -120,16 +136,37 @@ See `accessibility-audit` skill. Automated testing via `@axe-core/playwright` in
 
 ## CI
 
-- Main CI workflow (`.github/workflows/ci.yml`) is read-only: install, lint, type-check, build
+- Main CI workflow (`.github/workflows/ci.yml`) is read-only: install, lint, type-check, build, E2E
 - README badge refresh runs separately in `.github/workflows/update-badges.yml`
 - Do not assume the main CI job pushes commits
 
 ## Security
 - Content Security Policy (CSP) with SHA-256 algorithm
-- Server-side sessions via Cloudflare KV (`sessionKVBindingName: 'SESSION'`)
+- Sessions are off (`session: false` in `shared/src/config/astro.ts`); removing it makes the Cloudflare adapter bind a `SESSION` KV namespace
 - `checkOrigin: true` for CSRF protection
 - Zod validation for all inputs (env, forms)
 - No `set:html` without sanitization
+
+## Cloudflare Dev Server (vite.ssr.optimizeDeps)
+
+Both apps pin their SSR deps in `vite.ssr.optimizeDeps` (`noDiscovery: true` + `include`), via `viteSsrConfig()` in `shared/src/config/astro.ts` (shared base config for all apps).
+Without it, a cold `node_modules/.vite/deps_ssr` makes Vite discover deps during the first
+render and fire a program reload that kills the workerd runner. `environments.ssr.optimizeDeps`
+is NOT read by Astro — it must be `vite.ssr.optimizeDeps`. See `astro-architecture` skill.
+
+**Every `include` entry must resolve from the app itself.** Deps of `@astro-v7/shared`
+(`@lucide/svelte`, `clsx`, `tailwind-merge`, `zod`) only exist in `shared/node_modules` under
+pnpm, so a bare name resolves to nothing from `apps/*` and Vite drops the entry silently.
+
+| Entry belongs to | Write it as |
+|------------------|-------------|
+| the app's own `package.json` | `'astro/logger/console'` |
+| `@astro-v7/shared` | `'@astro-v7/shared > zod'` |
+
+Getting this wrong returns 500 on the first request of every page with a Svelte island
+(`Cannot read properties of null (reading 'function')`) — the reload bumps Vite's `?v=` hash
+mid-graph and leaves two instances of `svelte/internal/server`. To verify: after a cold start,
+`deps_ssr/_metadata.json` must hold as many entries as the include list.
 
 ## Webspire MCP
 

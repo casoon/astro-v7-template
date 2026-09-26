@@ -5,6 +5,11 @@ export const baseEnvSchema = z.object({
   PUBLIC_SITE_NAME: z.string().min(1),
   PUBLIC_AUTHOR: z.string().min(1),
   PUBLIC_LOCALE: z.string().min(2).default('en'),
+  // security.txt contact (mailto: or https:). Unset → no security.txt is generated.
+  PUBLIC_SECURITY_CONTACT: z
+    .string()
+    .regex(/^(mailto:|https:\/\/)/)
+    .optional(),
   PUBLIC_ENABLE_DARK_MODE: z
     .string()
     .default('true')

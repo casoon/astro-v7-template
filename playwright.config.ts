@@ -30,7 +30,9 @@ export default defineConfig({
   ],
   webServer: [
     {
-      command: 'npx serve apps/starter/dist/client -l 5173',
+      // Worker runtime (not a static server) — the contact page is rendered on request.
+      command:
+        'pnpm --filter @astro-v7/starter exec wrangler dev --config dist/server/wrangler.json --port 5173',
       port: 5173,
       reuseExistingServer: false,
     },

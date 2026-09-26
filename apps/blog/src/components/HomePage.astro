@@ -8,10 +8,8 @@ import type { Locale } from '@astro-v7/shared/utils/i18n';
 import { localePath } from '@astro-v7/shared/utils/i18n';
 import { env } from '@/env';
 import { t } from '@/i18n';
-import { type CollectionEntry, getCollection } from 'astro:content';
+import { type BlogPost, getBlogPosts, getPostSlug } from '@/utils/blog-posts';
 import '@/styles/app.css';
-
-type BlogPost = CollectionEntry<'blog'>;
 
 interface Props {
   locale: Locale;
@@ -23,14 +21,7 @@ const otherLocale: Locale = locale === 'en' ? 'de' : 'en';
 const dateLocale = locale === 'de' ? 'de-DE' : 'en-US';
 const ogImage = new URL(locale === 'de' ? '/og/de/home.png' : '/og/home.png', Astro.site).href;
 
-const getTitle = (post: BlogPost) =>
-  locale === 'de' ? (post.data.titleDe ?? post.data.title) : post.data.title;
-const getDescription = (post: BlogPost) =>
-  locale === 'de' ? (post.data.descriptionDe ?? post.data.description) : post.data.description;
-
-const posts = (await getCollection('blog'))
-  .filter((post: BlogPost) => !post.data.draft)
-  .sort((a: BlogPost, b: BlogPost) => b.data.date.valueOf() - a.data.date.valueOf());
+const posts = await getBlogPosts(locale);
 
 const links = [{ href: localePath('/', locale), label: tr('nav.home') }];
 ---
@@ -52,12 +43,12 @@ const links = [{ href: localePath('/', locale), label: tr('nav.home') }];
     <ul class="flex list-none flex-col gap-4 p-0" role="list">
       {posts.map((post: BlogPost) => (
         <li>
-          <Card href={localePath(`/blog/${post.id}`, locale)}>
+          <Card href={localePath(`/blog/${getPostSlug(post)}/`, locale)}>
             <time datetime={post.data.date.toISOString()} class="mb-1 block text-xs text-text-secondary">
               {post.data.date.toLocaleDateString(dateLocale, { year: 'numeric', month: 'long', day: 'numeric' })}
             </time>
-            <h3 class="mb-1 text-xl font-bold">{getTitle(post)}</h3>
-            <p class="leading-relaxed text-text-secondary">{getDescription(post)}</p>
+            <h3 class="mb-1 text-xl font-bold">{post.data.title}</h3>
+            <p class="leading-relaxed text-text-secondary">{post.data.description}</p>
             {post.data.tags.length > 0 && (
               <div class="mt-3 flex flex-wrap gap-1">
                 {post.data.tags.map((tag: string) => (
@@ -73,7 +64,7 @@ const links = [{ href: localePath('/', locale), label: tr('nav.home') }];
 
   <footer slot="footer" class="border-t border-border px-6 py-8 text-center text-sm text-text-secondary">
     <p>
-      &copy; {new Date().getFullYear()} Astro v7 Blog.
+      &copy; {new Date().getFullYear()} Astro v7 Blog.{' '}
       <a href="/rss.xml">{tr('footer.rss')}</a>
     </p>
   </footer>

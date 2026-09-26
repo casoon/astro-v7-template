@@ -4,12 +4,13 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "astro dev --port 4322",
+    "predev": "rm -rf .astro node_modules/.vite",
+    "dev": "astro dev",
     "generate:og": "tsx scripts/generate-og.ts",
     "build": "pnpm generate:og && astro build",
     "preview": "astro preview",
     "type-check": "astro check",
-    "clean": "rm -rf dist .astro",
+    "clean": "rm -rf dist .astro node_modules/.vite",
     "deploy": "pnpm build && wrangler deploy"
   },
   "dependencies": {

@@ -13,7 +13,7 @@ export default {
   // Feature cards
   'feature.astro.title': 'Astro v7',
   'feature.astro.desc':
-    'New dev server with Vite Environment API, Live Content Collections, CSP support.',
+    'Vite 8 with Rolldown, Rust compiler and Sätteri markdown — GFM and heading IDs built in.',
   'feature.tailwind.title': 'Tailwind v4',
   'feature.tailwind.desc': 'CSS-first configuration, OKLCH colors, native container queries.',
   'feature.svelte.title': 'Svelte 5',
@@ -70,6 +70,9 @@ export default {
   'contact.subject': 'Subject',
   'contact.message': 'Message',
   'contact.send': 'Send',
+  'contact.success': 'Thanks! Your message has been sent.',
+  'contact.demoNotice':
+    'Demo: your input is valid, but no message was sent. Connect a mail provider in src/actions/contact.ts.',
 
   // 404
   '404.title': '404 - Page Not Found',
