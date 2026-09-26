@@ -2,12 +2,12 @@
 
 <!-- BADGES:START -->
 [![CI](https://github.com/casoon/astro-v7-template/actions/workflows/ci.yml/badge.svg)](https://github.com/casoon/astro-v7-template/actions/workflows/ci.yml)
-[![Astro](https://img.shields.io/badge/Astro-7.3.2-FF5D01?logo=astro&logoColor=white)](https://astro.build)
+[![Astro](https://img.shields.io/badge/Astro-7.3.5-FF5D01?logo=astro&logoColor=white)](https://astro.build)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-4.3.3-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
-[![Svelte](https://img.shields.io/badge/Svelte-5.57.0-FF3E00?logo=svelte&logoColor=white)](https://svelte.dev)
+[![Svelte](https://img.shields.io/badge/Svelte-5.57.1-FF3E00?logo=svelte&logoColor=white)](https://svelte.dev)
 [![TypeScript](https://img.shields.io/badge/TypeScript-6.0.3-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![Biome](https://img.shields.io/badge/Biome-2.5.12-60A5FA?logo=biome&logoColor=white)](https://biomejs.dev)
-[![Zod](https://img.shields.io/badge/Zod-4.5.4-3068B7?logo=zod&logoColor=white)](https://zod.dev)
+[![Biome](https://img.shields.io/badge/Biome-2.5.14-60A5FA?logo=biome&logoColor=white)](https://biomejs.dev)
+[![Zod](https://img.shields.io/badge/Zod-4.6.5-3068B7?logo=zod&logoColor=white)](https://zod.dev)
 [![pnpm](https://img.shields.io/badge/pnpm-11.0.9-F69220?logo=pnpm&logoColor=white)](https://pnpm.io/)
 [![nosecrets](https://img.shields.io/badge/nosecrets-0.3.8-4B32C3?logo=gnuprivacyguard&logoColor=white)](https://www.npmjs.com/package/@casoon/nosecrets)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -87,7 +87,7 @@ All projects share the same design tokens, UI components and utilities — ensur
 - **i18n** — Multi-language support (en/de) with Astro i18n routing
 - **OG Images** — Auto-generated Open Graph images at build time (Satori + resvg)
 - **Astro Actions** — Server-side contact form handling
-- **CSP** — Content Security Policy with SHA-256 nonces
+- **CSP** — Content Security Policy with SHA-256 hashes
 - **Build Metrics** — `@casoon/astro-speed-measure` for build performance tracking
 - **Post-Build Audit** — `@casoon/astro-post-audit` for SEO, link and WCAG checks after every build
 - **Code Analysis** — fallow for dead code, complexity hotspots and duplication detection
@@ -99,7 +99,7 @@ All projects share the same design tokens, UI components and utilities — ensur
 - **Zod v4** — Runtime validation for env and forms
 - **pnpm Workspaces** — Monorepo with catalog for centralized dependency management
 - **Dark Mode** — System preference + manual toggle
-- **Site Files** — `@casoon/astro-site-files` generates `robots.txt`, `sitemap.xml`, `llms.txt`, `security.txt` and `humans.txt` at build time
+- **Site Files** — `@casoon/astro-site-files` generates `robots.txt`, `sitemap.xml`, `llms.txt` and (with `PUBLIC_SECURITY_CONTACT` set) `security.txt` at build time
 - **Structured Data** — `@casoon/astro-structured-data` generates JSON-LD via typed Astro components
 - **SEO** — robots.txt, canonical URLs, meta descriptions, Open Graph
 - **WCAG 2.1 AA** — Two-layer accessibility: axe-core runtime checks + static HTML audit
@@ -112,7 +112,7 @@ astro-v7-template/
 ├── apps/
 │   ├── starter/          # Landing page + contact form + i18n
 │   └── blog/             # Blog with MDX + RSS + i18n
-├── shared/                # Design tokens, components, layouts, SEO, utilities
+├── shared/               # Design tokens, components, layouts, SEO, utilities, shared Astro config
 ├── integrations/         # Custom Astro integrations (e.g. prop-for-that)
 ├── e2e/
 │   ├── starter/          # Playwright E2E tests for starter
@@ -146,7 +146,7 @@ pnpm dev:blog
 
 | Script | Description |
 |---|---|
-| `pnpm dev` | Start the starter app (port 4321) |
+| `pnpm dev` | Start the starter app (port 5014) |
 | `pnpm dev:blog` | Start the blog app (port 4322) |
 | `pnpm build` | Build all apps |
 | `pnpm build:starter` | Build starter only |
@@ -157,7 +157,7 @@ pnpm dev:blog
 | `pnpm check` | Run Biome lint + format check |
 | `pnpm check:fix` | Biome auto-fix |
 | `pnpm format` | Format all files |
-| `pnpm test:e2e` | Run all Playwright E2E tests |
+| `pnpm test:e2e` | Run all Playwright E2E tests (build first; starter runs in `wrangler dev`, blog on a static server) |
 | `pnpm test:e2e:starter` | E2E tests for starter only |
 | `pnpm test:e2e:starter:sitemap-rum` | Verify RUM transport for every starter sitemap URL |
 | `pnpm audit:pages` | Build and check page metadata and basic accessibility signals for every sitemap URL |
@@ -215,7 +215,7 @@ Blog template featuring:
 
 ## Web Vitals Monitoring
 
-[`@casoon/astro-webvitals`](https://www.npmjs.com/package/@casoon/astro-webvitals) v0.4.8 measures Core Web Vitals (LCP, CLS, INP) plus FCP/TTFB in the browser and reports them through a sampled, batched endpoint:
+[`@casoon/astro-webvitals`](https://www.npmjs.com/package/@casoon/astro-webvitals) v0.4.9 measures Core Web Vitals (LCP, CLS, INP) plus FCP/TTFB in the browser and reports them through a sampled, batched endpoint:
 
 - `apps/starter/src/layouts/StarterLayout.astro` applies `<WebVitals debug={import.meta.env.DEV} endpoint="/api/analytics/vitals/" sampleRate={import.meta.env.DEV ? 1 : 0.1} dashboard />` to every starter page. The overlay appears only in development; every local session and 10% of production sessions report metrics.
 - `apps/starter/src/pages/api/analytics/vitals.ts` validates the batch payload with Zod and returns `204`. It has no Cloudflare runtime import, so it works unchanged with Node, Vercel, Netlify and Cloudflare adapters.
@@ -229,7 +229,7 @@ Blog template featuring:
 
 `@casoon/astro-post-audit` is the static counterpart to Web Vitals: it checks rendered SEO, links and lightweight accessibility rules at build time, while Web Vitals captures what users experience in the browser. The starter's build runs both layers.
 
-Both apps configure `@casoon/astro-post-audit` (v0.6.0) identically in `astro.config.mjs`: `preset: 'standard'` with `failOn: 'errors'` (only real errors fail the build; advisory/info findings do not), `progress: 'verbose'`, `hints: { sourceFiles: true }` to map findings back to source files, and `contentStyle: true` for heuristic tone/language checks. The `rules` block enables `canonical.self_reference`, `opengraph.require_og_image`, `a11y.require_skip_link`, `structured_data.check_json_ld`, `html_validation.enabled`, `css_architecture.enabled` (per-route CSS payload and outlier detection), duplicate title/description detection under `content_quality`, and `links.check_fragments`, with `severity` overriding `html/assertion.roles.unnecessary-list` to `off` (a false positive for this template's semantic list markup). `rules.filters.exclude` skips `404.html` on both apps, plus `web-vitals/index.html` (starter — noindexed dashboard route) and `blog/index.html` (blog — an empty `Astro.redirect('/')` stub, which post-audit would otherwise flag as a 0-byte file).
+Both apps configure `@casoon/astro-post-audit` (v0.7.0) through `postAuditOptions()` in `shared/src/config/astro.ts`: `preset: 'standard'` with `failOn: 'errors'` (only real errors fail the build; advisory/info findings do not), `progress: 'verbose'`, `hints: { sourceFiles: true }` to map findings back to source files, and `contentStyle: true` for heuristic tone/language checks. The `rules` block enables `canonical.self_reference`, `opengraph.require_og_image`, `a11y.require_skip_link`, `structured_data.check_json_ld`, `html_validation.enabled`, `css_architecture.enabled` (per-route CSS payload and outlier detection), duplicate title/description detection under `content_quality`, `links.check_fragments` and `links.known_routes` (on-demand routes such as the starter's contact pages, which have no file in `dist/`), with `severity` overriding `html/assertion.roles.unnecessary-list` to `off` (a false positive for this template's semantic list markup). `rules.filters.exclude` skips `404.html` on both apps, plus `web-vitals/index.html` (starter — noindexed dashboard route) and `blog/index.html` (blog — an empty `Astro.redirect('/')` stub, which post-audit would otherwise flag as a 0-byte file).
 
 `e2e/starter/web-vitals.spec.ts` verifies the analytics contract for an official vital and a supporting metric, then confirms browser transport, the local dashboard route and the sitemap pass returning after every sitemap page. The endpoint contract is tested without requiring a Cloudflare Analytics Engine binding.
 
@@ -245,7 +245,7 @@ Use `apps/starter` or `apps/blog` as the starting point, depending on whether th
 2. Set the package name to `@astro-v7/<name>` and add scripts for `dev`, `build`, `preview`, `type-check`, `clean` and `deploy`.
 3. Import shared styles from `@astro-v7/shared/styles/global.css` in the app layout.
 4. Copy the app-level `tsconfig.json` path aliases so `@/*` points to local `src/*` and `@astro-v7/shared/*` points to `../../shared/src/*`.
-5. Configure `astro.config.mjs` with the same core integrations: Tailwind, Svelte, `@casoon/astro-site-files`, `@casoon/astro-structured-data`, `@casoon/astro-post-audit` and `@casoon/astro-speed-measure`.
+5. Configure `astro.config.mjs`: spread `baseAstroConfig` and use `viteSsrConfig()` / `postAuditOptions()` from `@astro-v7/shared/config/astro`, then add the core integrations: Tailwind, Svelte, `@casoon/astro-site-files`, `@casoon/astro-structured-data`, `@casoon/astro-post-audit` and `@casoon/astro-speed-measure`.
 6. Choose a unique dev port if the app should run alongside the existing apps.
 7. Add root scripts such as `dev:<name>`, `build:<name>` and `preview:<name>` from the workspace root.
 8. Add an optional Playwright project in `playwright.config.ts` plus tests under `e2e/<name>/`.
@@ -278,7 +278,7 @@ Shared Astro options (i18n, CSP, image service, post-audit rules, the `vite.ssr.
 Three config changes per app:
 
 1. **Swap the adapter** in `astro.config.mjs` (`@astrojs/node`, `@astrojs/vercel`, `@astrojs/netlify`)
-2. **Enable Sharp** — change image service to `'astro/assets/services/sharp'`
+2. **Enable Sharp** — override `image.service` with `'astro/assets/services/sharp'` in the app config (the shared base sets the noop service for Workers)
 3. **Delete `wrangler.toml`** — not needed outside Cloudflare
 
 ## Astro v7 Highlights
