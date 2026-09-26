@@ -1,6 +1,6 @@
 {
   "name": "astro-v7-workspace",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "private": true,
   "description": "Astro v7 monorepo template with pnpm workspaces, Tailwind v4, Svelte 5, and Biome",
   "author": "casoon",
@@ -33,6 +33,7 @@
     "check:fix": "biome check --write .",
     "format": "biome format --write .",
     "type-check": "pnpm -r run type-check",
+    "test:unit": "pnpm --filter @astro-v7/shared test",
     "test:e2e": "playwright test --grep-invert \"@sitemap-rum|@page-audit\"",
     "test:e2e:starter": "playwright test --project=starter --grep-invert \"@sitemap-rum|@page-audit\"",
     "test:e2e:starter:sitemap-rum": "playwright test --project=starter --grep @sitemap-rum",
@@ -64,6 +65,7 @@
     "check:fix": "Behebt Biome-Lint-/Formatfehler im gesamten Repo automatisch",
     "format": "Formatiert das gesamte Repo mit Biome",
     "type-check": "Führt den TypeScript-Type-Check in allen Workspace-Paketen aus",
+    "test:unit": "Führt die Unit-Tests der Shared-Utilities aus (node --test)",
     "test:e2e": "Führt die Playwright-E2E-Tests aus (ohne @sitemap-rum/@page-audit)",
     "test:e2e:starter": "Führt die Playwright-E2E-Tests der Starter-App aus (ohne @sitemap-rum/@page-audit)",
     "test:e2e:starter:sitemap-rum": "Führt die @sitemap-rum-Tests der Starter-App aus",

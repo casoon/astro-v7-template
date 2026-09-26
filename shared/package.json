@@ -2,6 +2,10 @@
   "name": "@astro-v7/shared",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "test": "node --import tsx --test \"src/**/*.test.ts\"",
+    "type-check": "tsc --noEmit"
+  },
   "type": "module",
   "exports": {
     "./config/*": "./src/config/*.ts",
@@ -28,6 +32,8 @@
     "svelte": "catalog:"
   },
   "devDependencies": {
+    "@types/node": "catalog:",
+    "tsx": "catalog:",
     "@astrojs/svelte": "catalog:",
     "svelte": "catalog:",
     "typescript": "catalog:"

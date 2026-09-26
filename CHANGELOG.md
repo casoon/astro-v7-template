@@ -1,6 +1,14 @@
 # Changelog
 
-## Unreleased
+## 1.3.3 (2026-09-26)
+
+### Added
+
+- Unit tests for the shared utilities (`pnpm test:unit`, Node's built-in test runner), also run in CI.
+
+### Fixed
+
+- `shared` was never type-checked (no `type-check` script), so missing Node types in `shared/src/config/astro.ts` went unnoticed. `shared` now runs `tsc --noEmit` as part of `pnpm type-check`, with `@types/node` as a dev dependency.
 
 ### Changed
 

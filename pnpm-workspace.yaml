@@ -49,6 +49,7 @@ catalog:
   gray-matter: ^4.0.3
   prop-for-that: ^0.7.12
   # rehype-slug and remark-gfm removed — Sätteri (Astro v7 default markdown) provides both natively
+  "@types/node": ^24.0.0
   tsx: ^4.23.15
   typescript: ^6.0.3
   zod: ^4.6.5
