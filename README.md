@@ -269,7 +269,8 @@ Before the first deploy of your own project:
 3. **Custom domain** — uncomment the `[[routes]]` block in `apps/starter/wrangler.toml`; without it the Worker runs on `*.workers.dev`.
 4. **Sessions** — off by default (`session: false` in `shared/src/config/astro.ts`). Remove that line to use `Astro.session`; the Cloudflare adapter then binds a `SESSION` KV namespace, which `wrangler deploy` provisions on first deploy.
 5. **security.txt** — set `PUBLIC_SECURITY_CONTACT` (`mailto:` or `https:`) to publish `/.well-known/security.txt`; `Expires` is rolled forward on every build.
-6. **Contact form** — connect a provider in `deliverContactMessage()`. The honeypot only stops simple bots; once messages are actually sent, add rate limiting (e.g. a Cloudflare rate-limiting rule or Workers Rate Limiting binding) or a Turnstile check before delivery.
+6. **Site profile** — replace the demo organization data (email, phone, address, `sameAs`, launch date) in `shared/src/config/site.ts` and the placeholder `public/logo.svg` in each app; they feed the JSON-LD on every page.
+7. **Contact form** — connect a provider in `deliverContactMessage()`. The honeypot only stops simple bots; once messages are actually sent, add rate limiting (e.g. a Cloudflare rate-limiting rule or Workers Rate Limiting binding) or a Turnstile check before delivery.
 
 Shared Astro options (i18n, CSP, image service, post-audit rules, the `vite.ssr.optimizeDeps` pin list) live in `shared/src/config/astro.ts`; each app's `astro.config.mjs` only adds its adapter, integrations and app-specific values.
 
