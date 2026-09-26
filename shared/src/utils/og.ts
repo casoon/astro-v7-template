@@ -14,7 +14,9 @@ export interface OgImageOptions {
  */
 export async function generateOgImage(
   options: OgImageOptions,
-  fontData: ArrayBuffer
+  // Pass the Buffer itself, not `buffer.buffer`: a Node Buffer can be a view into a larger
+  // shared ArrayBuffer, so `.buffer` may start with unrelated bytes.
+  fontData: Buffer
 ): Promise<Uint8Array> {
   const { title, description, siteName } = options;
 

@@ -47,7 +47,7 @@ async function main() {
 
     const png = await generateOgImage(
       { title: page.title, description: page.description, siteName: 'Astro v7 Starter' },
-      fontData.buffer as ArrayBuffer
+      fontData
     );
 
     writeFileSync(outPath, png);
