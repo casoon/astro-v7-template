@@ -92,6 +92,11 @@ See `accessibility-audit` skill. Automated testing via `@axe-core/playwright` in
 - Shared locale utilities in `shared/src/utils/i18n.ts` (`localePath`, `switchLocalePath`, `useTranslations`)
 - Language switcher as simple EN/DE link in Navbar
 
+## Blog Content
+
+- One folder per locale: `src/content/blog/en/<slug>.mdx`, `src/content/blog/de/<slug>.mdx` — `entry.id` is `<locale>/<slug>`
+- Use `getBlogPosts(locale)` / `getPostSlug(post)` from `src/utils/blog-posts.ts`; every post needs both locales (sitemap hreflang pairs them by slug)
+
 ## OG Image Generation
 
 - Build-time generation via `scripts/generate-og.ts` (runs before `astro build`)
@@ -103,7 +108,9 @@ See `accessibility-audit` skill. Automated testing via `@axe-core/playwright` in
 ## Astro Actions
 
 - Located in `src/actions/` with `index.ts` as re-export hub
-- Contact form handling lives in `contact.ts`
+- Contact form handling lives in `contact.ts`; delivery is a stub (`deliverContactMessage()` returns `false` → page shows a demo notice)
+- Contact pages are `prerender = false` (the form POST needs the action result). Starter `wrangler.toml` must NOT set `not_found_handling = "404-page"` — Cloudflare would answer browser navigations to on-demand routes with the 404 page without invoking the Worker
+- Starter E2E runs against `wrangler dev` (not a static server) for that reason
 - Convention: `export const server = { submitContactForm }`
 
 ## Site Files
@@ -120,7 +127,7 @@ See `accessibility-audit` skill. Automated testing via `@axe-core/playwright` in
 
 ## CI
 
-- Main CI workflow (`.github/workflows/ci.yml`) is read-only: install, lint, type-check, build
+- Main CI workflow (`.github/workflows/ci.yml`) is read-only: install, lint, type-check, build, E2E
 - README badge refresh runs separately in `.github/workflows/update-badges.yml`
 - Do not assume the main CI job pushes commits
 
@@ -133,7 +140,7 @@ See `accessibility-audit` skill. Automated testing via `@axe-core/playwright` in
 
 ## Cloudflare Dev Server (vite.ssr.optimizeDeps)
 
-Both apps pin their SSR deps in `vite.ssr.optimizeDeps` (`noDiscovery: true` + `include`).
+Both apps pin their SSR deps in `vite.ssr.optimizeDeps` (`noDiscovery: true` + `include`), via `viteSsrConfig()` in `shared/src/config/astro.ts` (shared base config for all apps).
 Without it, a cold `node_modules/.vite/deps_ssr` makes Vite discover deps during the first
 render and fire a program reload that kills the workerd runner. `environments.ssr.optimizeDeps`
 is NOT read by Astro — it must be `vite.ssr.optimizeDeps`. See `astro-architecture` skill.

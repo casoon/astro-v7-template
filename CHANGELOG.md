@@ -8,8 +8,22 @@
 - Sitemap RUM test mode that opens every sitemap URL and verifies that it reports browser metrics.
 - Local Web Vitals dashboard route backed by browser storage.
 - Documentation explaining the complementary static Post-Audit and field Web Vitals checks.
+- German blog posts (`src/content/blog/de/`) with their own OG images and sitemap `lastmod`.
+- Contact form honeypot and a `deliverContactMessage()` hook; without a provider the page shows a demo notice instead of claiming the message was sent.
+- `PUBLIC_SECURITY_CONTACT` env var for `security.txt` (with rolling `Expires`).
+- Shared Astro base config in `shared/src/config/astro.ts`.
+
+### Fixed
+
+- Contact form submission returned 405 in production: the contact pages were prerendered, and `not_found_handling = "404-page"` answered browser navigations to on-demand routes with the 404 page. Contact pages are now rendered on request and the starter no longer sets `not_found_handling`.
+- Blog posts still referred to Astro v6.
+- German blog pages rendered English post bodies.
 
 ### Changed
+
+- Blog posts moved to one folder per locale; `titleDe`/`descriptionDe` frontmatter removed.
+- Starter `wrangler.toml` no longer pins a KV namespace id or custom domain.
+- Starter E2E tests run against `wrangler dev` instead of a static file server.
 
 - The Web Vitals endpoint is platform-independent; Cloudflare Analytics Engine is no longer required.
 - Starter pages share a dedicated layout that applies Web Vitals consistently.

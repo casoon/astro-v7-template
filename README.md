@@ -184,7 +184,7 @@ pnpm dev:blog
 
 Landing page featuring:
 - Hero section with feature grid
-- Contact form with Astro Actions + Zod validation
+- Contact form with Astro Actions + Zod validation and a honeypot field — ships as a **demo**: `deliverContactMessage()` in `src/actions/contact.ts` is the hook for your mail provider; until it returns `true`, the page tells visitors that nothing was sent
 - i18n (English + German) with language switcher
 - OG image generation per page and locale
 - Dark mode toggle
@@ -201,8 +201,8 @@ Blog template featuring:
 - Reading progress bar — thin indicator at the top of every post
 - Enriched RSS feed (`/rss.xml`) with `article:readingTime`, `article:series` and OG image enclosures
 - Automatic sitemap (`/sitemap.xml`) with i18n hreflang via `@casoon/astro-site-files`
-- i18n (English + German) with language switcher
-- OG image generation per page and blog post
+- i18n (English + German) with language switcher — one folder per locale (`src/content/blog/en/`, `src/content/blog/de/`), same file name = same post in both languages
+- OG image generation per page, blog post and locale
 - Tag display
 
 ## prop-for-that Integration
@@ -261,6 +261,17 @@ pnpm deploy:blog
 # or both apps at once
 pnpm deploy
 ```
+
+Before the first deploy of your own project:
+
+1. **Names** — set `name` in `apps/*/wrangler.toml`.
+2. **Site URL** — set `PUBLIC_SITE_URL` (and `PUBLIC_SITE_NAME`) in `.env` or the defaults in `apps/*/src/env.ts`; canonical URLs, sitemap and OG images are built from it.
+3. **Custom domain** — uncomment the `[[routes]]` block in `apps/starter/wrangler.toml`; without it the Worker runs on `*.workers.dev`.
+4. **Sessions KV** — the `SESSION` namespace has no `id`, so `wrangler deploy` provisions it on first deploy.
+5. **security.txt** — set `PUBLIC_SECURITY_CONTACT` (`mailto:` or `https:`) to publish `/.well-known/security.txt`; `Expires` is rolled forward on every build.
+6. **Contact form** — connect a provider in `deliverContactMessage()`.
+
+Shared Astro options (i18n, CSP, image service, post-audit rules, the `vite.ssr.optimizeDeps` pin list) live in `shared/src/config/astro.ts`; each app's `astro.config.mjs` only adds its adapter, integrations and app-specific values.
 
 ### Other platforms (Node.js, Vercel, Netlify)
 

@@ -11,7 +11,7 @@ import { AutoBreadcrumbSchema } from '@casoon/astro-structured-data/components';
 import type { MarkdownHeading } from 'astro';
 import { env } from '@/env';
 import { t } from '@/i18n';
-import type { BlogPost } from '@/utils/blog-posts';
+import { type BlogPost, getPostSlug } from '@/utils/blog-posts';
 import { render } from 'astro:content';
 import '@/styles/app.css';
 
@@ -25,19 +25,18 @@ const tr = t(locale);
 const otherLocale: Locale = locale === 'en' ? 'de' : 'en';
 const dateLocale = locale === 'de' ? 'de-DE' : 'en-US';
 
-const title = locale === 'de' ? (post.data.titleDe ?? post.data.title) : post.data.title;
-const description =
-  locale === 'de' ? (post.data.descriptionDe ?? post.data.description) : post.data.description;
+const { title, description } = post.data;
+const slug = getPostSlug(post);
+const ogImage = new URL(`/og/${locale === 'de' ? 'de/' : ''}blog/${slug}.png`, Astro.site).href;
 const alternateHref = switchLocalePath(Astro.url.pathname, otherLocale);
 const links = [{ href: localePath('/', locale), label: tr('nav.home') }];
-const breadcrumbHomeLabel = locale === 'de' ? 'Start' : 'Home';
-const breadcrumbLabels: Record<string, string> = { blog: 'Blog' };
+const breadcrumbLabels: Record<string, string> = { blog: tr('breadcrumb.blog') };
 const { Content, headings } = await render(post);
 const tocHeadings = headings.filter((h: MarkdownHeading) => h.depth === 2 || h.depth === 3);
 ---
 
-<BaseLayout title={`${title} - Astro v7 Blog`} description={description} lang={locale} siteName={env.PUBLIC_SITE_NAME} ogImage={new URL(`/og/blog/${post.id}.png`, Astro.site).href} articleAuthor={post.data.author} articleDate={post.data.date} articleModified={post.data.lastmod}>
-  <AutoBreadcrumbSchema slot="head" homeLabel={breadcrumbHomeLabel} labels={breadcrumbLabels} />
+<BaseLayout title={`${title} - Astro v7 Blog`} description={description} lang={locale} siteName={env.PUBLIC_SITE_NAME} ogImage={ogImage} articleAuthor={post.data.author} articleDate={post.data.date} articleModified={post.data.lastmod}>
+  <AutoBreadcrumbSchema slot="head" homeLabel={tr('breadcrumb.home')} labels={breadcrumbLabels} />
 
   <Navbar slot="header" siteName="Astro v7 Blog" links={links}>
     <a href={alternateHref} class="text-xs font-medium text-text-secondary hover:text-text no-underline">{otherLocale.toUpperCase()}</a>
@@ -56,7 +55,7 @@ const tocHeadings = headings.filter((h: MarkdownHeading) => h.depth === 2 || h.d
           <h1 class="mb-2 text-[clamp(1.75rem,4vw,2.5rem)] font-extrabold leading-snug tracking-tight">{title}</h1>
           <p class="text-[0.9375rem] text-text-secondary">{tr('post.by')} {post.data.author}</p>
           {post.data.readTime && (
-            <p class="mt-1 text-sm text-text-secondary">{post.data.readTime} min read</p>
+            <p class="mt-1 text-sm text-text-secondary">{post.data.readTime} {tr('post.readTime')}</p>
           )}
           {post.data.tags.length > 0 && (
             <div class="mt-4 flex flex-wrap gap-1">

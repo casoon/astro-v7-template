@@ -1,6 +1,6 @@
 import { z } from 'astro/zod';
 
-export const webVitalsMetricSchema = z.object({
+const webVitalsMetricSchema = z.object({
   name: z.string(),
   value: z.number(),
   delta: z.number(),

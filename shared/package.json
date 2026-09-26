@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "exports": {
+    "./config/*": "./src/config/*.ts",
     "./styles/*": "./src/styles/*",
     "./layouts/*": "./src/layouts/*",
     "./components/*": "./src/components/*",

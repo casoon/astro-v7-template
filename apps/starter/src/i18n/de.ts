@@ -71,6 +71,9 @@ export default {
   'contact.subject': 'Betreff',
   'contact.message': 'Nachricht',
   'contact.send': 'Senden',
+  'contact.success': 'Danke! Deine Nachricht wurde gesendet.',
+  'contact.demoNotice':
+    'Demo: Deine Eingaben sind gültig, es wurde aber keine Nachricht verschickt. Mail-Provider in src/actions/contact.ts anbinden.',
 
   // 404
   '404.title': '404 - Seite nicht gefunden',
