@@ -70,6 +70,9 @@ export default {
   'contact.subject': 'Subject',
   'contact.message': 'Message',
   'contact.send': 'Send',
+  'contact.success': 'Thanks! Your message has been sent.',
+  'contact.demoNotice':
+    'Demo: your input is valid, but no message was sent. Connect a mail provider in src/actions/contact.ts.',
 
   // 404
   '404.title': '404 - Page Not Found',

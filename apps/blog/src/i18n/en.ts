@@ -10,6 +10,11 @@ export default {
   // Blog post
   'post.by': 'by',
   'post.back': 'Back to overview',
+  'post.readTime': 'min read',
+
+  // Breadcrumbs
+  'breadcrumb.home': 'Home',
+  'breadcrumb.blog': 'Blog',
 
   // 404
   '404.title': '404 - Page Not Found',

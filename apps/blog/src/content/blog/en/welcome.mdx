@@ -1,0 +1,42 @@
+---
+title: 'Welcome to the Astro v7 Blog'
+description: 'The first post in the Astro v7 template featuring MDX support and Content Collections.'
+date: 2026-02-24
+lastmod: 2026-09-26
+author: 'Astro v7 Template'
+tags: ['astro', 'v7', 'template']
+---
+
+This is the first post in the **Astro v7 Blog Template**. Here we cover the most important changes.
+
+## What's New in Astro v7?
+
+- **Vite 8** with the **Rolldown** bundler
+- **Rust compiler** for `.astro` files — strict about unclosed HTML tags
+- **Sätteri** as the default markdown processor, with GFM and heading IDs built in
+- **`compressHTML: 'jsx'`** as the new default whitespace handling
+- **`src/fetch.ts`** is now a reserved filename for advanced routing
+
+## Content Collections with Loader API
+
+Content Collections are defined in `src/content.config.ts` with a `loader`. This blog keeps one folder per locale:
+
+```typescript title="src/content.config.ts"
+import { glob } from 'astro/loaders';
+import { z } from 'astro/zod';
+import { defineCollection } from 'astro:content';
+
+const blog = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/blog' }),
+  schema: z.object({
+    title: z.string(),
+    date: z.coerce.date(),
+  }),
+});
+```
+
+Posts are rendered with `render(entry)` and addressed via `entry.id` — for example `en/welcome`.
+
+## Conclusion
+
+Astro v7 moves more of the toolchain to Rust and makes markdown features that used to need plugins work out of the box.

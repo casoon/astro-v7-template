@@ -1,0 +1,36 @@
+---
+title: 'Tailwind CSS v4 in der Praxis'
+description: 'Wie wir Tailwind v4 mit CSS-first-Konfiguration und OKLCH-Farben in Astro v7 einsetzen.'
+date: 2026-02-23
+lastmod: 2026-09-26
+author: 'Astro v7 Template'
+tags: ['tailwind', 'css', 'design']
+---
+
+Tailwind v4 bringt einen grundlegenden Wechsel: **CSS-first-Konfiguration** statt JavaScript.
+
+## Was hat sich geändert?
+
+- Keine `tailwind.config.js` mehr nötig
+- Konfiguration direkt im CSS über `@theme`
+- Native OKLCH-Farben
+- Eingebaute Container Queries
+- Deutlich schnellere Builds
+
+## Integration in Astro v7
+
+Wir binden das Vite-Plugin direkt ein:
+
+```javascript title="astro.config.mjs"
+import tailwindcss from '@tailwindcss/vite';
+
+export default defineConfig({
+  vite: {
+    plugins: [tailwindcss()],
+  },
+});
+```
+
+## Design-Tokens
+
+Unsere Design-Tokens nutzen CSS Custom Properties mit OKLCH-Farben – für konsistente, barrierearme Farbschemata im hellen und dunklen Modus.

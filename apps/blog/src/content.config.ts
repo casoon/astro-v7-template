@@ -7,11 +7,9 @@ const blog = defineCollection({
   schema: z.object({
     title: z.string().min(1).max(100),
     description: z.string().min(10).max(160),
-    titleDe: z.string().min(1).max(100).optional(),
-    descriptionDe: z.string().min(10).max(160).optional(),
     date: z.coerce.date(),
     lastmod: z.coerce.date().optional(),
-    author: z.string().default('Astro v7 Team'),
+    author: z.string().default('Astro v7 Template'),
     tags: z.array(z.string()).default([]),
     draft: z.boolean().default(false),
     readTime: z.number().optional(),

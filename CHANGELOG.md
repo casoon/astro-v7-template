@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 1.3.2 (2026-09-26)
 
 ### Added
 
@@ -8,8 +8,25 @@
 - Sitemap RUM test mode that opens every sitemap URL and verifies that it reports browser metrics.
 - Local Web Vitals dashboard route backed by browser storage.
 - Documentation explaining the complementary static Post-Audit and field Web Vitals checks.
+- German blog posts (`src/content/blog/de/`) with their own OG images and sitemap `lastmod`.
+- Contact form honeypot and a `deliverContactMessage()` hook; without a provider the page shows a demo notice instead of claiming the message was sent.
+- `PUBLIC_SECURITY_CONTACT` env var for `security.txt` (with rolling `Expires`).
+- Shared Astro base config in `shared/src/config/astro.ts`.
+
+### Fixed
+
+- Contact form submission returned 405 in production: the contact pages were prerendered, and `not_found_handling = "404-page"` answered browser navigations to on-demand routes with the 404 page. Contact pages are now rendered on request and the starter no longer sets `not_found_handling`.
+- Blog posts still referred to Astro v6.
+- German blog pages rendered English post bodies.
+- `PUBLIC_*` values from an app's `.env` were ignored in `astro.config.mjs` (Vite loads the config with the `VITE_` prefix), so `site`, canonical URLs and the sitemap always used the defaults. The config now reads `.env` via `configEnv()`.
 
 ### Changed
+
+- Blog posts moved to one folder per locale; `titleDe`/`descriptionDe` frontmatter removed.
+- Starter `wrangler.toml` no longer pins a KV namespace id or custom domain.
+- Starter E2E tests run against `wrangler dev` instead of a static file server.
+- Default `PUBLIC_SITE_URL`: starter `https://astro-v7-template.casoon.dev` (the live demo), blog `https://blog.example.com` (placeholder — `astrov7.casoon.dev` / `astrov7blog.casoon.dev` no longer resolve).
+- Dependencies: astro 7.3.5, @astrojs/cloudflare 14.3.3, @casoon/astro-post-audit 0.7.0, zod 4.6.5, wrangler 4.140, Biome 2.5.14.
 
 - The Web Vitals endpoint is platform-independent; Cloudflare Analytics Engine is no longer required.
 - Starter pages share a dedicated layout that applies Web Vitals consistently.

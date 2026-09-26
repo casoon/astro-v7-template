@@ -1,11 +1,11 @@
 {
   "name": "astro-v7-workspace",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "private": true,
   "description": "Astro v7 monorepo template with pnpm workspaces, Tailwind v4, Svelte 5, and Biome",
   "author": "casoon",
   "license": "MIT",
-  "homepage": "https://astrov7.casoon.dev",
+  "homepage": "https://astro-v7-template.casoon.dev",
   "repository": {
     "type": "git",
     "url": "https://github.com/casoon/astro-v7-template"
@@ -20,7 +20,6 @@
     "pnpm": "11.0.9"
   },
   "scripts": {
-    "info": "npm-scripts-info",
     "dev": "pnpm --filter @astro-v7/starter dev",
     "dev:starter": "pnpm --filter @astro-v7/starter dev",
     "dev:blog": "pnpm --filter @astro-v7/blog dev",
@@ -52,7 +51,6 @@
     "prepare": "husky"
   },
   "scripts-info": {
-    "info": "Zeigt diese Übersicht der verfügbaren Scripts",
     "dev": "Startet die Starter-App (@astro-v7/starter) im Dev-Modus",
     "dev:starter": "Startet die Starter-App im Dev-Modus",
     "dev:blog": "Startet die Blog-App im Dev-Modus",
@@ -109,7 +107,6 @@
     "fallow": "catalog:",
     "husky": "catalog:",
     "lint-staged": "catalog:",
-    "npm-scripts-info": "^0.3.9",
     "sharp": "catalog:"
   }
 }

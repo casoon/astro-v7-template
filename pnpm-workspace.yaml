@@ -22,18 +22,18 @@ overrides:
 
 catalog:
   # Astro v7 (stable)
-  astro: ^7.3.2
+  astro: ^7.3.5
   "@astrojs/check": ^0.9.10
-  "@astrojs/cloudflare": ^14.3.1
-  "@astrojs/mdx": ^8.0.1
+  "@astrojs/cloudflare": ^14.3.3
+  "@astrojs/mdx": ^8.0.2
   "@astrojs/rss": ^4.0.19
   "@astrojs/svelte": ^9.0.1
   "@axe-core/playwright": ^4.13.0
-  "@casoon/astro-post-audit": ^0.6.0
+  "@casoon/astro-post-audit": ^0.7.0
   "@casoon/astro-structured-data": ^2.0.1
   "@casoon/astro-site-files": ^0.5.0
   "@casoon/astro-speed-measure": ^0.4.0
-  "@casoon/astro-webvitals": ^0.4.8
+  "@casoon/astro-webvitals": ^0.4.9
 
   # Tailwind v4
   tailwindcss: ^4.3.3
@@ -42,30 +42,30 @@ catalog:
   tailwindcss-animate: ^1.0.7
 
   # Svelte 5
-  svelte: ^5.57.0
-  "@lucide/svelte": ^1.43.0
+  svelte: ^5.57.1
+  "@lucide/svelte": ^1.48.0
 
   # Core
   gray-matter: ^4.0.3
   prop-for-that: ^0.7.12
   # rehype-slug and remark-gfm removed — Sätteri (Astro v7 default markdown) provides both natively
-  tsx: ^4.23.13
+  tsx: ^4.23.15
   typescript: ^6.0.3
-  zod: ^4.5.4
+  zod: ^4.6.5
   clsx: ^2.1.1
-  tailwind-merge: ^3.6.0
-  satori: ^0.33.4
+  tailwind-merge: ^3.7.0
+  satori: ^0.33.5
   "@resvg/resvg-js": ^2.6.2
   sharp: ^0.35.4
 
   # Code analysis
-  fallow: ^3.23.0
+  fallow: ^3.28.0
 
   # Deployment
-  wrangler: ^4.130.0
+  wrangler: ^4.140.0
 
   # Formatting & Linting (Biome only - no more ESLint/Prettier hybrid)
-  "@biomejs/biome": ^2.5.12
+  "@biomejs/biome": ^2.5.14
   husky: ^9.1.7
   lint-staged: ^17.5.0
 
