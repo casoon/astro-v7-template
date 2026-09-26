@@ -7,6 +7,9 @@
 - Translation keys are typed: `de.ts` must match the keys of `en.ts`, and `t(locale)` only accepts known keys — missing or misspelled keys fail `astro check` instead of rendering the key name.
 - The blog build fails when a published post is missing in a locale (the sitemap would otherwise advertise hreflang alternates that 404).
 - Sessions are disabled (`session: false`); the unused `SESSION` KV binding and `SessionData` type are removed.
+- JSON-LD now fills the recommended fields (Organization logo/contact/address/sameAs, WebPage dates/author/image, BlogPosting publisher logo) from a demo profile in `shared/src/config/site.ts` (example.com, 555-01xx) plus a `logo.svg` per app — no more structured-data warnings in the build.
+- Starter hero subtitle uses `text-balance` (no orphaned last word).
+- README deploy checklist: add rate limiting or Turnstile once the contact form actually sends mail.
 
 ## 1.3.2 (2026-09-26)
 

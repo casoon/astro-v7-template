@@ -74,7 +74,14 @@ export default defineConfig({
         ],
       },
     }),
-    structuredData({ generateMeta: true, siteName: env.PUBLIC_SITE_NAME, locale: 'en_US' }),
+    structuredData({
+      generateMeta: true,
+      siteName: env.PUBLIC_SITE_NAME,
+      locale: 'en_US',
+      // Recommended-field warnings ask for business data (address, phone, sameAs, …) that a
+      // template can't provide. JSON-LD validity is still checked by post-audit (check_json_ld).
+      warnOnMissingRecommended: false,
+    }),
     speedMeasure(),
     postAudit(postAuditOptions(['404.html', 'web-vitals/index.html'], onDemandRoutes)),
   ],

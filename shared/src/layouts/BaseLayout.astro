@@ -5,6 +5,7 @@ import {
   WebPageSchema,
   WebSiteSchema,
 } from '@casoon/astro-structured-data/components';
+import { siteProfile } from '../config/site';
 
 export interface Props {
   title: string;
@@ -31,6 +32,10 @@ const {
 } = Astro.props;
 
 const useArticleSchema = !!articleDate && !!ogImage;
+const logoUrl = new URL(siteProfile.logoPath, Astro.site).href;
+// Pages without their own OG image (e.g. 404) fall back to the home image.
+const pageImage = ogImage ?? new URL('/og/home.png', Astro.site).href;
+const publisherName = siteName ?? Astro.site?.hostname ?? 'Website';
 ---
 
 <!doctype html>
@@ -79,12 +84,31 @@ const useArticleSchema = !!articleDate && !!ogImage;
         dateModified={articleModified?.toISOString()}
         authorName={articleAuthor ?? 'Unknown'}
         imageUrl={ogImage!}
+        publisherName={publisherName}
+        publisherLogo={logoUrl}
       />
     ) : (
-      <WebPageSchema title={title} description={description} image={ogImage} />
+      <WebPageSchema
+        title={title}
+        description={description}
+        image={pageImage}
+        datePublished={siteProfile.launchDate}
+        dateModified={new Date()}
+        author={{ name: publisherName, type: 'Organization' }}
+      />
     )}
     {siteName && <WebSiteSchema name={siteName} />}
-    {siteName && <OrganizationSchema name={siteName} />}
+    {siteName && (
+      <OrganizationSchema
+        name={siteName}
+        url={Astro.site?.href}
+        logoUrl={logoUrl}
+        email={siteProfile.email}
+        telephone={siteProfile.telephone}
+        address={siteProfile.address}
+        sameAs={siteProfile.sameAs}
+      />
+    )}
     <slot name="head" />
   </head>
   <body>
