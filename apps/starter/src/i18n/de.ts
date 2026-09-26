@@ -13,7 +13,7 @@ export default {
   // Feature cards
   'feature.astro.title': 'Astro v7',
   'feature.astro.desc':
-    'Neuer Dev-Server mit Vite Environment API, Live Content Collections, CSP-Unterstützung.',
+    'Vite 8 mit Rolldown, Rust-Compiler und Sätteri-Markdown – GFM und Heading-IDs eingebaut.',
   'feature.tailwind.title': 'Tailwind v4',
   'feature.tailwind.desc': 'CSS-first-Konfiguration, OKLCH-Farben, native Container Queries.',
   'feature.svelte.title': 'Svelte 5',

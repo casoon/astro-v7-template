@@ -25,7 +25,7 @@
 - Blog posts moved to one folder per locale; `titleDe`/`descriptionDe` frontmatter removed.
 - Starter `wrangler.toml` no longer pins a KV namespace id or custom domain.
 - Starter E2E tests run against `wrangler dev` instead of a static file server.
-- Default `PUBLIC_SITE_URL`: starter `https://astro-v7-template.casoon.dev` (the live demo), blog `https://blog.example.com` (placeholder — `astrov7.casoon.dev` / `astrov7blog.casoon.dev` no longer resolve).
+- Default `PUBLIC_SITE_URL`: starter `https://astro-v7-template.casoon.dev` (the live demo), blog `https://astro-v7-blog.casoon.dev` (both live demos; `astrov7.casoon.dev` / `astrov7blog.casoon.dev` no longer resolve).
 - Dependencies: astro 7.3.5, @astrojs/cloudflare 14.3.3, @casoon/astro-post-audit 0.7.0, zod 4.6.5, wrangler 4.140, Biome 2.5.14.
 
 - The Web Vitals endpoint is platform-independent; Cloudflare Analytics Engine is no longer required.
