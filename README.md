@@ -267,7 +267,7 @@ Before the first deploy of your own project:
 1. **Names** — set `name` in `apps/*/wrangler.toml`.
 2. **Site URL** — set `PUBLIC_SITE_URL` (and `PUBLIC_SITE_NAME`) in `.env` or the defaults in `apps/*/src/env.ts`; canonical URLs, sitemap and OG images are built from it.
 3. **Custom domain** — uncomment the `[[routes]]` block in `apps/starter/wrangler.toml`; without it the Worker runs on `*.workers.dev`.
-4. **Sessions KV** — the `SESSION` namespace has no `id`, so `wrangler deploy` provisions it on first deploy.
+4. **Sessions** — off by default (`session: false` in `shared/src/config/astro.ts`). Remove that line to use `Astro.session`; the Cloudflare adapter then binds a `SESSION` KV namespace, which `wrangler deploy` provisions on first deploy.
 5. **security.txt** — set `PUBLIC_SECURITY_CONTACT` (`mailto:` or `https:`) to publish `/.well-known/security.txt`; `Expires` is rolled forward on every build.
 6. **Contact form** — connect a provider in `deliverContactMessage()`.
 

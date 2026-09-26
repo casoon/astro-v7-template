@@ -11,11 +11,6 @@ html_handling = "force-trailing-slash"
 [observability]
 enabled = true
 
-# Astro sessions (Cloudflare KV). Without an `id`, `wrangler deploy` provisions the
-# namespace automatically on first deploy. Pin your own id here afterwards if you want.
-[[kv_namespaces]]
-binding = "SESSION"
-
 # Custom domain — uncomment and set your own domain. Without it the Worker is served
 # on its workers.dev subdomain.
 # [[routes]]
