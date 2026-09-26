@@ -1,10 +1,16 @@
 # Changelog
 
-## Unreleased
+## 1.3.5 (2026-09-26)
 
 ### Changed
 
 - CI: `timeout-minutes: 15` on the job and a `concurrency` group — a new push to a PR cancels its outdated run, runs on `main`/`master` always finish.
+- `scripts-info` descriptions in `package.json` are in English.
+
+### Added
+
+- README links the product website ([astro-template.casoon.de](https://astro-template.casoon.de/en/)) next to the live demos.
+- README tip on [opi](https://github.com/casoon/opi) under "Available Scripts".
 
 ## 1.3.4 (2026-09-26)
 
