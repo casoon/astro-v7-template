@@ -1,6 +1,6 @@
 import { createEnvSchema, validateEnv } from '@astro-v7/shared/utils/env';
 
-const envSchema = createEnvSchema({
+export const envSchema = createEnvSchema({
   PUBLIC_SITE_URL: 'https://astrov7blog.casoon.dev',
   PUBLIC_SITE_NAME: 'Astro v7 Blog',
   PUBLIC_AUTHOR: 'Your Name',

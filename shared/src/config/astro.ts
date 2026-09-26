@@ -4,6 +4,20 @@
  * holds plain option objects.
  */
 
+import { existsSync, readFileSync } from 'node:fs';
+import { parseEnv } from 'node:util';
+
+/**
+ * Environment for astro.config.mjs. Astro evaluates the config with Vite's default `VITE_`
+ * env prefix, so `PUBLIC_*` values from `.env` never reach `import.meta.env` there and
+ * `site`, canonical URLs and the sitemap would silently fall back to the defaults.
+ * Reads the app's `.env` explicitly; variables set in the shell take precedence.
+ */
+export function configEnv(envFile: URL): Record<string, string | undefined> {
+  const fileEnv = existsSync(envFile) ? parseEnv(readFileSync(envFile, 'utf-8')) : {};
+  return { ...fileEnv, ...process.env };
+}
+
 export const baseAstroConfig = {
   trailingSlash: 'always',
   devToolbar: { enabled: false },

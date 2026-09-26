@@ -1,10 +1,12 @@
 import {
   baseAstroConfig,
+  configEnv,
   postAuditOptions,
   securityTxt,
   sitemapI18n,
   viteSsrConfig,
 } from '@astro-v7/shared/config/astro';
+import { validateEnv } from '@astro-v7/shared/utils/env';
 import cloudflare from '@astrojs/cloudflare';
 import mdx from '@astrojs/mdx';
 import svelte from '@astrojs/svelte';
@@ -15,7 +17,7 @@ import structuredData from '@casoon/astro-structured-data';
 import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from 'astro/config';
 import propsForThat from '../../integrations/props-for-that.mjs';
-import { env } from './src/env.ts';
+import { envSchema } from './src/env.ts';
 import { getBlogSitemapEntries } from './src/utils/blog-rss.js';
 
 // Astro v7: remark-gfm and rehype-slug removed — Sätteri provides both natively.
@@ -30,6 +32,8 @@ const codeBlockTitleTransformer = {
     if (m) node.properties['data-title'] = m[1] ?? m[2];
   },
 };
+
+const env = validateEnv(envSchema, configEnv(new URL('.env', import.meta.url)));
 
 export default defineConfig({
   ...baseAstroConfig,

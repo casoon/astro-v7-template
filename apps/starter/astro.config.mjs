@@ -1,10 +1,12 @@
 import {
   baseAstroConfig,
+  configEnv,
   postAuditOptions,
   securityTxt,
   sitemapI18n,
   viteSsrConfig,
 } from '@astro-v7/shared/config/astro';
+import { validateEnv } from '@astro-v7/shared/utils/env';
 import cloudflare from '@astrojs/cloudflare';
 import svelte from '@astrojs/svelte';
 import postAudit from '@casoon/astro-post-audit';
@@ -15,10 +17,12 @@ import { webVitalsDashboard } from '@casoon/astro-webvitals/integration';
 import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from 'astro/config';
 import propsForThat from '../../integrations/props-for-that.mjs';
-import { env } from './src/env.ts';
+import { envSchema } from './src/env.ts';
 
 // Routes with `prerender = false` — no file in dist, so sitemap and link audit need them listed.
 const onDemandRoutes = ['/contact/', '/de/contact/'];
+
+const env = validateEnv(envSchema, configEnv(new URL('.env', import.meta.url)));
 
 export default defineConfig({
   ...baseAstroConfig,

@@ -18,6 +18,7 @@
 - Contact form submission returned 405 in production: the contact pages were prerendered, and `not_found_handling = "404-page"` answered browser navigations to on-demand routes with the 404 page. Contact pages are now rendered on request and the starter no longer sets `not_found_handling`.
 - Blog posts still referred to Astro v6.
 - German blog pages rendered English post bodies.
+- `PUBLIC_*` values from an app's `.env` were ignored in `astro.config.mjs` (Vite loads the config with the `VITE_` prefix), so `site`, canonical URLs and the sitemap always used the defaults. The config now reads `.env` via `configEnv()`.
 
 ### Changed
 
