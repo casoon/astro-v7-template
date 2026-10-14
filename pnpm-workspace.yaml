@@ -33,7 +33,7 @@ catalog:
   "@casoon/astro-structured-data": ^2.0.1
   "@casoon/astro-site-files": ^0.5.0
   "@casoon/astro-speed-measure": ^0.4.0
-  "@casoon/astro-webvitals": ^0.4.9
+  "@casoon/astro-webvitals": ^0.4.10
 
   # Tailwind v4
   tailwindcss: ^4.3.3
