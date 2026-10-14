@@ -40,8 +40,8 @@ catalogs:
       specifier: ^2.0.1
       version: 2.0.1
     '@casoon/astro-webvitals':
-      specifier: ^0.4.9
-      version: 0.4.9
+      specifier: ^0.4.10
+      version: 0.4.10
     '@fontsource/fira-code':
       specifier: ^5.3.0
       version: 5.3.0
@@ -251,7 +251,7 @@ importers:
         version: 2.0.1(astro@7.3.5(@types/node@24.13.6)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.0))(typescript@6.0.3)
       '@casoon/astro-webvitals':
         specifier: 'catalog:'
-        version: 0.4.9(astro@7.3.5(@types/node@24.13.6)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.0))
+        version: 0.4.10(astro@7.3.5(@types/node@24.13.6)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.0))
       '@fontsource/inter':
         specifier: 'catalog:'
         version: 5.3.0
@@ -636,8 +636,8 @@ packages:
     peerDependencies:
       astro: ^5.0.0 || ^6.0.0 || ^7.0.0
 
-  '@casoon/astro-webvitals@0.4.9':
-    resolution: {integrity: sha512-ChvaLTJzYq053FxVGJ+He74KaSXpGxudNhEqdwlph1vJ/jBIT2hbkdAhgP7YXLvx/yMZGO48eVayQqCp4HkYGQ==}
+  '@casoon/astro-webvitals@0.4.10':
+    resolution: {integrity: sha512-HqjaBI4foT0wz/Re5jFI74fLN+wYo3eavKJvN7qkmeM+pteM1SGnx7FsVBoxB7Kww6HP0MXqdLFwRrFWg16FqQ==}
     engines: {node: '>=18.17.0'}
     peerDependencies:
       astro: ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0
@@ -3663,7 +3663,7 @@ snapshots:
     transitivePeerDependencies:
       - typescript
 
-  '@casoon/astro-webvitals@0.4.9(astro@7.3.5(@types/node@24.13.6)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.0))':
+  '@casoon/astro-webvitals@0.4.10(astro@7.3.5(@types/node@24.13.6)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.0))':
     dependencies:
       astro: 7.3.5(@types/node@24.13.6)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.0)
       web-vitals: 6.2.2

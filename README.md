@@ -87,7 +87,7 @@ All projects share the same design tokens, UI components and utilities — ensur
 - **i18n** — Multi-language support (en/de) with Astro i18n routing
 - **OG Images** — Auto-generated Open Graph images at build time (Satori + resvg)
 - **Astro Actions** — Server-side contact form handling
-- **CSP** — Content Security Policy with SHA-256 hashes
+- **CSP** — Content Security Policy (`security.csp`): scripts and styles by SHA-256 hash or same origin, everything else `'self'`
 - **Build Metrics** — `@casoon/astro-speed-measure` for build performance tracking
 - **Post-Build Audit** — `@casoon/astro-post-audit` for SEO, link and WCAG checks after every build
 - **Code Analysis** — fallow for dead code, complexity hotspots and duplication detection
@@ -274,6 +274,19 @@ Before the first deploy of your own project:
 5. **security.txt** — set `PUBLIC_SECURITY_CONTACT` (`mailto:` or `https:`) to publish `/.well-known/security.txt`; `Expires` is rolled forward on every build.
 6. **Site profile** — replace the demo organization data (email, phone, address, `sameAs`, launch date) in `shared/src/config/site.ts` and the placeholder `public/logo.svg` in each app; they feed the JSON-LD on every page.
 7. **Contact form** — connect a provider in `deliverContactMessage()`. The honeypot only stops simple bots; once messages are actually sent, add rate limiting (e.g. a Cloudflare rate-limiting rule or Workers Rate Limiting binding) or a Turnstile check before delivery.
+8. **Content Security Policy** — the default policy only allows the own origin (plus `data:` images and inline `style` attributes). Loading external fonts, analytics, embeds or a Turnstile widget needs matching directives; extend them in the app's `astro.config.mjs`:
+
+   ```js
+   security: {
+     ...baseAstroConfig.security,
+     csp: {
+       ...baseAstroConfig.security.csp,
+       directives: [...baseAstroConfig.security.csp.directives, "frame-src https://challenges.cloudflare.com"],
+     },
+   },
+   ```
+
+   The option must stay under `security.csp` — a top-level `csp` key is silently ignored by Astro, and the site then ships without any policy. Scripts in `<head>` must be files in `public/` (like `theme-init.js`), not inline: Astro inserts the CSP `<meta>` after them, so they would run unprotected. `e2e/*/csp.spec.ts` fails on any violation.
 
 Shared Astro options (i18n, CSP, image service, post-audit rules, the `vite.ssr.optimizeDeps` pin list) live in `shared/src/config/astro.ts`; each app's `astro.config.mjs` only adds its adapter, integrations and app-specific values.
 

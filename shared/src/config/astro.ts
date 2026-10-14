@@ -37,15 +37,34 @@ export const baseAstroConfig = {
 
   security: {
     checkOrigin: true,
+    // Content-Security-Policy, emitted as a <meta> tag on every page. It must live under
+    // `security` — a top-level `csp` option is silently ignored by Astro (the config schema
+    // is not strict), which is how earlier template versions shipped without any CSP.
+    // Scripts and <style> elements are allowed by SHA-256 hash (Astro computes them) or from
+    // the own origin; inline style *attributes* are allowed (style-src-attr). Everything else
+    // is same-origin only. Projects that load external resources (fonts, analytics, embeds)
+    // extend `directives` / `scriptDirective.resources` / `styleDirective.resources` in their
+    // own astro.config.mjs. Head scripts must not be inline: Astro inserts the CSP <meta>
+    // after them, so they would run unprotected — use a file in public/ instead.
+    csp: {
+      algorithm: 'SHA-256',
+      directives: [
+        "default-src 'self'",
+        "img-src 'self' data:",
+        "font-src 'self'",
+        "connect-src 'self'",
+        "object-src 'none'",
+        "base-uri 'self'",
+        "form-action 'self'",
+      ],
+      scriptDirective: { resources: ["'self'"] },
+      styleDirective: { resources: ["'self'", { resource: "'unsafe-inline'", kind: 'attribute' }] },
+    },
   },
 
   // No app uses Astro.session. Without this, @astrojs/cloudflare enables sessions and binds
   // a KV namespace (SESSION) on every deploy. Remove the line to opt in.
   session: false,
-
-  csp: {
-    algorithm: 'SHA-256',
-  },
 
   // Cloudflare Workers does not support Sharp — use noop image service.
   image: {

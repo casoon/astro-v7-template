@@ -45,36 +45,8 @@ const publisherName = siteName ?? Astro.site?.hostname ?? 'Website';
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
-    <script is:inline>
-      function getStoredTheme() {
-        try {
-          const cookieTheme = document.cookie.match(/(?:^|;\s*)theme=(dark|light)(?:;|$)/)?.[1];
-          return cookieTheme || localStorage.getItem('theme');
-        } catch {
-          return null;
-        }
-      }
-
-      function applyTheme() {
-        document.documentElement.classList.remove('no-js');
-        const storedTheme = getStoredTheme();
-        if (
-          storedTheme === 'dark' ||
-          (!storedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)
-        ) {
-          document.documentElement.classList.add('dark');
-        } else {
-          document.documentElement.classList.remove('dark');
-        }
-      }
-
-      applyTheme();
-      if (window.__applyThemeHandler) {
-        document.removeEventListener('astro:after-swap', window.__applyThemeHandler);
-      }
-      window.__applyThemeHandler = applyTheme;
-      document.addEventListener('astro:after-swap', window.__applyThemeHandler);
-    </script>
+    {/* Each app ships public/theme-init.js — a file, not inline: head scripts run before the CSP meta. */}
+    <script is:inline src="/theme-init.js"></script>
     {robots && <meta name="robots" content={robots} />}
     {useArticleSchema ? (
       <ArticleSchema

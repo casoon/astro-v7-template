@@ -1,5 +1,16 @@
 # Changelog
 
+## Unreleased
+
+### Fixed
+
+- No page shipped a Content Security Policy: `csp` was set at the top level of the shared Astro config, which Astro 7 silently ignores. It now lives under `security.csp` with explicit directives — scripts and `<style>` by SHA-256 hash or `'self'`, inline style attributes allowed, `img-src 'self' data:`, `object-src 'none'`, `base-uri 'self'`, `form-action 'self'`, everything else `'self'`. Projects created from the template should move their `csp` block the same way.
+- The theme script ran inline before the CSP `<meta>` (outside the policy). It moved to `public/theme-init.js` in each app.
+
+### Added
+
+- `e2e/starter/csp.spec.ts` and `e2e/blog/csp.spec.ts` (shared helpers in `e2e/shared/csp.ts`): no CSP violations on representative pages, no executable inline script before the CSP meta.
+
 ## 1.3.5 (2026-09-26)
 
 ### Changed
