@@ -141,7 +141,10 @@ See `accessibility-audit` skill. Automated testing via `@axe-core/playwright` in
 - Do not assume the main CI job pushes commits
 
 ## Security
-- Content Security Policy (CSP) with SHA-256 algorithm
+- CSP lives under **`security.csp`** in `shared/src/config/astro.ts` — a top-level `csp` key is silently ignored by Astro (non-strict config schema), so earlier template versions shipped every page without a policy
+- Policy: scripts by SHA-256 hash or `'self'`, `<style>` by hash or `'self'`, inline style *attributes* allowed (`style-src-attr`), `img-src` adds `data:`, `object-src 'none'`, everything else `'self'`. New external resources need a directive (extend in the app's `astro.config.mjs`)
+- No executable inline scripts in `<head>`: Astro inserts the CSP `<meta>` after them, so they run unprotected — use a file in `public/` (`theme-init.js`, one copy per app). `is:inline` / `define:vars` scripts are not hashed either and get blocked in `<body>`
+- `e2e/*/csp.spec.ts` (helpers in `e2e/shared/csp.ts`) fail on any violation and on inline scripts before the CSP meta
 - Sessions are off (`session: false` in `shared/src/config/astro.ts`); removing it makes the Cloudflare adapter bind a `SESSION` KV namespace
 - `checkOrigin: true` for CSRF protection
 - Zod validation for all inputs (env, forms)
