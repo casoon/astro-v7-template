@@ -10,14 +10,7 @@ import matter from 'gray-matter';
 
 const blogContentDir = fileURLToPath(new URL('../content/blog', import.meta.url));
 
-/**
- * Returns sitemap entries for all published blog posts with real lastmod
- * dates from MDX frontmatter. Used by siteFiles({ sitemap: { sources: [...] } }).
- * loc must be a relative path — the integration prepends the siteUrl.
- *
- * @returns {import('@casoon/astro-site-files').SitemapEntry[]}
- */
-export function getBlogSitemapEntries() {
+function getPublishedPosts() {
   const files = readdirSync(blogContentDir, { recursive: true, encoding: 'utf-8' }).filter(
     (f) => f.endsWith('.mdx') || f.endsWith('.md')
   );
@@ -28,12 +21,46 @@ export function getBlogSitemapEntries() {
       const { data } = matter(raw);
       if (data.draft) return null;
       // en/<slug>.mdx → /blog/<slug>/, de/<slug>.mdx → /de/blog/<slug>/
-      const [locale, slug] = file.replace(/\.(mdx|md)$/, '').split('/');
-      const lastmod = data.lastmod ?? data.date ?? null;
-      return {
-        loc: `${locale === 'en' ? '' : `/${locale}`}/blog/${slug}/`,
-        lastmod: lastmod ? new Date(lastmod).toISOString().split('T')[0] : undefined,
-      };
+      const [locale, ...segments] = file.replace(/\.(mdx|md)$/, '').split('/');
+      const slug = segments.join('/');
+      return { locale, data, url: `${locale === 'en' ? '' : `/${locale}`}/blog/${slug}/` };
     })
     .filter(Boolean);
+}
+
+/**
+ * Returns sitemap entries for all published blog posts with real lastmod
+ * dates from MDX frontmatter. Used by siteFiles({ sitemap: { sources: [...] } }).
+ * loc must be a relative path — the integration prepends the siteUrl.
+ *
+ * @returns {import('@casoon/astro-site-files').SitemapEntry[]}
+ */
+export function getBlogSitemapEntries() {
+  return getPublishedPosts().map(({ data, url }) => ({
+    loc: url,
+    lastmod: new Date(data.lastmod ?? data.date).toISOString().split('T')[0],
+  }));
+}
+
+/** Build hooks read frontmatter directly; Astro's content runtime is unavailable here. */
+export function getBlogLlmsSection(locale) {
+  return {
+    title: locale === 'de' ? 'Artikel auf Deutsch' : 'Articles in English',
+    links: getPublishedPosts()
+      .filter((post) => post.locale === locale)
+      .map(({ data, url }) => ({ title: data.title, url, description: data.description })),
+  };
+}
+
+export function getBlogRssItems(locale) {
+  return getPublishedPosts()
+    .filter((post) => post.locale === locale)
+    .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
+    .map(({ data, url }) => ({
+      title: data.title,
+      description: data.description,
+      pubDate: new Date(data.date),
+      link: url,
+      categories: data.tags ?? [],
+    }));
 }

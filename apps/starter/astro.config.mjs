@@ -6,6 +6,7 @@ import {
   sitemapI18n,
   viteSsrConfig,
 } from '@astro-v7/shared/config/astro';
+import { siteCredits } from '@astro-v7/shared/config/site';
 import { validateEnv } from '@astro-v7/shared/utils/env';
 import cloudflare from '@astrojs/cloudflare';
 import svelte from '@astrojs/svelte';
@@ -49,14 +50,17 @@ export default defineConfig({
         i18n: sitemapI18n,
         audit: {
           warnOnEmpty: true,
-          errorOnDuplicates: false,
+          errorOnDuplicates: true,
         },
       },
-      robots: { preset: 'seoOnly' },
+      robots: { preset: 'seoOnly', disallow: ['/api/', '/web-vitals/'] },
+      humans: siteCredits,
       security: securityTxt(env.PUBLIC_SECURITY_CONTACT, env.PUBLIC_SITE_URL),
       llms: {
         title: env.PUBLIC_SITE_NAME,
         description: 'Astro v7 starter with Tailwind v4, Svelte 5 and Cloudflare.',
+        details:
+          'This is a bilingual demonstration template, not a real business. Contact and organization details are placeholders; the contact form does not send mail. robots.txt defines crawler preferences independently of this file.',
         sections: [
           {
             title: 'Pages',
@@ -71,13 +75,32 @@ export default defineConfig({
               },
             ],
           },
+          {
+            title: 'Site files',
+            links: [
+              {
+                title: 'Sitemap',
+                url: '/sitemap.xml',
+                description: 'Public pages with language alternates.',
+              },
+              {
+                title: 'Crawler preferences',
+                url: '/robots.txt',
+                description: 'Search engines allowed; known AI crawlers blocked.',
+              },
+              {
+                title: 'Demo credits',
+                url: '/humans.txt',
+                description: 'Example team and technology stack.',
+              },
+            ],
+          },
         ],
       },
     }),
     structuredData({
       generateMeta: true,
       siteName: env.PUBLIC_SITE_NAME,
-      locale: 'en_US',
       // Recommended-field warnings ask for business data (address, phone, sameAs, …) that a
       // template can't provide. JSON-LD validity is still checked by post-audit (check_json_ld).
       warnOnMissingRecommended: false,

@@ -11,6 +11,13 @@ test.describe('Starter – i18n', () => {
     await expect(page.locator('html')).toHaveAttribute('lang', 'de');
   });
 
+  test('logo keeps the German locale when returning home', async ({ page }) => {
+    await page.goto('/de/contact/');
+    await page.locator('nav > div > a').click();
+    await expect(page).toHaveURL(/\/de\/$/);
+    await expect(page.locator('html')).toHaveAttribute('lang', 'de');
+  });
+
   test('language switcher navigates to DE', async ({ page }) => {
     await page.goto('/');
     await page.locator('nav').getByRole('link', { name: 'DE' }).click();

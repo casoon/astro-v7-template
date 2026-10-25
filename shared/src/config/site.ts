@@ -20,3 +20,11 @@ export const siteProfile = {
   /** First publication of the site — used as WebPage `datePublished`. */
   launchDate: '2026-02-23',
 };
+
+/** Fictional credits demonstrate humans.txt without publishing personal contact data. */
+export const siteCredits = {
+  team: [{ name: 'Example Template Team (demo)', role: 'Design and development' }],
+  thanks: ['Astro, Svelte and the open-source community'],
+  technology: ['Astro', 'TypeScript', 'Svelte', 'Tailwind CSS', 'Cloudflare Workers'],
+  note: 'Demo credits — replace these with your own team before publishing.',
+};

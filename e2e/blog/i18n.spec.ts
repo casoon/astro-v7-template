@@ -23,6 +23,13 @@ test.describe('Blog – i18n', () => {
     );
   });
 
+  test('logo keeps the German locale when returning home', async ({ page }) => {
+    await page.goto('/de/blog/welcome/');
+    await page.locator('nav > div > a').click();
+    await expect(page).toHaveURL(/\/de\/$/);
+    await expect(page.locator('html')).toHaveAttribute('lang', 'de');
+  });
+
   test('language switcher navigates to DE', async ({ page }) => {
     await page.goto('/');
     await page.locator('nav').getByRole('link', { name: 'DE' }).click();

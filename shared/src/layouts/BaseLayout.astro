@@ -6,6 +6,7 @@ import {
   WebSiteSchema,
 } from '@casoon/astro-structured-data/components';
 import { siteProfile } from '../config/site';
+import { locales, switchLocalePath } from '../utils/i18n';
 
 export interface Props {
   title: string;
@@ -17,6 +18,9 @@ export interface Props {
   articleAuthor?: string;
   articleDate?: Date;
   articleModified?: Date;
+  articleKeywords?: string[];
+  articleWordCount?: number;
+  articleReadingTime?: number;
 }
 
 const {
@@ -29,6 +33,9 @@ const {
   articleAuthor,
   articleDate,
   articleModified,
+  articleKeywords,
+  articleWordCount,
+  articleReadingTime,
 } = Astro.props;
 
 const useArticleSchema = !!articleDate && !!ogImage;
@@ -36,6 +43,15 @@ const logoUrl = new URL(siteProfile.logoPath, Astro.site).href;
 // Pages without their own OG image (e.g. 404) fall back to the home image.
 const pageImage = ogImage ?? new URL('/og/home.png', Astro.site).href;
 const publisherName = siteName ?? Astro.site?.hostname ?? 'Website';
+const organizationId = new URL('/#organization', Astro.site).href;
+const websiteId = new URL('/#website', Astro.site).href;
+const language = lang === 'de' ? 'de-DE' : 'en-US';
+const alternates = robots?.includes('noindex')
+  ? undefined
+  : locales.map((locale) => ({
+      hreflang: locale,
+      href: new URL(switchLocalePath(Astro.url.pathname, locale), Astro.site).href,
+    }));
 ---
 
 <!doctype html>
@@ -48,7 +64,7 @@ const publisherName = siteName ?? Astro.site?.hostname ?? 'Website';
     {/* Each app ships public/theme-init.js — a file, not inline: head scripts run before the CSP meta. */}
     <script is:inline src="/theme-init.js"></script>
     {robots && <meta name="robots" content={robots} />}
-    {useArticleSchema ? (
+    {useArticleSchema && (
       <ArticleSchema
         title={title}
         description={description}
@@ -58,21 +74,34 @@ const publisherName = siteName ?? Astro.site?.hostname ?? 'Website';
         imageUrl={ogImage!}
         publisherName={publisherName}
         publisherLogo={logoUrl}
-      />
-    ) : (
-      <WebPageSchema
-        title={title}
-        description={description}
-        image={pageImage}
-        datePublished={siteProfile.launchDate}
-        dateModified={new Date()}
-        author={{ name: publisherName, type: 'Organization' }}
+        publisherId={organizationId}
+        inLanguage={language}
+        imageWidth={1200}
+        imageHeight={630}
+        imageFormat="image/png"
+        keywords={articleKeywords}
+        wordCount={articleWordCount}
+        readingTimeMinutes={articleReadingTime}
       />
     )}
-    {siteName && <WebSiteSchema name={siteName} />}
+    <WebPageSchema
+      title={title}
+      description={description}
+      image={pageImage}
+      datePublished={articleDate ?? siteProfile.launchDate}
+      dateModified={articleModified}
+      inLanguage={language}
+      alternates={alternates}
+      robots={robots}
+      isPartOf={{ type: 'WebSite', id: websiteId }}
+      publisher={{ name: publisherName, id: organizationId }}
+      author={{ name: publisherName, type: 'Organization' }}
+    />
+    {siteName && <WebSiteSchema name={siteName} id={websiteId} />}
     {siteName && (
       <OrganizationSchema
         name={siteName}
+        id={organizationId}
         url={Astro.site?.href}
         logoUrl={logoUrl}
         email={siteProfile.email}

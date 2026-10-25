@@ -1,0 +1,110 @@
+---
+import { Schema } from '@casoon/astro-structured-data/components';
+import type { Locale } from '../utils/i18n';
+
+export interface Props {
+  locale: Locale;
+  title: string;
+  description: string;
+  image: string;
+  blog?: boolean;
+  security?: boolean;
+}
+
+const { locale, title, description, image, blog = false, security = false } = Astro.props;
+const copy = {
+  en: {
+    title: 'Site files and structured data',
+    description:
+      'Open the generated files below. This page contains Organization, WebSite, WebPage and FAQPage JSON-LD; blog posts add BlogPosting and breadcrumbs.',
+    files: 'Generated site files',
+    questions: [
+      {
+        question: 'What does llms.txt do?',
+        answer:
+          'It provides a site overview and links for AI tools. It does not grant access: this demo keeps the seoOnly crawler policy in robots.txt, which blocks known AI crawlers.',
+      },
+      {
+        question: 'Where do the structured data come from?',
+        answer:
+          'Page content, article frontmatter and the shared site profile produce JSON-LD and matching canonical, Open Graph, Twitter and language tags. These questions and answers also appear as FAQPage data.',
+      },
+      {
+        question: 'Are the organization details real?',
+        answer:
+          'No. The address, email, phone and team credits are demo placeholders. Replace them before publishing. Structured data describe content; they do not guarantee a rich search result.',
+      },
+    ],
+  },
+  de: {
+    title: 'Site-Dateien und strukturierte Daten',
+    description:
+      'Öffne die erzeugten Dateien unten. Diese Seite enthält Organization-, WebSite-, WebPage- und FAQPage-JSON-LD; Blogartikel ergänzen BlogPosting und Breadcrumbs.',
+    files: 'Erzeugte Site-Dateien',
+    questions: [
+      {
+        question: 'Was macht die llms.txt?',
+        answer:
+          'Sie bietet KI-Werkzeugen eine Übersicht und Links zur Website. Sie erteilt keine Zugriffsrechte: Diese Demo behält die seoOnly-Regeln in robots.txt bei, die bekannte KI-Crawler ausschließen.',
+      },
+      {
+        question: 'Woher kommen die strukturierten Daten?',
+        answer:
+          'Seiteninhalte, Artikel-Frontmatter und das gemeinsame Site-Profil erzeugen JSON-LD sowie passende Canonical-, Open-Graph-, Twitter- und Sprach-Tags. Auch diese Fragen und Antworten erscheinen als FAQPage-Daten.',
+      },
+      {
+        question: 'Sind die Organisationsdaten echt?',
+        answer:
+          'Nein. Adresse, E-Mail, Telefon und Team-Angaben sind Demo-Platzhalter. Ersetze sie vor der Veröffentlichung. Strukturierte Daten beschreiben Inhalte; sie garantieren keine hervorgehobene Darstellung in Suchergebnissen.',
+      },
+    ],
+  },
+}[locale];
+const files = [
+  { href: '/sitemap.xml', label: 'sitemap.xml' },
+  { href: '/robots.txt', label: 'robots.txt' },
+  { href: '/llms.txt', label: 'llms.txt' },
+  { href: '/humans.txt', label: 'humans.txt' },
+  ...(blog
+    ? [
+        {
+          href: locale === 'de' ? '/de/rss.xml' : '/rss.xml',
+          label: locale === 'de' ? 'RSS (DE)' : 'RSS (EN)',
+        },
+      ]
+    : []),
+  ...(security ? [{ href: '/.well-known/security.txt', label: 'security.txt' }] : []),
+];
+---
+
+{/* FAQPage takes meta precedence over WebPage. Schema lets the FAQ carry the same page
+    metadata; the typed FAQSchema only accepts Q&A props. Both outputs use the visible Q&A. */}
+<Schema item={{
+  '@type': 'FAQPage',
+  '@id': new URL(`${Astro.url.pathname}#metadata-demo`, Astro.site).href,
+  name: title,
+  description,
+  image,
+  inLanguage: locale === 'de' ? 'de-DE' : 'en-US',
+  mainEntity: copy.questions.map(({ question, answer }) => ({
+    '@type': 'Question',
+    name: question,
+    acceptedAnswer: { '@type': 'Answer', text: answer },
+  })),
+}} />
+
+<section id="metadata-demo" class="mx-auto max-w-3xl px-6 pb-12" aria-labelledby="metadata-demo-title">
+  <h2 id="metadata-demo-title" class="mb-4 text-2xl font-bold">{copy.title}</h2>
+  <p class="mb-6 leading-relaxed text-text-secondary">{copy.description}</p>
+  <ul class="mb-6 flex list-none flex-wrap gap-4 p-0" role="list" aria-label={copy.files}>
+    {files.map(({ href, label }) => <li><a href={href} class="inline-block py-2">{label}</a></li>)}
+  </ul>
+  <dl class="space-y-6">
+    {copy.questions.map(({ question, answer }) => (
+      <div>
+        <dt class="mb-2 font-semibold">{question}</dt>
+        <dd class="leading-relaxed text-text-secondary">{answer}</dd>
+      </div>
+    ))}
+  </dl>
+</section>

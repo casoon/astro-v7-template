@@ -9,8 +9,8 @@ interface Props {
 const { class: className, href } = Astro.props;
 
 const classes = cn(
-  'rounded-xl border border-border bg-surface p-8 transition-all',
-  href ? 'block text-inherit no-underline hover:border-accent hover:shadow-md' : 'hover:shadow-md',
+  'border-border bg-surface rounded-xl border p-8 transition-all',
+  href ? 'hover:border-accent block text-inherit no-underline hover:shadow-md' : 'hover:shadow-md',
   className
 );
 ---

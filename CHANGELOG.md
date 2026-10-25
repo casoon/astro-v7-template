@@ -1,15 +1,34 @@
 # Changelog
 
-## Unreleased
+## [Unreleased]
+
+### Added
+
+- **Metadata demo:** Localized homepage examples link to generated site files and emit matching FAQPage data; demo team credits and a German RSS feed demonstrate additional site-files outputs.
+- **Site files:** Blog `llms.txt` sections are generated from published article frontmatter in both languages.
+
+- `e2e/starter/csp.spec.ts` and `e2e/blog/csp.spec.ts` (shared helpers in `e2e/shared/csp.ts`): no CSP violations on representative pages, no executable inline script before the CSP meta.
+
+### Changed
+
+- **Accessibility:** Expanded automated axe checks to WCAG 2.2 AA.
+
+- **Dependencies:** Updated workspace packages and Biome configuration; TypeScript stays on 6 because Astro check does not yet support 7, and Node types stay on 24 to match the runtime.
 
 ### Fixed
+
+- **SEO:** Page languages now drive Open Graph locale and hreflang tags; articles include linked publisher IDs, keywords, image dimensions and reading statistics.
+- **Site files:** Removed nonexistent archive links from `llms.txt` and duplicate blog sitemap sources; duplicate URLs now fail the build.
+
+- **Blog:** Sitemap entries retain the full path of nested post slugs.
+- **Navigation:** The logo returns to the homepage in the current language.
 
 - No page shipped a Content Security Policy: `csp` was set at the top level of the shared Astro config, which Astro 7 silently ignores. It now lives under `security.csp` with explicit directives — scripts and `<style>` by SHA-256 hash or `'self'`, inline style attributes allowed, `img-src 'self' data:`, `object-src 'none'`, `base-uri 'self'`, `form-action 'self'`, everything else `'self'`. Projects created from the template should move their `csp` block the same way.
 - The theme script ran inline before the CSP `<meta>` (outside the policy). It moved to `public/theme-init.js` in each app.
 
-### Added
+### Security
 
-- `e2e/starter/csp.spec.ts` and `e2e/blog/csp.spec.ts` (shared helpers in `e2e/shared/csp.ts`): no CSP violations on representative pages, no executable inline script before the CSP meta.
+- **Dependencies:** Updated vulnerable dependencies and added scoped overrides for Undici 7 and the typography selector parser; `pnpm audit` reports no known vulnerabilities.
 
 ## 1.3.5 (2026-09-26)
 

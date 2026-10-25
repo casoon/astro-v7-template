@@ -6,6 +6,7 @@ import {
   sitemapI18n,
   viteSsrConfig,
 } from '@astro-v7/shared/config/astro';
+import { siteCredits } from '@astro-v7/shared/config/site';
 import { validateEnv } from '@astro-v7/shared/utils/env';
 import cloudflare from '@astrojs/cloudflare';
 import mdx from '@astrojs/mdx';
@@ -18,7 +19,11 @@ import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from 'astro/config';
 import propsForThat from '../../integrations/props-for-that.mjs';
 import { envSchema } from './src/env.ts';
-import { getBlogSitemapEntries } from './src/utils/blog-rss.js';
+import {
+  getBlogLlmsSection,
+  getBlogRssItems,
+  getBlogSitemapEntries,
+} from './src/utils/blog-rss.js';
 
 // Astro v7: remark-gfm and rehype-slug removed — Sätteri provides both natively.
 
@@ -61,7 +66,8 @@ export default defineConfig({
     siteFiles({
       sitemap: {
         i18n: sitemapI18n,
-        exclude: [/\/blog\/?$/, /\/de\/blog\/?$/],
+        // Posts come from sources exactly once, with their real frontmatter dates.
+        exclude: [/\/blog(?:\/|$)/],
         // Matches priority/changefreq rules against the locale-stripped path, so
         // /de/blog/x/ gets the same 0.7 as /blog/x/ instead of falling back to depth-based default.
         localeAgnosticRules: true,
@@ -77,28 +83,37 @@ export default defineConfig({
         sources: [getBlogSitemapEntries],
         audit: {
           warnOnEmpty: true,
-          errorOnDuplicates: false,
+          errorOnDuplicates: true,
         },
       },
       robots: { preset: 'seoOnly' },
+      humans: siteCredits,
       security: securityTxt(env.PUBLIC_SECURITY_CONTACT, env.PUBLIC_SITE_URL),
-      audit: {
-        disable: ['sitemap/duplicate-urls'],
+      // The English feed keeps its Astro RSS route; this demonstrates build-time RSS.
+      rss: {
+        filename: 'de/rss.xml',
+        title: `${env.PUBLIC_SITE_NAME} — Deutsch`,
+        description: 'Demo-Artikel über Astro, Tailwind und die Funktionen dieses Templates.',
+        language: 'de-DE',
+        getItems: () => getBlogRssItems('de'),
       },
       llms: {
         title: env.PUBLIC_SITE_NAME,
         description: 'A blog template built with Astro v7, MDX and Content Collections.',
+        details:
+          'This bilingual demo blog contains example articles, not a real editorial publication. English posts live under /blog/ and German posts under /de/blog/. Drafts are omitted. robots.txt controls crawler preferences independently of this overview.',
+        sources: [() => getBlogLlmsSection('en'), () => getBlogLlmsSection('de')],
         sections: [
           {
             title: 'Pages',
             links: [
               { title: 'Home', url: '/', description: 'Blog template overview.' },
-              { title: 'Blog index', url: '/blog/', description: 'English blog archive.' },
               { title: 'German home', url: '/de/', description: 'German localized homepage.' },
+              { title: 'English RSS', url: '/rss.xml', description: 'Published English articles.' },
               {
-                title: 'German blog index',
-                url: '/de/blog/',
-                description: 'German localized blog archive.',
+                title: 'German RSS',
+                url: '/de/rss.xml',
+                description: 'Published German articles.',
               },
             ],
           },
@@ -108,7 +123,6 @@ export default defineConfig({
     structuredData({
       generateMeta: true,
       siteName: env.PUBLIC_SITE_NAME,
-      locale: 'en_US',
       defaultArticlePublisher: { name: env.PUBLIC_SITE_NAME },
       // Recommended-field warnings ask for business data (address, phone, sameAs, …) that a
       // template can't provide. JSON-LD validity is still checked by post-audit (check_json_ld).

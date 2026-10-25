@@ -1,4 +1,6 @@
 ---
+import { getLocaleFromPath, localePath } from '../utils/i18n';
+
 export interface NavLink {
   href: string;
   label: string;
@@ -11,6 +13,7 @@ export interface Props {
 
 const { siteName, links = [] } = Astro.props;
 const currentPath = Astro.url.pathname;
+const homeHref = localePath('/', getLocaleFromPath(currentPath));
 
 function normalizePath(path: string): string {
   if (path === '/') return '/';
@@ -21,7 +24,7 @@ function normalizePath(path: string): string {
 <header class="sticky top-0 z-[var(--z-sticky)] h-[var(--nav-height)] border-b border-border bg-[var(--color-surface)] backdrop-blur-[12px]">
 <nav aria-label="Main navigation" class="h-full">
   <div class="relative mx-auto flex h-full max-w-[72rem] items-center px-[var(--space-lg)]">
-    <a href="/" class="text-lg font-bold text-text no-underline">{siteName}</a>
+    <a href={homeHref} class="text-lg font-bold text-text no-underline">{siteName}</a>
 
     {links.length > 0 && (
       <ul class="absolute inset-x-0 flex justify-center gap-[var(--space-md)] list-none p-0 pointer-events-none" role="list">

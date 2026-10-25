@@ -1,6 +1,7 @@
 ---
 import Button from '@astro-v7/shared/components/Button.astro';
 import Card from '@astro-v7/shared/components/Card.astro';
+import MetadataDemo from '@astro-v7/shared/components/MetadataDemo.astro';
 import Navbar from '@astro-v7/shared/components/Navbar.astro';
 import ThemeToggle from '@astro-v7/shared/components/ThemeToggle.svelte';
 import type { Locale } from '@astro-v7/shared/utils/i18n';
@@ -149,6 +150,8 @@ const links = [
       </div>
     </div>
   </section>
+
+  <MetadataDemo locale={locale} title={tr('home.title')} description={tr('home.description')} image={ogImage} security={!!env.PUBLIC_SECURITY_CONTACT} />
 
   <footer slot="footer" class="border-t border-border px-6 py-8 text-center text-sm text-text-secondary">
     <p>&copy; {new Date().getFullYear()} Astro v7 Starter. {tr('footer.built')} <a href="https://astro.build" target="_blank" rel="noopener noreferrer">Astro</a>.</p>

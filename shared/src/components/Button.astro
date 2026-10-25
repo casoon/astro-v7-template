@@ -15,7 +15,7 @@ const { class: className, href, rel, target, type = 'button', variant = 'primary
 const classes = cn(
   'inline-flex items-center justify-center rounded-md px-6 py-3 font-semibold no-underline transition-colors',
   variant === 'primary' && 'bg-accent text-text-inverse hover:bg-accent-hover',
-  variant === 'secondary' && 'border border-border text-text hover:bg-bg-secondary',
+  variant === 'secondary' && 'border-border text-text hover:bg-bg-secondary border',
   !href && 'cursor-pointer',
   className
 );
