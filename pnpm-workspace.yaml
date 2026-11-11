@@ -31,11 +31,11 @@ catalog:
   "@astrojs/rss": ^4.0.19
   "@astrojs/svelte": ^9.1.1
   "@axe-core/playwright": ^4.14.0
-  "@casoon/astro-post-audit": ^0.9.1
-  "@casoon/astro-structured-data": ^2.3.0
-  "@casoon/astro-site-files": ^0.7.0
-  "@casoon/astro-speed-measure": ^0.4.0
-  "@casoon/astro-webvitals": ^0.4.10
+  "@casoon/astro-post-audit": ^0.10.0
+  "@casoon/astro-structured-data": ^2.4.1
+  "@casoon/astro-site-files": ^0.7.2
+  "@casoon/astro-speed-measure": ^0.4.1
+  "@casoon/astro-webvitals": ^0.4.11
 
   # Tailwind v4
   tailwindcss: ^4.3.3

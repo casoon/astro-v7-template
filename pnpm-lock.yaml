@@ -28,20 +28,20 @@ catalogs:
       specifier: ^2.6.3
       version: 2.6.3
     '@casoon/astro-post-audit':
-      specifier: ^0.9.1
-      version: 0.9.1
+      specifier: ^0.10.0
+      version: 0.10.0
     '@casoon/astro-site-files':
-      specifier: ^0.7.0
-      version: 0.7.0
+      specifier: ^0.7.2
+      version: 0.7.2
     '@casoon/astro-speed-measure':
-      specifier: ^0.4.0
-      version: 0.4.0
+      specifier: ^0.4.1
+      version: 0.4.1
     '@casoon/astro-structured-data':
-      specifier: ^2.3.0
-      version: 2.3.0
+      specifier: ^2.4.1
+      version: 2.4.1
     '@casoon/astro-webvitals':
-      specifier: ^0.4.10
-      version: 0.4.10
+      specifier: ^0.4.11
+      version: 0.4.11
     '@fontsource/fira-code':
       specifier: ^5.3.0
       version: 5.3.0
@@ -137,8 +137,8 @@ importers:
         specifier: 'catalog:'
         version: 2.6.3
       '@casoon/nosecrets':
-        specifier: ^0.3.8
-        version: 0.3.8
+        specifier: ^0.3.9
+        version: 0.3.9
       '@playwright/test':
         specifier: ^1.64.1
         version: 1.64.1
@@ -174,13 +174,13 @@ importers:
         version: 9.1.1(@types/node@24.13.6)(astro@7.4.2(@types/node@24.13.6)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1))(esbuild@0.28.2)(jiti@2.7.0)(svelte@5.57.2)(tsx@4.23.15)(typescript@6.0.3)(yaml@2.9.1)
       '@casoon/astro-site-files':
         specifier: 'catalog:'
-        version: 0.7.0(astro@7.4.2(@types/node@24.13.6)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1))
+        version: 0.7.2(astro@7.4.2(@types/node@24.13.6)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1))
       '@casoon/astro-speed-measure':
         specifier: 'catalog:'
-        version: 0.4.0(astro@7.4.2(@types/node@24.13.6)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1))
+        version: 0.4.1(astro@7.4.2(@types/node@24.13.6)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1))
       '@casoon/astro-structured-data':
         specifier: 'catalog:'
-        version: 2.3.0(astro@7.4.2(@types/node@24.13.6)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1))
+        version: 2.4.1(astro@7.4.2(@types/node@24.13.6)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1))
       '@fontsource/fira-code':
         specifier: 'catalog:'
         version: 5.3.0
@@ -220,7 +220,7 @@ importers:
         version: 0.9.12(@emnapi/runtime@1.11.3)(prettier@3.9.10)(typescript@6.0.3)
       '@casoon/astro-post-audit':
         specifier: 'catalog:'
-        version: 0.9.1(astro@7.4.2(@types/node@24.13.6)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1))
+        version: 0.10.0(astro@7.4.2(@types/node@24.13.6)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1))
       tsx:
         specifier: 'catalog:'
         version: 4.23.15
@@ -244,16 +244,16 @@ importers:
         version: 9.1.1(@types/node@24.13.6)(astro@7.4.2(@types/node@24.13.6)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1))(esbuild@0.28.2)(jiti@2.7.0)(svelte@5.57.2)(tsx@4.23.15)(typescript@6.0.3)(yaml@2.9.1)
       '@casoon/astro-site-files':
         specifier: 'catalog:'
-        version: 0.7.0(astro@7.4.2(@types/node@24.13.6)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1))
+        version: 0.7.2(astro@7.4.2(@types/node@24.13.6)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1))
       '@casoon/astro-speed-measure':
         specifier: 'catalog:'
-        version: 0.4.0(astro@7.4.2(@types/node@24.13.6)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1))
+        version: 0.4.1(astro@7.4.2(@types/node@24.13.6)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1))
       '@casoon/astro-structured-data':
         specifier: 'catalog:'
-        version: 2.3.0(astro@7.4.2(@types/node@24.13.6)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1))
+        version: 2.4.1(astro@7.4.2(@types/node@24.13.6)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1))
       '@casoon/astro-webvitals':
         specifier: 'catalog:'
-        version: 0.4.10(astro@7.4.2(@types/node@24.13.6)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1))
+        version: 0.4.11(astro@7.4.2(@types/node@24.13.6)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1))
       '@fontsource/inter':
         specifier: 'catalog:'
         version: 5.3.0
@@ -281,7 +281,7 @@ importers:
         version: 0.9.12(@emnapi/runtime@1.11.3)(prettier@3.9.10)(typescript@6.0.3)
       '@casoon/astro-post-audit':
         specifier: 'catalog:'
-        version: 0.9.1(astro@7.4.2(@types/node@24.13.6)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1))
+        version: 0.10.0(astro@7.4.2(@types/node@24.13.6)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1))
       tsx:
         specifier: 'catalog:'
         version: 4.23.15
@@ -296,7 +296,7 @@ importers:
     dependencies:
       '@casoon/astro-structured-data':
         specifier: 'catalog:'
-        version: 2.3.0(astro@7.4.2(@types/node@24.13.6)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1))
+        version: 2.4.1(astro@7.4.2(@types/node@24.13.6)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1))
       '@lucide/svelte':
         specifier: 'catalog:'
         version: 1.61.0(svelte@5.57.2)
@@ -623,16 +623,16 @@ packages:
     resolution: {integrity: sha512-CuNiSqg7+e1cO/GjffyMOm5Tt2jUF9CWHHnvQ/UkqvtkGfHdgwEC0wpmq7fkN3gxwpRnrAN0WzO3vREKmNolMQ==}
     engines: {node: '>=18'}
 
-  '@casoon/astro-post-audit@0.9.1':
-    resolution: {integrity: sha512-rytJCB7p35m982xu5S5bA9huqtdKLzdJzvOg+E3g18Uiu9WJL6Ue1/K2mM2e1EY9wRxpfuw1Sf9tHhIy1YQVcQ==}
+  '@casoon/astro-post-audit@0.10.0':
+    resolution: {integrity: sha512-nQAAjbANigNvJOJZPx570OD5qrxPingavRJR/HpF41oa61d4KqZEkbeCL2+wz1s9dwfsrXFzh8BiCnroJxncfw==}
     engines: {node: '>=18'}
     cpu: [x64, arm64]
     os: [darwin, linux, win32]
     peerDependencies:
       astro: ^5.0.0 || ^6.0.0 || ^7.0.0
 
-  '@casoon/astro-site-files@0.7.0':
-    resolution: {integrity: sha512-3nTb6JSsCPaIICVnpqZD8zkhhnizZeCEsihbwsb+Wj5ThTI64vExfGC6Th8S+n5EZIjJN2aXd56EGxtRfCcOTw==}
+  '@casoon/astro-site-files@0.7.2':
+    resolution: {integrity: sha512-s5mHzicyF/f5s718DZere9Q7nFgKYKcXMeBkZ3OZIUtzUw4pL+HdpYAclDgaT0hnZBClFYHsCwnzsekCE3xaJg==}
     engines: {node: '>=22.12.0'}
     peerDependencies:
       astro: '>=6.0.0'
@@ -640,26 +640,26 @@ packages:
       astro:
         optional: true
 
-  '@casoon/astro-speed-measure@0.4.0':
-    resolution: {integrity: sha512-X42cKnAio1iWq5j/HYq/LK8PBw6Mnmk1eCy20Fm97uSf0f2ezRDZnadEq8iNJAst81Iyc25lMMOxwBWmhLlQMQ==}
+  '@casoon/astro-speed-measure@0.4.1':
+    resolution: {integrity: sha512-ICKrEsT/qcVl7SWdJKP7TCwulq4kfgguVQFwyeRMm1n8OGJ1dOUoe6FJfP16o7DPWluuDW424O5ZN6birgo4Lg==}
     engines: {node: '>=22.12.0'}
     peerDependencies:
       astro: ^5.0.0 || ^6.0.0 || ^7.0.0
 
-  '@casoon/astro-structured-data@2.3.0':
-    resolution: {integrity: sha512-+w6Lb4+NxumJp8Iewv36XGGinArVSvfkawIexWhyolP7Qe40he9Vmt+ZH36+YFfe9jLJAXB4qWZ/serdTlnItA==}
+  '@casoon/astro-structured-data@2.4.1':
+    resolution: {integrity: sha512-/n5/DoJGfZxCl0N9CCGhIo3U6z3j3VbEJgnuLIJVJ7xpIBJsJf2pGRVcIQfFUPGwC3WWv4hhyOTUg4UWOEVOQA==}
     engines: {node: '>=18'}
     peerDependencies:
       astro: ^5.0.0 || ^6.0.0 || ^7.0.0
 
-  '@casoon/astro-webvitals@0.4.10':
-    resolution: {integrity: sha512-HqjaBI4foT0wz/Re5jFI74fLN+wYo3eavKJvN7qkmeM+pteM1SGnx7FsVBoxB7Kww6HP0MXqdLFwRrFWg16FqQ==}
+  '@casoon/astro-webvitals@0.4.11':
+    resolution: {integrity: sha512-V98sgpm6eGndcmRgEQv+uDZ+om90TU6QI9+1J78Fg53y00ouO8+30nsWy5lrJtQFjA/+F0D/H/eKgH/4EuLNSA==}
     engines: {node: '>=18.17.0'}
     peerDependencies:
       astro: ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0
 
-  '@casoon/nosecrets@0.3.8':
-    resolution: {integrity: sha512-Z5YRv4qVrHH+hK7GlCE3x19b1qTZJ3jgcmglpFbBX+MOXEO2tH4ylxGRNoWBencRJtGKq9q+K9FxowzMOvAv7w==}
+  '@casoon/nosecrets@0.3.9':
+    resolution: {integrity: sha512-/gTVhABRUkzLLvjaC0tr6EXYxbe44qbC4QtQBAPAwhNx1XbbfmK+yytACtGfbu1aaGdA1RAh6Hc+Nj8EGR7RQw==}
     engines: {node: '>=16'}
     hasBin: true
 
@@ -2033,8 +2033,8 @@ packages:
   fast-xml-builder@1.3.1:
     resolution: {integrity: sha512-pIM/1n3ntFXKYrUZwW7QCK0gAW7XY+wzj1YMIV3tLDvPj/V+zTGJK5e3/4WJfwj0qWw2ElNXiTixda/R+3YSug==}
 
-  fast-xml-parser@5.11.2:
-    resolution: {integrity: sha512-R9iDuNrQYeQut46cn2r2wHKn4HYzVDvDm5J1wW+koZewykv0yuO2HChTYeZtrULyHIDM9cj9TUXloCsueCQUog==}
+  fast-xml-parser@5.12.0:
+    resolution: {integrity: sha512-/pXxRBtwxY9w8z7YbgsvIPPcPvFDsTbIkWwTQJhzNJPokj+TbN6ftmcv4j/pEQDvOCNnKGDzuk5Bo2oogIOiFg==}
     hasBin: true
 
   fdir@6.5.0:
@@ -2139,8 +2139,8 @@ packages:
   is-reference@3.0.3:
     resolution: {integrity: sha512-ixkJoqQvAP88E6wLydLGGqCJsrFUnqoH6HnaczB8XmDH1oaWU+xxdptvikTgaEhtZ53Ky6YXiBuUI2WXLMCwjw==}
 
-  is-unsafe@2.0.2:
-    resolution: {integrity: sha512-HgbIHPBH0KHHCcjLfGsCvhtPTVxjaAZlXjwdz7/GQC40SjSe4sfQsar8J5VFo8JOSbarkpV0OLG95bbaNd9aAQ==}
+  is-unsafe@2.0.3:
+    resolution: {integrity: sha512-ZBllczCCO267vgdFb6Tq3pv+LhHaCiGMdr+ZsuL+OopruAg7S+3ZDs1vD0RPC0uSrkjzbraxaGjtX1YBxjPeFQ==}
 
   jiti@2.7.0:
     resolution: {integrity: sha512-AC/7JofJvZGrrneWNaEnJeOLUx+JlGt7tNa0wZiRPT4MY1wmfKjt2+6O2p2uz2+skll8OZZmJMNqeke7kKbNgQ==}
@@ -3243,7 +3243,7 @@ snapshots:
 
   '@astrojs/rss@4.0.19':
     dependencies:
-      fast-xml-parser: 5.11.2
+      fast-xml-parser: 5.12.0
       piccolore: 0.1.3
       zod: 4.6.7
 
@@ -3379,31 +3379,31 @@ snapshots:
     dependencies:
       fontkitten: 1.0.3
 
-  '@casoon/astro-post-audit@0.9.1(astro@7.4.2(@types/node@24.13.6)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1))':
+  '@casoon/astro-post-audit@0.10.0(astro@7.4.2(@types/node@24.13.6)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1))':
     dependencies:
       astro: 7.4.2(@types/node@24.13.6)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1)
 
-  '@casoon/astro-site-files@0.7.0(astro@7.4.2(@types/node@24.13.6)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1))':
+  '@casoon/astro-site-files@0.7.2(astro@7.4.2(@types/node@24.13.6)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1))':
     optionalDependencies:
       astro: 7.4.2(@types/node@24.13.6)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1)
 
-  '@casoon/astro-speed-measure@0.4.0(astro@7.4.2(@types/node@24.13.6)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1))':
+  '@casoon/astro-speed-measure@0.4.1(astro@7.4.2(@types/node@24.13.6)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1))':
     dependencies:
       astro: 7.4.2(@types/node@24.13.6)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1)
       picocolors: 1.1.1
 
-  '@casoon/astro-structured-data@2.3.0(astro@7.4.2(@types/node@24.13.6)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1))':
+  '@casoon/astro-structured-data@2.4.1(astro@7.4.2(@types/node@24.13.6)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1))':
     dependencies:
       astro: 7.4.2(@types/node@24.13.6)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1)
       schema-dts: 2.1.0
       zod: 4.6.7
 
-  '@casoon/astro-webvitals@0.4.10(astro@7.4.2(@types/node@24.13.6)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1))':
+  '@casoon/astro-webvitals@0.4.11(astro@7.4.2(@types/node@24.13.6)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1))':
     dependencies:
       astro: 7.4.2(@types/node@24.13.6)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1)
       web-vitals: 6.2.3
 
-  '@casoon/nosecrets@0.3.8': {}
+  '@casoon/nosecrets@0.3.9': {}
 
   '@clack/core@1.5.1':
     dependencies:
@@ -4544,11 +4544,11 @@ snapshots:
       path-expression-matcher: 1.6.2
       xml-naming: 0.3.0
 
-  fast-xml-parser@5.11.2:
+  fast-xml-parser@5.12.0:
     dependencies:
       '@nodable/entities': 3.1.0
       fast-xml-builder: 1.3.1
-      is-unsafe: 2.0.2
+      is-unsafe: 2.0.3
       path-expression-matcher: 1.6.2
       strnum: 2.5.1
       xml-naming: 0.3.0
@@ -4647,7 +4647,7 @@ snapshots:
     dependencies:
       '@types/estree': 1.0.9
 
-  is-unsafe@2.0.2: {}
+  is-unsafe@2.0.3: {}
 
   jiti@2.7.0: {}
 

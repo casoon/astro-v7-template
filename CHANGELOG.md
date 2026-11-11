@@ -2,35 +2,35 @@
 
 ## [Unreleased]
 
+## [1.4.0] - 2026-11-11
+
 ### Added
 
 - **Metadata demo:** Localized homepage examples link to generated site files and emit matching FAQPage data; demo team credits and a German RSS feed demonstrate additional site-files outputs.
 - **Site files:** Blog `llms.txt` sections are generated from published article frontmatter in both languages.
-
-- `e2e/starter/csp.spec.ts` and `e2e/blog/csp.spec.ts` (shared helpers in `e2e/shared/csp.ts`): no CSP violations on representative pages, no executable inline script before the CSP meta.
+- **Contributors:** `e2e/starter/csp.spec.ts` and `e2e/blog/csp.spec.ts` (helpers in `e2e/shared/csp.ts`) fail on any CSP violation and on an executable inline script before the CSP meta.
 
 ### Changed
 
 - **Accessibility:** Expanded automated axe checks to WCAG 2.2 AA.
-
+- **Build audit:** `@casoon/astro-post-audit` 0.10.0 — `html_validation` runs much faster, AAA-only findings are reported once per element pattern, and the WebSite search-action hint is no longer reported; errors and warnings on both apps are unchanged.
 - **Dependencies:** Updated workspace packages and Biome configuration; TypeScript stays on 6 because Astro check does not yet support 7, and Node types stay on 24 to match the runtime.
+- **Dependencies:** `@casoon/astro-structured-data` 2.4.1, `@casoon/astro-site-files` 0.7.2, `@casoon/astro-speed-measure` 0.4.1, `@casoon/astro-webvitals` 0.4.11 and `@casoon/nosecrets` 0.3.9 — all published with npm provenance via Trusted Publishing; structured-data streams on-demand pages and fixes `mainEntityOfPage` and rewrite handling.
 
 ### Fixed
 
+- **CSP:** No page shipped a Content Security Policy, because `csp` sat at the top level of the shared Astro config, which Astro 7 silently ignores. It now lives under `security.csp` with explicit directives; projects created from the template should move their `csp` block the same way.
+- **CSP:** The theme script ran inline before the CSP `<meta>` (outside the policy); it moved to `public/theme-init.js` in each app.
+- **Blog:** Sitemap entries retain the full path of nested post slugs.
+- **Navigation:** The logo returns to the homepage in the current language.
 - **SEO:** Page languages now drive Open Graph locale and hreflang tags; articles include linked publisher IDs, keywords, image dimensions and reading statistics.
 - **Site files:** Removed nonexistent archive links from `llms.txt` and duplicate blog sitemap sources; duplicate URLs now fail the build.
 
-- **Blog:** Sitemap entries retain the full path of nested post slugs.
-- **Navigation:** The logo returns to the homepage in the current language.
-
-- No page shipped a Content Security Policy: `csp` was set at the top level of the shared Astro config, which Astro 7 silently ignores. It now lives under `security.csp` with explicit directives — scripts and `<style>` by SHA-256 hash or `'self'`, inline style attributes allowed, `img-src 'self' data:`, `object-src 'none'`, `base-uri 'self'`, `form-action 'self'`, everything else `'self'`. Projects created from the template should move their `csp` block the same way.
-- The theme script ran inline before the CSP `<meta>` (outside the policy). It moved to `public/theme-init.js` in each app.
-
 ### Security
 
-- **Dependencies:** Updated vulnerable dependencies and added scoped overrides for Undici 7 and the typography selector parser; `pnpm audit` reports no known vulnerabilities.
+- **Dependencies:** Updated vulnerable dependencies (including `fast-xml-parser` under `@astrojs/rss`) and added scoped overrides for Undici 7 and the typography selector parser. `pnpm audit` still lists one low-severity advisory for `deepmerge` in the Svelte Vite plugin (build-time only), for which no fixed version is published yet.
 
-## 1.3.5 (2026-09-26)
+## [1.3.5] - 2026-09-26
 
 ### Changed
 
@@ -42,7 +42,7 @@
 - README links the product website ([astro-template.casoon.de](https://astro-template.casoon.de/en/)) next to the live demos.
 - README tip on [opi](https://github.com/casoon/opi) under "Available Scripts".
 
-## 1.3.4 (2026-09-26)
+## [1.3.4] - 2026-09-26
 
 ### Changed
 
@@ -53,7 +53,7 @@
 
 - OG image generation could fail with "Unsupported OpenType signature": the scripts passed `fontData.buffer`, the whole backing ArrayBuffer of a Node Buffer, ignoring its offset. `generateOgImage()` now takes the Buffer itself.
 
-## 1.3.3 (2026-09-26)
+## [1.3.3] - 2026-09-26
 
 ### Added
 
@@ -72,7 +72,7 @@
 - Starter hero subtitle uses `text-balance` (no orphaned last word).
 - README deploy checklist: add rate limiting or Turnstile once the contact form actually sends mail.
 
-## 1.3.2 (2026-09-26)
+## [1.3.2] - 2026-09-26
 
 ### Added
 
@@ -106,27 +106,24 @@
 - The starter now uses `@casoon/astro-webvitals` 0.4.8 with browser-local page checks alongside the sitemap QA pass.
 - `pnpm audit:pages` and `pnpm audit:pages:dev` print the sitemap page-check results in the terminal.
 
-## 1.0.0 (2026-06-23)
+## [1.0.0] - 2026-06-23
 
 Initial release based on [astro-v6-template](https://github.com/casoon/astro-v6-template) v1.4.4.
 
-### Upgrades
+### Changed
 
 - `astro` → v7.0.0 (Vite 8, Rolldown bundler, Rust compiler, Sätteri markdown)
 - `@astrojs/cloudflare` → v14.0.0
 - `@astrojs/mdx` → v7.0.0
 - `@astrojs/svelte` → v9.0.0
 - `wrangler.toml` compatibility_date → 2026-06-01
-
-### Removals
-
-- Removed `remark-gfm` — Sätteri provides GitHub Flavored Markdown natively
-- Removed `rehype-slug` — Sätteri generates heading anchor IDs natively
-
-### Changes
-
 - `compressHTML: 'jsx'` set explicitly in both app configs (new Astro v7 default)
 - Blog `astro.config.mjs`: removed `remarkPlugins` and `rehypePlugins` from `mdx()`
 - All `@astro-v6/*` package namespaces renamed to `@astro-v7/*`
 - Worker names updated: `astro-v7-starter`, `astro-v7-blog`
 - `PUBLIC_SITE_URL` defaults updated to `astrov7.casoon.dev` / `astrov7blog.casoon.dev`
+
+### Removed
+
+- Removed `remark-gfm` — Sätteri provides GitHub Flavored Markdown natively
+- Removed `rehype-slug` — Sätteri generates heading anchor IDs natively
