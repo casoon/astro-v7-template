@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Changed
+
+- **Docs:** README explains the monorepo, how to keep the template up to date and its setup for coding agents; the retired product website link is gone.
+
 ## [1.4.0] - 2026-11-11
 
 ### Added

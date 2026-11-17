@@ -15,7 +15,7 @@
 
 A lean, production-ready **Astro v7** monorepo template with Tailwind v4, Svelte 5 and Biome.
 
-**Website:** [astro-template.casoon.de](https://astro-template.casoon.de/en/) · **Live Demos:** [Starter](https://astro-v7-template.casoon.dev) · [Blog](https://astro-v7-blog.casoon.dev)
+**Live Demos:** [Starter](https://astro-v7-template.casoon.dev) · [Blog](https://astro-v7-blog.casoon.dev)
 
 > **Status:** Astro v7 is stable. This template tracks the latest Astro v7 releases.
 
@@ -328,6 +328,18 @@ Three config changes per app:
 - **Stable advanced routing** — No more `experimental.advancedRouting` flag
 - **`@astrojs/cloudflare` v14** — Full workerd parity across dev, prerender and production
 - **`astro dev --background`** — Background dev server for AI coding agents and CI workflows
+
+## Why a monorepo
+
+Several apps, for example a website, a blog and landing pages, share design tokens, components and tooling and still deploy individually. A new app is a folder under `apps/` that imports from `shared/` (see [Adding Another App](#adding-another-app)).
+
+## Keeping up to date
+
+The template is a starting point, not a package: after cloning, the code belongs to your project. Dependency versions live in one place, the pnpm catalog in `pnpm-workspace.yaml`, and a `renovate.json` is included.
+
+## Prepared for coding agents
+
+`CLAUDE.md` holds the project rules, `.claude/mcp.json` an MCP configuration and `.ai/` prompts and knowledge files. Astro 7 adds `astro dev --background` for agents and CI.
 
 ## License
 
