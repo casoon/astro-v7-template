@@ -43,7 +43,6 @@
 
 ### Added
 
-- README links the product website ([astro-template.casoon.de](https://astro-template.casoon.de/en/)) next to the live demos.
 - README tip on [opi](https://github.com/casoon/opi) under "Available Scripts".
 
 ## [1.3.4] - 2026-09-26
