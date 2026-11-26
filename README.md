@@ -341,6 +341,8 @@ The template is a starting point, not a package: after cloning, the code belongs
 
 `CLAUDE.md` holds the project rules, `.claude/mcp.json` an MCP configuration and `.ai/` prompts and knowledge files. Astro 7 adds `astro dev --background` for agents and CI.
 
+
+
 ## License
 
 MIT
