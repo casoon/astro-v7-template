@@ -341,7 +341,9 @@ The template is a starting point, not a package: after cloning, the code belongs
 
 `CLAUDE.md` holds the project rules, `.claude/mcp.json` an MCP configuration and `.ai/` prompts and knowledge files. Astro 7 adds `astro dev --background` for agents and CI.
 
+## Author
 
+Built and maintained by [Jörn Seidel](https://www.casoon.de/joern-seidel/) ([CASOON](https://www.casoon.de/)). Background and design decisions are described in an article on Insights (in German): [astro-v7-template: Rolldown, Rust-Compiler und die Erweiterungen für Astro 7](https://insights.casoon.de/artikel/astro-v7-template-rolldown-prop-for-that/).
 
 ## License
 
